@@ -19,7 +19,7 @@ module Hudson
         
         def self.get_xml(path)
             request = Net::HTTP::Get.new(path)
-            request.basic_auth(@@user, @@password) #if @@user and @@password
+            request.basic_auth(@@user, @@password) if @@user and @@password
             request['Content-Type'] = "text/xml"
             response = Net::HTTP.start(@@host, @@port){|http| http.request(request)}
             
@@ -42,7 +42,7 @@ module Hudson
         
         def send_post_request(path, data={})
             request = Net::HTTP::Post.new(path)
-            request.basic_auth(@@user, @@password)
+            request.basic_auth(@@user, @@password) if @@user and @@password
             request.set_form_data(data)
             #puts request.to_yaml
             Net::HTTP.new(@@host, @@port).start{|http| http.request(request)}
@@ -50,7 +50,7 @@ module Hudson
         
         def send_xml_post_request(path, xml)
             request = Net::HTTP::Post.new(path)
-            request.basic_auth(@@user, @@password)
+            request.basic_auth(@@user, @@password) if @@user and @@password
             request.body = xml
             #puts request.body
             #puts request.to_yaml
