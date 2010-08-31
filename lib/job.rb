@@ -69,10 +69,10 @@ module Hudson
             @color = @info_doc.elements["/freeStyleProject/color"].text
             @last_build = @info_doc.elements["/freeStyleProject/lastBuild/number"].text
             @last_completed_build = @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"].text
-            @last_failed_build = @info_doc.elements["/freeStyleProject/lastFailedBuild/number"].text
-            @last_stable_build = @info_doc.elements["/freeStyleProject/lastStableBuild/number"].text
-            @last_successful_build = @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"].text
-            @last_unsuccessful_build = @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"].text
+            @last_failed_build = @info_doc.elements["/freeStyleProject/lastFailedBuild/number"].text if @info_doc.elements["/freeStyleProject/lastFailedBuild/number"]
+            @last_stable_build = @info_doc.elements["/freeStyleProject/lastStableBuild/number"].text if @info_doc.elements["/freeStyleProject/lastStableBuild/number"]
+            @last_successful_build = @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"]
+            @last_unsuccessful_build = @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"]
             @next_build_number = @info_doc.elements["/freeStyleProject/nextBuildNumber"].text
         end
         
