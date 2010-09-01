@@ -1,0 +1,20 @@
+hudson-remote-api is ruby library to talk to Hudson's xml remote access api
+
+Usage:
+
+require 'hudson-remote-api'
+
+# Configuration
+Hudson[:host] = 'localhost'
+Hudson[:user] = 'hudson'
+Hudson[:password] = 'password'
+
+# List all Hudson jobs
+Hudson::Job.list
+
+# List all active Hudson jobs
+Hudson::Job.list_active
+
+# print the last build number of a job
+j = Hudson::Job.new('jobname')
+puts j.last_build

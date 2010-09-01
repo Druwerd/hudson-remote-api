@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/base.rb'
+require 'hudson-remote-api'
 module Hudson
 	class Build < HudsonObject
 		attr_reader :number, :job, :revisions, :result

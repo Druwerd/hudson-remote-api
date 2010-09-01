@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/base.rb'
+require 'hudson-remote-api'
 module Hudson
     # This class provides an interface to Hudson's build queue
     class BuildQueue < HudsonObject
