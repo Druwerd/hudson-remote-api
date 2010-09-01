@@ -10,6 +10,7 @@ begin
     gemspec.email = "Druwerd@gmail.com"
     gemspec.homepage = "http://github.com/Druwerd/hudson-remote-api"
     gemspec.authors = ["Dru Ibarra"]
+    gemspec.rubyforge_project = gemspec.name
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

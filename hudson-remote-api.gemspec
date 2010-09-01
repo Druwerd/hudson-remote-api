@@ -18,7 +18,9 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
      "README",
+     "Rakefile",
      "VERSION",
+     "hudson-remote-api.gemspec",
      "lib/hudson-remote-api.rb",
      "lib/hudson-remote-api/build.rb",
      "lib/hudson-remote-api/build_queue.rb",
@@ -28,6 +30,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/Druwerd/hudson-remote-api}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
+  s.rubyforge_project = %q{hudson-remote-api}
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Connect to Hudson's remote web API}
 
