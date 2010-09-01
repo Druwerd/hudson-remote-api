@@ -1,6 +1,6 @@
 # This set of classes provides a Ruby interface to Hudson's web xml API
 # 
-# Author:: Asdrubal Ibarra
+# Author:: Dru Ibarra
 
 require 'net/http'
 require 'rexml/document'
