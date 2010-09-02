@@ -4,7 +4,7 @@ module Hudson
     class BuildQueue < HudsonObject
         # List the jobs in the queue
         def self.list()
-            path = "#{HUDSON_URL_ROOT}/queue/api/xml"
+            path = "#{Hudson[:url_root]}/queue/api/xml"
             xml = get_xml(path)
             queue = []
             queue_doc = REXML::Document.new(xml)

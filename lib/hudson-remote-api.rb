@@ -9,7 +9,7 @@ require 'yaml'
 require 'zlib'
 
 module Hudson
-  @@settings = {:host => 'localhost', :port => 80, :user => nil, :password => nil}
+  @@settings = {:host => 'localhost', :url_root => '/', :port => 80, :user => nil, :password => nil}
 
   def self.[](param)
     return @@settings[param]

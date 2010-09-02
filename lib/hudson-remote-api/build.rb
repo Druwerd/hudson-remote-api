@@ -17,7 +17,7 @@ module Hudson
 		
 		private
 		def load_build_info
-			path = "#{HUDSON_URL_ROOT}/job/#{@job.name}/#{@number}/api/xml"
+			path = "#{Hudson[:url_root]}/job/#{@job.name}/#{@number}/api/xml"
 			build_info_xml = get_xml(path)
             build_info_doc = REXML::Document.new(build_info_xml)
 			
