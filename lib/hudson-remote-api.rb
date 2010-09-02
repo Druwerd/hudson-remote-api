@@ -7,23 +7,11 @@ require 'rexml/document'
 require 'cgi'
 require 'yaml'
 require 'zlib'
+require 'hudson-remote-api/config.rb'
 
 module Hudson
-  @@settings = {:host => 'localhost', :url_root => '/', :port => 80, :user => nil, :password => nil}
+  config
 
-  def self.[](param)
-    return @@settings[param]
-  end
-
-  def self.[]=(param,value)
-    @@settings[param]=value
-  end
-
-  def self.settings=(settings)
-    @@settings = settings
-  end
-
-  HUDSON_URL_ROOT = ""
   # Base class for all Hudson objects
   class HudsonObject
 
