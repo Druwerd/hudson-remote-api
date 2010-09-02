@@ -65,15 +65,16 @@ module Hudson
             @info = get_xml(path)
             @info_doc = REXML::Document.new(@info)
             
-            #FIXME: make sure it's really a freeStyleProject
-            @color = @info_doc.elements["/freeStyleProject/color"].text
-            @last_build = @info_doc.elements["/freeStyleProject/lastBuild/number"].text
-            @last_completed_build = @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"].text
-            @last_failed_build = @info_doc.elements["/freeStyleProject/lastFailedBuild/number"].text if @info_doc.elements["/freeStyleProject/lastFailedBuild/number"]
-            @last_stable_build = @info_doc.elements["/freeStyleProject/lastStableBuild/number"].text if @info_doc.elements["/freeStyleProject/lastStableBuild/number"]
-            @last_successful_build = @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"]
-            @last_unsuccessful_build = @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"]
-            @next_build_number = @info_doc.elements["/freeStyleProject/nextBuildNumber"].text
+            if @info_doc.elements["/freeStylePorject"]
+              @color = @info_doc.elements["/freeStyleProject/color"].text if @info_doc.elements["/freeStyleProject/color"]
+              @last_build = @info_doc.elements["/freeStyleProject/lastBuild/number"].text if @info_doc.elements["/freeStyleProject/lastBuild/number"]
+              @last_completed_build = @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"].text if @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"]
+              @last_failed_build = @info_doc.elements["/freeStyleProject/lastFailedBuild/number"].text if @info_doc.elements["/freeStyleProject/lastFailedBuild/number"]
+              @last_stable_build = @info_doc.elements["/freeStyleProject/lastStableBuild/number"].text if @info_doc.elements["/freeStyleProject/lastStableBuild/number"]
+              @last_successful_build = @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"]
+              @last_unsuccessful_build = @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"]
+              @next_build_number = @info_doc.elements["/freeStyleProject/nextBuildNumber"].text if @info_doc.elements["/freeStyleProject/nextBuildNumber"]
+            end
         end
         
         def active?
