@@ -4,8 +4,11 @@ Usage:
 
 require 'hudson-remote-api'
 
-# Configuration
-Hudson[:host] = 'localhost'
+# Auto Configuration sets Hudson[:url]
+Hudson.auto_config
+
+# Manual Configuration
+Hudson[:url] = 'http://localhost:8080'
 Hudson[:user] = 'hudson'
 Hudson[:password] = 'password'
 
