@@ -1,4 +1,3 @@
-require 'hudson-remote-api'
 module Hudson
 	class Build < HudsonObject
 		attr_reader :number, :job, :revisions, :result
@@ -12,18 +11,19 @@ module Hudson
 				@number = @job.last_build
 			end
 			@revisions = {}
+			@xml_api_build_info_path = File.join(Hudson[:url], "job/#{@job.name}/#{@number}/api/xml")
 			load_build_info
 		end
 		
 		private
 		def load_build_info
-			path = "#{Hudson[:url_root]}/job/#{@job.name}/#{@number}/api/xml"
-			build_info_xml = get_xml(path)
-            build_info_doc = REXML::Document.new(build_info_xml)
 			
-            if !build_info_doc.elements["/freeStyleBuild/changeSet"].nil?
-                build_info_doc.elements.each("/freeStyleBuild/changeSet/revision"){|e| @revisions[e.elements["module"].text] = e.elements["revision"].text }
-            end
+			build_info_xml = get_xml(@xml_api_build_info_path)
+      build_info_doc = REXML::Document.new(build_info_xml)
+
+      if !build_info_doc.elements["/freeStyleBuild/changeSet"].nil?
+          build_info_doc.elements.each("/freeStyleBuild/changeSet/revision"){|e| @revisions[e.elements["module"].text] = e.elements["revision"].text }
+      end
 		end
 	end
 end

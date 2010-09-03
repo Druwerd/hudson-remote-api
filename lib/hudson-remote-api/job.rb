@@ -1,4 +1,3 @@
-require 'hudson-remote-api'
 module Hudson
     # This class provides an interface to Hudson jobs
     class Job < HudsonObject
@@ -8,8 +7,7 @@ module Hudson
         
         # List all Hudson jobs
         def self.list()
-            path = "#{Hudson[:url_root]}/api/xml"
-            xml = get_xml(path)
+            xml = get_xml(@@hudson_xml_api_path)
             
             jobs = []
             jobs_doc = REXML::Document.new(xml)
@@ -21,8 +19,7 @@ module Hudson
         
         # List all jobs in active execution
         def self.list_active
-            path = "#{Hudson[:url_root]}/api/xml"
-            xml = get_xml(path)
+            xml = get_xml(@@hudson_xml_api_path)
             
             active_jobs = []
             jobs_doc = REXML::Document.new(xml)
@@ -36,14 +33,24 @@ module Hudson
         
         def initialize(name)
             @name = name
+            load_xml_api
             load_config
             load_info
         end
         
+        def load_xml_api
+          @xml_api_path = File.join(Hudson[:url], "job/#{@name}/api/xml")
+          @xml_api_config_path = File.join(Hudson[:url], "job/#{@name}/config.xml")
+          @xml_api_build_path = File.join(Hudson[:url], "job/#{@name}/build")
+          @xml_api_disable_path = File.join(Hudson[:url], "job/#{@name}/disable")
+          @xml_api_enable_path = File.join(Hudson[:url], "job/#{@name}/enable")
+          @xml_api_delete_path  = File.join(Hudson[:url], "job/#{@name}/doDelete")
+          @xml_api_wipe_out_workspace_path = File.join(Hudson[:url], "job/#{@name}/doWipeOutWorkspace")
+        end
+        
         # Load data from Hudson's Job configuration settings into class variables
         def load_config()
-            path = "#{Hudson[:url_root]}/job/#{@name}/config.xml"
-            @config = get_xml(path)
+            @config = get_xml(@xml_api_config_path)
             @config_doc = REXML::Document.new(@config)
             
             @config_doc = REXML::Document.new(@config)
@@ -61,8 +68,7 @@ module Hudson
         end
         
         def load_info()
-            path = "#{Hudson[:url_root]}/job/#{@name}/api/xml"
-            @info = get_xml(path)
+            @info = get_xml(@xml_api_path)
             @info_doc = REXML::Document.new(@info)
             
             if @info_doc.elements["/freeStylePorject"]
@@ -92,9 +98,8 @@ module Hudson
         # Create a new job on Hudson server based on the current job object
         def copy(new_job=nil)
             new_job = "copy_of_#{@name}" if new_job.nil?
-            path = "#{Hudson[:url_root]}/createItem"
             
-            response = send_post_request(path, {:name=>new_job, :mode=>"copy", :from=>@name})
+            response = send_post_request(@@xml_api_create_item_path, {:name=>new_job, :mode=>"copy", :from=>@name})
             raise(APIError, "Error copying job #{@name}: #{response.body}") if response.class != Net::HTTPFound
             Job.new(new_job)
         end
@@ -102,8 +107,7 @@ module Hudson
         # Update the job configuration on Hudson server
         def update(config=nil)
             @config = config if !config.nil?
-            path = "#{Hudson[:url_root]}/job/#{@name}/config.xml"
-            response = send_xml_post_request(path, @config)
+            response = send_xml_post_request(@xml_api_config_path, @config)
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
         
@@ -148,37 +152,33 @@ module Hudson
         
         # Start building this job on Hudson server (can't build parameterized jobs)
         def build()
-            path = "#{Hudson[:url_root]}/job/#{@name}/build"
-            response = send_post_request(path, {:delay => '0sec'})
+            response = send_post_request(@xml_api_build_path, {:delay => '0sec'})
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
 
-        def disable()
-            path = "#{Hudson[:url_root]}/job/#{@name}/disable"
-            response = send_post_request(path)
+        def disable()            
+            response = send_post_request(@xml_api_disable_path)
             puts response.class
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
         
-        def enable()
-            path = "#{Hudson[:url_root]}/job/#{@name}/enable"
-            response = send_post_request(path)
+        def enable()            
+            response = send_post_request(@xml_api_enable_path)
             puts response.class
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
         
         # Delete this job from Hudson server
         def delete()
-            path  = "#{Hudson[:url_root]}/job/#{@name}/doDelete"
-            response = send_post_request(path)
+            response = send_post_request(@xml_api_delete_path)
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
         
         def wipe_out_workspace()
             wait_for_build_to_finish
-            path = "#{Hudson[:url_root]}/job/#{@name}/doWipeOutWorkspace"
+            
             if !active?
-                response = send_post_request(path)
+                response = send_post_request(@xml_api_wipe_out_workspace_path)
             else
                 response = false
             end

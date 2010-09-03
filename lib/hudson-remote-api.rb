@@ -3,23 +3,35 @@
 # Author:: Dru Ibarra
 
 require 'net/http'
+require 'uri'
 require 'rexml/document'
 require 'cgi'
 require 'yaml'
 require 'zlib'
-require 'hudson-remote-api/config.rb'
+require File.dirname(__FILE__) + '/hudson-remote-api/config.rb'
 
 module Hudson
-  config
-
   # Base class for all Hudson objects
   class HudsonObject
-
-    def self.get_xml(path)
+    
+    
+    def self.load_xml_api
+      @@hudson_xml_api_path = File.join(Hudson[:url], "api/xml")
+      @@xml_api_create_item_path = File.join(Hudson[:url], "createItem")
+    end
+    
+    load_xml_api
+    
+    def self.get_xml(url)
+      puts url
+      uri = URI.parse(url)
+      host = uri.host
+      port = uri.port
+      path = uri.path
       request = Net::HTTP::Get.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request['Content-Type'] = "text/xml"
-      response = Net::HTTP.start(Hudson[:host], Hudson[:port]){|http| http.request(request)}
+      response = Net::HTTP.start(host, port){|http| http.request(request)}
 
       if response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         encoding = response.get_fields("Content-Encoding")
@@ -38,21 +50,29 @@ module Hudson
       self.class.get_xml(path)
     end
 
-    def send_post_request(path, data={})
+    def send_post_request(url, data={})
+      uri = URI.parse(url)
+      host = uri.host
+      port = uri.port
+      path = uri.path
       request = Net::HTTP::Post.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request.set_form_data(data)
       #puts request.to_yaml
-      Net::HTTP.new(Hudson[:host], Hudson[:port]).start{|http| http.request(request)}
+      Net::HTTP.new(host, port).start{|http| http.request(request)}
     end
 
     def send_xml_post_request(path, xml)
+      uri = URI.parse(url)
+      host = uri.host
+      port = uri.port
+      path = uri.path
       request = Net::HTTP::Post.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request.body = xml
       #puts request.body
       #puts request.to_yaml
-      Net::HTTP.new(Hudson[:host], Hudson[:port]).start{|http| http.request(request)}
+      Net::HTTP.new(host, port).start{|http| http.request(request)}
     end
   end
 end
