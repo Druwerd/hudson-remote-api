@@ -71,7 +71,8 @@ module Hudson
             @info = get_xml(@xml_api_path)
             @info_doc = REXML::Document.new(@info)
             
-            if @info_doc.elements["/freeStylePorject"]
+            if @info_doc.elements["/freeStyleProject"]
+              puts "loading build info"
               @color = @info_doc.elements["/freeStyleProject/color"].text if @info_doc.elements["/freeStyleProject/color"]
               @last_build = @info_doc.elements["/freeStyleProject/lastBuild/number"].text if @info_doc.elements["/freeStyleProject/lastBuild/number"]
               @last_completed_build = @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"].text if @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"]
