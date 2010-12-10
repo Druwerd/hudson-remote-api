@@ -25,7 +25,7 @@ class TestHudsonJob < Test::Unit::TestCase
   
   def test_desc_update
     job = Hudson::Job.new('test_job')
-    assert job
+    assert job.description
     assert job.description = "test"
   end
 end

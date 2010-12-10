@@ -64,7 +64,9 @@ module Hudson
             if !@config_doc.elements["/project/scm/browser/location"].nil?
                 @repository_browser_location = @config_doc.elements["/project/scm/browser/location"].text
             end
-            @description = @config_doc.elements["/project/description"].text || ""
+            if !@config_doc.elements["/project/description"].nil?
+                @description = @config_doc.elements["/project/description"].text || ""
+            end
         end
         
         def load_info()
