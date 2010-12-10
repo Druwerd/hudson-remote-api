@@ -62,7 +62,7 @@ module Hudson
       Net::HTTP.new(host, port).start{|http| http.request(request)}
     end
 
-    def send_xml_post_request(path, xml)
+    def send_xml_post_request(url, xml)
       uri = URI.parse(url)
       host = uri.host
       port = uri.port

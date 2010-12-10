@@ -20,6 +20,12 @@ class TestHudsonJob < Test::Unit::TestCase
     # TODO: load job fixtures
     job = Hudson::Job.new('test_job')
     assert job
-    assert job.last_build, "failed to get last build number"
+    assert_equal 'test_job', job.name, "failed to get job name"
+  end
+  
+  def test_desc_update
+    job = Hudson::Job.new('test_job')
+    assert job
+    assert job.description = "test"
   end
 end
