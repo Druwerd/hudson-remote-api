@@ -17,6 +17,7 @@ module Hudson
       @@settings[param]=value
     end
     HudsonObject::load_xml_api
+    BuildQueue::load_xml_api
   end
 
   def self.settings=(settings)
