@@ -23,7 +23,6 @@ module Hudson
     load_xml_api
     
     def self.get_xml(url)
-      puts url
       uri = URI.parse(url)
       host = uri.host
       port = uri.port
@@ -50,7 +49,7 @@ module Hudson
       self.class.get_xml(path)
     end
 
-    def send_post_request(url, data={})
+    def self.send_post_request(url, data={})
       uri = URI.parse(url)
       host = uri.host
       port = uri.port
@@ -58,21 +57,28 @@ module Hudson
       request = Net::HTTP::Post.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request.set_form_data(data)
-      #puts request.to_yaml
       Net::HTTP.new(host, port).start{|http| http.request(request)}
     end
+    
+    def send_post_request(url, data={})
+      self.class.send_post_request(url, data)
+    end
 
-    def send_xml_post_request(url, xml)
+    def self.send_xml_post_request(url, xml, data=nil)
       uri = URI.parse(url)
       host = uri.host
       port = uri.port
       path = uri.path
+      path = path+"?"+uri.query if uri.query
       request = Net::HTTP::Post.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
+      request.set_form_data(data) if data
       request.body = xml
-      #puts request.body
-      #puts request.to_yaml
       Net::HTTP.new(host, port).start{|http| http.request(request)}
+    end
+    
+    def send_xml_post_request(url, xml, data=nil)
+      self.class.send_xml_post_request(url, xml, data)
     end
   end
 end

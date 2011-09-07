@@ -31,11 +31,31 @@ module Hudson
             active_jobs
         end
         
-        def initialize(name)
-            @name = name
-            load_xml_api
-            load_config
-            load_info
+        def self.get(job_name)
+          job_name.strip!
+          if list.include?(job_name)
+            Job.new(job_name)
+          else
+            nil
+          end
+        end
+        
+        def initialize(name, config=nil)
+            name.strip!
+            if Job.list.include?(name)
+              @name = name
+              load_xml_api
+              load_config
+              load_info
+              self
+            else
+              j = Job.create(name, config)
+              @name = j.name
+              load_xml_api
+              load_config
+              load_info
+              self
+            end
         end
         
         def load_xml_api
@@ -95,6 +115,14 @@ module Hudson
                 sleep poll_freq # wait
                 break if !active? and !BuildQueue.list.include?(@name)
             end
+        end
+        
+        def self.create(name, config=nil)
+          config = File.open(File.dirname(__FILE__) + '/new_job_config.xml').read if config.nil?
+          
+          response = send_post_request(@@xml_api_create_item_path, {:name=>name, :mode=>"hudson.model.FreeStyleProject", :config=>config})
+          raise(APIError, "Error creating job #{name}: #{response.body}") if response.class != Net::HTTPFound
+          Job.get(name)
         end
         
         # Create a new job on Hudson server based on the current job object
@@ -160,13 +188,11 @@ module Hudson
 
         def disable()            
             response = send_post_request(@xml_api_disable_path)
-            puts response.class
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
         
         def enable()            
             response = send_post_request(@xml_api_enable_path)
-            puts response.class
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
         

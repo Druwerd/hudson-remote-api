@@ -32,7 +32,6 @@ module Hudson
   def self.auto_config
     xml_response = discover()
     if xml_response
-      #puts xml_response
       doc = REXML::Document.new(xml_response)
       url = doc.elements["/hudson/url"]
       if url
