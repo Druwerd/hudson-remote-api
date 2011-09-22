@@ -1,6 +1,6 @@
 module Hudson
 	class Build < HudsonObject
-		attr_reader :number, :job, :revisions, :result
+		attr_reader :number, :job, :revisions, :result, :culprit
 		
 		def initialize(job, build_number=nil)
 			@job = Job.new(job) if job.kind_of?(String)
@@ -25,6 +25,11 @@ module Hudson
       if !build_info_doc.elements["/freeStyleBuild/changeSet"].nil?
           build_info_doc.elements.each("/freeStyleBuild/changeSet/revision"){|e| @revisions[e.elements["module"].text] = e.elements["revision"].text }
       end
+
+      if build_info_doc.elements['/freeStyleBuild/culprit/fullName']
+        @culprit = build_info_doc.elements['/freeStyleBuild/culprit/fullName'].text
+      end
+
 		end
 	end
 end
