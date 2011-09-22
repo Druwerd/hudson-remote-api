@@ -18,7 +18,7 @@ module Hudson
 		private
 		def load_build_info
 			
-			build_info_xml = get_xml(@xml_api_build_info_path)
+			build_info_xml = patch_bad_git_xml(get_xml(@xml_api_build_info_path))
       build_info_doc = REXML::Document.new(build_info_xml)
 
       @result = build_info_doc.elements["/freeStyleBuild/result"].text
@@ -31,5 +31,9 @@ module Hudson
       end
 
 		end
+
+    def patch_bad_git_xml(xml)
+      xml.gsub(/<(\/?)origin\/([_a-zA-Z0-9\-\.]+)>/, '<\1origin-\2>')
+    end
 	end
 end
