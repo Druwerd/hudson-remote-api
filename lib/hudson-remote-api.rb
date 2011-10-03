@@ -3,6 +3,7 @@
 # Author:: Dru Ibarra
 
 require 'net/http'
+require "net/https"
 require 'uri'
 require 'rexml/document'
 require 'cgi'
@@ -30,7 +31,14 @@ module Hudson
       request = Net::HTTP::Get.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request['Content-Type'] = "text/xml"
-      response = Net::HTTP.start(host, port){|http| http.request(request)}
+      response = Net::HTTP.start(host, port) do |http| 
+        http = Net::HTTP.new(uri.host, uri.port)
+        if uri.scheme == 'https'
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        end
+        http.request(request)
+      end
 
       if response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         encoding = response.get_fields("Content-Encoding")
