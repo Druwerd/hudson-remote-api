@@ -57,6 +57,6 @@ class TestHudsonJob < Test::Unit::TestCase
 
   def test_url
     job = Hudson::Job.get("test_job")
-    assert_equal(job.url, "http://localhost:8080/job/#{job.name}")
+    assert_equal(job.url, "http://localhost:8080/job/#{job.name}/")
   end
 end
