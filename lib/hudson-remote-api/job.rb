@@ -179,6 +179,10 @@ module Hudson
             @config = @config_doc.to_s
             update
         end
+
+        def url
+          File.join( Hudson[:url], 'job', name) + '/'
+        end
         
         # Start building this job on Hudson server (can't build parameterized jobs)
         def build()
