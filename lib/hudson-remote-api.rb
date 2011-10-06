@@ -24,7 +24,7 @@ module Hudson
     load_xml_api
     
     def self.get_xml(url)
-      uri = URI.parse(url)
+      uri = URI.parse(URI.encode(url))
       host = uri.host
       port = uri.port
       path = uri.path
@@ -58,7 +58,7 @@ module Hudson
     end
 
     def self.send_post_request(url, data={})
-      uri = URI.parse(url)
+      uri = URI.parse(URI.encode(url))
       host = uri.host
       port = uri.port
       path = uri.path
@@ -73,7 +73,7 @@ module Hudson
     end
 
     def self.send_xml_post_request(url, xml, data=nil)
-      uri = URI.parse(url)
+      uri = URI.parse(URI.encode(url))
       host = uri.host
       port = uri.port
       path = uri.path
