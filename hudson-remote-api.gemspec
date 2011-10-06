@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hudson-remote-api}
-  s.version = "0.2.2"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Dru Ibarra"]
-  s.date = %q{2010-12-09}
+  s.authors = [%q{Dru Ibarra}]
+  s.date = %q{2011-10-05}
   s.description = %q{Connect to Hudson's remote web API}
   s.email = %q{Druwerd@gmail.com}
   s.extra_rdoc_files = [
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
      "lib/hudson-remote-api/errors.rb",
      "lib/hudson-remote-api/job.rb",
      "lib/hudson-remote-api/multicast.rb",
+     "lib/hudson-remote-api/new_job_config.xml",
      "test/test_hudson_build.rb",
      "test/test_hudson_build_queue.rb",
      "test/test_hudson_config.rb",
@@ -38,10 +39,10 @@ Gem::Specification.new do |s|
      "test/test_hudson_remote_api.rb"
   ]
   s.homepage = %q{http://github.com/Druwerd/hudson-remote-api}
-  s.rdoc_options = ["--charset=UTF-8"]
-  s.require_paths = ["lib"]
+  s.rdoc_options = [%q{--charset=UTF-8}]
+  s.require_paths = [%q{lib}]
   s.rubyforge_project = %q{hudson-remote-api}
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.8.5}
   s.summary = %q{Connect to Hudson's remote web API}
   s.test_files = [
     "test/test_hudson_build.rb",
@@ -53,7 +54,6 @@ Gem::Specification.new do |s|
   ]
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
