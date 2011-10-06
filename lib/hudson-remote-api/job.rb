@@ -42,6 +42,7 @@ module Hudson
         
         def initialize(name, config=nil)
             name.strip!
+            Hudson::Job.fetch_crumb
             if Job.list.include?(name)
               @name = name
               load_xml_api

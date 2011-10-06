@@ -20,8 +20,10 @@ module Hudson
 			
 			build_info_xml = patch_bad_git_xml(get_xml(@xml_api_build_info_path))
       build_info_doc = REXML::Document.new(build_info_xml)
-
-      @result = build_info_doc.elements["/freeStyleBuild/result"].text
+      
+      if build_info_doc.elements["/freeStyleBuild/result"]
+        @result = build_info_doc.elements["/freeStyleBuild/result"].text
+      end
       if !build_info_doc.elements["/freeStyleBuild/changeSet"].nil?
           build_info_doc.elements.each("/freeStyleBuild/changeSet/revision"){|e| @revisions[e.elements["module"].text] = e.elements["revision"].text }
       end

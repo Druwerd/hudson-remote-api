@@ -116,6 +116,8 @@ module Hudson
       end
       
       @@apiCrumb = Struct.new(:name,:value).new(crumbName.text,crumbValue.text)
+    rescue
+        $stderr.puts "Failure fetching crumb xml"
     end
     
   end
