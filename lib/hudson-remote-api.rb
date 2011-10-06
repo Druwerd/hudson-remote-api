@@ -52,7 +52,7 @@ module Hudson
           return response.body
         end
       else
-        puts response
+        $stderr.puts response.body
         raise APIError, "Error retrieving #{path}"
       end
     end
