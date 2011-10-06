@@ -65,7 +65,14 @@ module Hudson
       request = Net::HTTP::Post.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request.set_form_data(data)
-      Net::HTTP.new(host, port).start{|http| http.request(request)}
+      Net::HTTP.start(host, port) do |http|
+        http = Net::HTTP.new(uri.host, uri.port)
+        if uri.scheme == 'https'
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        end
+        http.request(request)
+      end
     end
     
     def send_post_request(url, data={})
@@ -82,7 +89,14 @@ module Hudson
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request.set_form_data(data) if data
       request.body = xml
-      Net::HTTP.new(host, port).start{|http| http.request(request)}
+      Net::HTTP.start(host, port) do |http|
+        http = Net::HTTP.new(uri.host, uri.port)
+        if uri.scheme == 'https'
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        end
+        http.request(request)
+      end
     end
     
     def send_xml_post_request(url, xml, data=nil)
