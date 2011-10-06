@@ -20,7 +20,8 @@ end
 namespace :test do
    desc "Run all tests"
    task :all do
-      puts `cd test && ruby test_hudson_remote_api.rb &2> /dev/null`
+      test_files = Dir.glob("test/*.rb")
+      test_files.each{|f| require f}
    end
 end
 
