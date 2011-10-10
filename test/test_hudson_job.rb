@@ -54,4 +54,9 @@ class TestHudsonJob < Test::Unit::TestCase
     assert_equal(new_job.name, 'copy_of_test_job')
     assert new_job.delete
   end
+
+  def test_url
+    job = Hudson::Job.get("test_job")
+    assert_equal(job.url, "http://localhost:8080/job/#{job.name}/")
+  end
 end

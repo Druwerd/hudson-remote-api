@@ -22,7 +22,11 @@ module Hudson
     end
     
     load_xml_api
-    
+
+    def self.url_for(path)
+      File.join Hudson[:url], path
+    end
+
     def self.get_xml(url)
       uri = URI.parse(URI.encode(url))
       host = uri.host
@@ -48,7 +52,7 @@ module Hudson
           return response.body
         end
       else
-        puts response
+        $stderr.puts response.body
         raise APIError, "Error retrieving #{path}"
       end
     end
@@ -65,6 +69,8 @@ module Hudson
       request = Net::HTTP::Post.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request.set_form_data(data)
+      request.add_field(crumb.name, crumb.value) if crumb
+      Net::HTTP.new(host, port).start{|http| http.request(request)}
       Net::HTTP.start(host, port) do |http|
         http = Net::HTTP.new(uri.host, uri.port)
         if uri.scheme == 'https'
@@ -88,6 +94,7 @@ module Hudson
       request = Net::HTTP::Post.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request.set_form_data(data) if data
+      request.add_field(crumb.name, crumb.value) if crumb
       request.body = xml
       Net::HTTP.start(host, port) do |http|
         http = Net::HTTP.new(uri.host, uri.port)
@@ -102,6 +109,32 @@ module Hudson
     def send_xml_post_request(url, xml, data=nil)
       self.class.send_xml_post_request(url, xml, data)
     end
+    
+    
+    
+    def self.crumb
+      @@apiCrumb ||= nil
+    end
+    
+    def self.fetch_crumb
+      body = get_xml(url_for '/crumbIssuer/api/xml')
+      doc = REXML::Document.new(body)
+      
+      crumbValue = doc.elements['/defaultCrumbIssuer/crumb'] or begin
+        $stderr.puts "Failure fetching crumb value from server"
+        return
+      end
+      
+      crumbName = doc.elements['/defaultCrumbIssuer/crumbRequestField'] or begin
+        $stderr.puts "Failure fetching crumb field name from server"
+        return
+      end
+      
+      @@apiCrumb = Struct.new(:name,:value).new(crumbName.text,crumbValue.text)
+    rescue
+        $stderr.puts "Failure fetching crumb xml"
+    end
+    
   end
 end
 

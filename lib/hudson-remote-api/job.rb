@@ -42,6 +42,7 @@ module Hudson
         
         def initialize(name, config=nil)
             name.strip!
+            Hudson::Job.fetch_crumb
             if Job.list.include?(name)
               @name = name
               load_xml_api
@@ -178,6 +179,10 @@ module Hudson
             @config_doc.elements["/project/description"].text = description
             @config = @config_doc.to_s
             update
+        end
+
+        def url
+          File.join( Hudson[:url], 'job', name) + '/'
         end
         
         # Start building this job on Hudson server (can't build parameterized jobs)
