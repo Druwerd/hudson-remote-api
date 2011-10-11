@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hudson-remote-api}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Dru Ibarra}]
-  s.date = %q{2011-10-05}
+  s.date = %q{2011-10-10}
   s.description = %q{Connect to Hudson's remote web API}
   s.email = %q{Druwerd@gmail.com}
   s.extra_rdoc_files = [
@@ -35,8 +35,7 @@ Gem::Specification.new do |s|
      "test/test_hudson_build_queue.rb",
      "test/test_hudson_config.rb",
      "test/test_hudson_job.rb",
-     "test/test_hudson_multicast.rb",
-     "test/test_hudson_remote_api.rb"
+     "test/test_hudson_multicast.rb"
   ]
   s.homepage = %q{http://github.com/Druwerd/hudson-remote-api}
   s.rdoc_options = [%q{--charset=UTF-8}]
@@ -49,8 +48,7 @@ Gem::Specification.new do |s|
      "test/test_hudson_build_queue.rb",
      "test/test_hudson_config.rb",
      "test/test_hudson_job.rb",
-     "test/test_hudson_multicast.rb",
-     "test/test_hudson_remote_api.rb"
+     "test/test_hudson_multicast.rb"
   ]
 
   if s.respond_to? :specification_version then
