@@ -59,4 +59,11 @@ class TestHudsonJob < Test::Unit::TestCase
     job = Hudson::Job.get("test_job")
     assert_equal(job.url, "http://localhost:8080/job/#{job.name}/")
   end
+  
+  def test_job_with_spaces
+    job = Hudson::Job.create('test job with spaces')
+    assert job
+    assert job.name
+    assert job.delete
+  end
 end
