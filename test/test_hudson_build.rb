@@ -16,7 +16,7 @@ class TestHudsonBuild < Test::Unit::TestCase
     assert build.number.to_i > 0, "build number test failed"
     
     assert build.revisions, "build revisions test failed"
-    assert build.revisions.kind_of?(Array), "build revisions is not an Array"
+    assert build.revisions.kind_of?(Hash), "build revisions is not an Hash"
     
     assert_equal build.result, "SUCCESS", "build result test failed"
     

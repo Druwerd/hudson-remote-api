@@ -25,8 +25,7 @@ module Hudson
         @result = build_info_doc.elements["/freeStyleBuild/result"].text
       end
       if !build_info_doc.elements["/freeStyleBuild/changeSet"].nil?
-          @revisions = []
-          build_info_doc.elements.each("/freeStyleBuild/changeSet/revision"){|e| @revisions[e.elements["module"].text] << e.elements["revision"].text }
+          build_info_doc.elements.each("/freeStyleBuild/changeSet/revision"){|e| @revisions[e.elements["module"].text] = e.elements["revision"].text }
       end
 
       if build_info_doc.elements['/freeStyleBuild/culprit/fullName']
