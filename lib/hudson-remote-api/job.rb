@@ -4,6 +4,7 @@ module Hudson
 
         attr_accessor :name, :config, :repository_url, :repository_urls, :repository_browser_location, :description
         attr_reader :color, :last_build, :last_completed_build, :last_failed_build, :last_stable_build, :last_successful_build, :last_unsuccessful_build, :next_build_number
+        attr_reader :builds_list
         
         # List all Hudson jobs
         def self.list()
@@ -103,6 +104,11 @@ module Hudson
               @last_successful_build = @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"]
               @last_unsuccessful_build = @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"]
               @next_build_number = @info_doc.elements["/freeStyleProject/nextBuildNumber"].text if @info_doc.elements["/freeStyleProject/nextBuildNumber"]
+            end
+            
+            if !@info_doc.elements["/freeStyleProject/build"].nil?
+                @builds_list = []
+                @info_doc.elements.each("/freeStyleProject/build"){|e| @builds_list << e.elements["number"].text }
             end
         end
         

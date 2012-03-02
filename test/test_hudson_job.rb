@@ -66,4 +66,9 @@ class TestHudsonJob < Test::Unit::TestCase
     assert job.name
     assert job.delete
   end
+  
+  def test_builds_list
+    job = Hudson::Job.get("test_job")
+    assert job.builds_list.kind_of?(Array)
+  end
 end
