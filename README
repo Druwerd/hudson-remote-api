@@ -21,3 +21,8 @@ Hudson::Job.list_active
 # print the last build number of a job
 j = Hudson::Job.new('jobname')
 puts j.last_build
+
+# if you are using hudson.plugins.git.GitSCM
+j.repository_url = { :url => 'https://github.com/beeplove/hudson-remote-api-mkhan.git', :branch => 'origin/master' }
+# or, only to change branch
+j.repository_url = { :branch => 'origin/master' }

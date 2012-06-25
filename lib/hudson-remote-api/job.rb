@@ -71,23 +71,37 @@ module Hudson
         end
         
         # Load data from Hudson's Job configuration settings into class variables
-        def load_config()
+        def load_config
             @config = get_xml(@xml_api_config_path)
             @config_doc = REXML::Document.new(@config)
-            
-            @config_doc = REXML::Document.new(@config)
-            if !@config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].nil?
-                @repository_url = @config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].text || ""
-            end
+
             @repository_urls = []
-            if !@config_doc.elements["/project/scm/locations"].nil?
-                @config_doc.elements.each("/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation"){|e| @repository_urls << e.elements["remote"].text }
-            end
-            if !@config_doc.elements["/project/scm/browser/location"].nil?
-                @repository_browser_location = @config_doc.elements["/project/scm/browser/location"].text
-            end
-            if !@config_doc.elements["/project/description"].nil?
+            if @config_doc.elements["/project/description"]
                 @description = @config_doc.elements["/project/description"].text || ""
+            end
+
+            if @config_doc.elements["/project/scm"].attributes['class'] == "hudson.plugins.git.GitSCM"
+                @git = true
+                @repository_url = {}
+                if @config_doc.elements["/project/scm/userRemoteConfigs/hudson.plugins.git.UserRemoteConfig/url"]
+                    @repository_url[:url] = @config_doc.elements['/project/scm/userRemoteConfigs/hudson.plugins.git.UserRemoteConfig/url'].text || ""
+                end
+                if @config_doc.elements['/project/scm/branches/hudson.plugins.git.BranchSpec/name']
+                    @repository_url[:branch] = @config_doc.elements['/project/scm/branches/hudson.plugins.git.BranchSpec/name'].text || ""
+                end
+                if @config_doc.elements['/project/scm/browser/url']
+                    @repository_browser_location = @config_doc.elements['/project/scm/browser/url'].text || ""
+                end
+            else
+                if !@config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].nil?
+                    @repository_url = @config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].text || ""
+                end
+                if !@config_doc.elements["/project/scm/locations"].nil?
+                    @config_doc.elements.each("/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation"){|e| @repository_urls << e.elements["remote"].text }
+                end
+                if !@config_doc.elements["/project/scm/browser/location"].nil?
+                    @repository_browser_location = @config_doc.elements["/project/scm/browser/location"].text
+                end
             end
         end
         
@@ -151,9 +165,22 @@ module Hudson
         # Set the repository url and update on Hudson server
         def repository_url=(repository_url)
             return false if @repository_url.nil?
+
             @repository_url = repository_url
-            @config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].text = repository_url
+
+            if @git
+                if repository_url[:url]
+                    @config_doc.elements['/project/scm/userRemoteConfigs/hudson.plugins.git.UserRemoteConfig/url'].text = repository_url[:url]
+                end
+                if repository_url[:branch]
+                    @config_doc.elements['/project/scm/branches/hudson.plugins.git.BranchSpec/name'].text = repository_url[:branch]
+                end
+            else
+                @config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].text = repository_url
+            end
+
             @config = @config_doc.to_s
+
             update
         end
         
@@ -174,7 +201,11 @@ module Hudson
         # Set the repository browser location and update on Hudson server
         def repository_browser_location=(repository_browser_location)
             @repository_browser_location = repository_browser_location
-            @config_doc.elements["/project/scm/browser/location"].text = repository_browser_location
+            if @git
+                @config_doc.elements['/project/scm/browser/url'].text = repository_browser_location
+            else
+                @config_doc.elements["/project/scm/browser/location"].text = repository_browser_location
+            end
             @config = @config_doc.to_s
             update
         end
