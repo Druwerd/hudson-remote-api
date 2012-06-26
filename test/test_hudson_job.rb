@@ -32,8 +32,8 @@ class TestHudsonJob < Test::Unit::TestCase
   
   def test_desc_update
     job = Hudson::Job.new('test_job')
-    assert job.description
     assert job.description = "test"
+    assert job.description != nil, "Job description should not be nil"
   end
   
   def test_new
