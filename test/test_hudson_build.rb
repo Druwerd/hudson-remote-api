@@ -11,14 +11,14 @@ class TestHudsonBuild < Test::Unit::TestCase
   
   def test_build_info
     build = Hudson::Build.new('test_job')
-    assert_equal build.job.name, 'test_job'
+    assert_equal 'test_job', build.job.name
     
     assert build.number.to_i > 0, "build number test failed"
     
     assert build.revisions, "build revisions test failed"
     assert build.revisions.kind_of?(Hash), "build revisions is not an Hash"
     
-    assert_equal build.result, "SUCCESS", "build result test failed"
+    assert_equal "SUCCESS", build.result, "build result test failed"
     
     assert_nil build.culprit, "build culprit test failed"
   end

@@ -3,6 +3,7 @@ $LOAD_PATH << File.dirname(__FILE__) + "/../lib"
 require 'hudson-remote-api.rb'
 
 class TestHudsonJob < Test::Unit::TestCase
+  TEST_SVN_REPO_URL = "http://svn.apache.org/repos/asf/subversion/trunk/doc/user/"
   
   def setup
     Hudson[:url] = "http://localhost:8080"
@@ -34,6 +35,15 @@ class TestHudsonJob < Test::Unit::TestCase
     job = Hudson::Job.new('test_job')
     assert job.description = "test"
     assert job.description != nil, "Job description should not be nil"
+  end
+  
+  def test_scm_url
+    job = Hudson::Job.new('test_svn_job')
+    job.build
+    assert job.repository_url = TEST_SVN_REPO_URL
+    
+    job = Hudson::Job.new('test_svn_job')
+    assert_equal TEST_SVN_REPO_URL, job.repository_url
   end
   
   def test_new

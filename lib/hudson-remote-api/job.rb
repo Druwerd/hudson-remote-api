@@ -6,6 +6,24 @@ module Hudson
         attr_reader :color, :last_build, :last_completed_build, :last_failed_build, :last_stable_build, :last_successful_build, :last_unsuccessful_build, :next_build_number
         attr_reader :builds_list
         
+SVN_SCM_CONF = <<-SVN_SCM_STRING
+  <scm class="hudson.scm.SubversionSCM">
+  <locations>
+  <hudson.scm.SubversionSCM_-ModuleLocation>
+  <remote>%s</remote>
+  <local>.</local>
+  </hudson.scm.SubversionSCM_-ModuleLocation>
+  </locations>
+  <excludedRegions/>
+  <includedRegions/>
+  <excludedUsers/>
+  <excludedRevprop/>
+  <excludedCommitMessages/>
+  <workspaceUpdater class="hudson.scm.subversion.UpdateUpdater"/>
+  </scm>
+SVN_SCM_STRING
+        
+        
         # List all Hudson jobs
         def self.list()
             xml = get_xml(@@hudson_xml_api_path)
@@ -164,7 +182,7 @@ module Hudson
         
         # Set the repository url and update on Hudson server
         def repository_url=(repository_url)
-            return false if @repository_url.nil?
+            #return false if @repository_url.nil?
 
             @repository_url = repository_url
 
@@ -176,7 +194,11 @@ module Hudson
                     @config_doc.elements['/project/scm/branches/hudson.plugins.git.BranchSpec/name'].text = repository_url[:branch]
                 end
             else
-                @config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].text = repository_url
+                if @config_doc.elements["/project/scm"].attributes['class'] == "hudson.scm.NullSCM"
+                  @config_doc.elements["/project/scm"].replace_with REXML::Document.new(SVN_SCM_CONF % repository_url)
+                else
+                  @config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].text = repository_url
+                end
             end
 
             @config = @config_doc.to_s
