@@ -23,42 +23,54 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
   </scm>
 SVN_SCM_STRING
         
-        
-        # List all Hudson jobs
-        def self.list()
-            xml = get_xml(@@hudson_xml_api_path)
-            
-            jobs = []
-            jobs_doc = REXML::Document.new(xml)
-            jobs_doc.each_element("hudson/job") do |job|
-                jobs << job.elements["name"].text
-            end
-            jobs
-        end
-        
-        # List all jobs in active execution
-        def self.list_active
-            xml = get_xml(@@hudson_xml_api_path)
-            
-            active_jobs = []
-            jobs_doc = REXML::Document.new(xml)
-            jobs_doc.each_element("hudson/job") do |job|
-                if job.elements["color"].text.include?("anime")
-                    active_jobs << job.elements["name"].text
-                end
-            end
-            active_jobs
-        end
-        
-        def self.get(job_name)
-          job_name.strip!
-          if list.include?(job_name)
-            Job.new(job_name)
-          else
-            nil
+        # Class methods
+        class <<self
+          # List all Hudson jobs
+          def list()
+              xml = get_xml(@@hudson_xml_api_path)
+
+              jobs = []
+              jobs_doc = REXML::Document.new(xml)
+              jobs_doc.each_element("hudson/job") do |job|
+                  jobs << job.elements["name"].text
+              end
+              jobs
           end
+          
+          # List all jobs in active execution
+          def list_active
+              xml = get_xml(@@hudson_xml_api_path)
+
+              active_jobs = []
+              jobs_doc = REXML::Document.new(xml)
+              jobs_doc.each_element("hudson/job") do |job|
+                  if job.elements["color"].text.include?("anime")
+                      active_jobs << job.elements["name"].text
+                  end
+              end
+              active_jobs
+          end
+          
+          def get(job_name)
+            job_name.strip!
+            if list.include?(job_name)
+              Job.new(job_name)
+            else
+              nil
+            end
+          end
+          
+          def create(name, config=nil)
+            config = File.open(File.dirname(__FILE__) + '/new_job_config.xml').read if config.nil?
+
+            response = send_post_request(@@xml_api_create_item_path, {:name=>name, :mode=>"hudson.model.FreeStyleProject", :config=>config})
+            raise(APIError, "Error creating job #{name}: #{response.body}") if response.class != Net::HTTPFound
+            Job.get(name)
+          end
+          
         end
-        
+
+        # Instance methods
         def initialize(name, config=nil)
             name.strip!
             Hudson::Job.fetch_crumb
@@ -154,14 +166,6 @@ SVN_SCM_STRING
                 sleep poll_freq # wait
                 break if !active? and !BuildQueue.list.include?(@name)
             end
-        end
-        
-        def self.create(name, config=nil)
-          config = File.open(File.dirname(__FILE__) + '/new_job_config.xml').read if config.nil?
-          
-          response = send_post_request(@@xml_api_create_item_path, {:name=>name, :mode=>"hudson.model.FreeStyleProject", :config=>config})
-          raise(APIError, "Error creating job #{name}: #{response.body}") if response.class != Net::HTTPFound
-          Job.get(name)
         end
         
         # Create a new job on Hudson server based on the current job object
