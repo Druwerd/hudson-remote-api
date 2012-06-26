@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'rake/testtask'
 
 begin
   require 'jeweler'
@@ -17,12 +18,9 @@ rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install jeweler -s http://gemcutter.org"
 end
 
-namespace :test do
-   desc "Run all tests"
-   task :all do
-      test_files = Dir.glob("test/*.rb")
-      test_files.each{|f| require f}
-   end
+Rake::TestTask.new do |t|
+ t.libs << 'test'
 end
 
-Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
+desc "Run tests"
+task :default => :test
