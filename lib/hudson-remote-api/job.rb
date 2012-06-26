@@ -44,7 +44,7 @@ module Hudson
         def initialize(name, config=nil)
             name.strip!
             Hudson::Job.fetch_crumb
-            if Job.list.include?(name)
+            if Job.list.include?(name) # job already in Jenkins
               @name = name
               load_xml_api
               load_config
@@ -213,6 +213,8 @@ module Hudson
         # Set the job description and update on Hudson server
         def description=(description)
             @description = description
+            @config_doc.elements["/project"] << REXML::Element.new("description") if @config_doc.elements["/project/description"].nil?
+            
             @config_doc.elements["/project/description"].text = description
             @config = @config_doc.to_s
             update
