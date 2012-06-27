@@ -1,7 +1,6 @@
 module Hudson
     # This class provides an interface to Hudson jobs
     class Job < HudsonObject
-
         attr_accessor :name, :config, :repository_url, :repository_urls, :repository_browser_location, :description
         
 SVN_SCM_CONF = <<-SVN_SCM_STRING
@@ -72,18 +71,11 @@ SVN_SCM_STRING
         def initialize(name, config=nil)
             name.strip!
             Hudson::Job.fetch_crumb
-            if Job.list.include?(name) # job already in Jenkins
-              @name = name
-              load_xml_api
-              load_config
-              self
-            else
-              j = Job.create(name, config)
-              @name = j.name
-              load_xml_api
-              load_config
-              self
-            end
+            # Creates the job in Hudson if it doesn't already exist
+            @name = Job.list.include?(name) ? name : Job.create(name, config).name
+            load_xml_api
+            load_config
+            self
         end
         
         def load_xml_api
