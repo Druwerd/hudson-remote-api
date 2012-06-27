@@ -50,15 +50,11 @@ SVN_SCM_STRING
           
           def get(job_name)
             job_name.strip!
-            if list.include?(job_name)
-              Job.new(job_name)
-            else
-              nil
-            end
+            list.include?(job_name) ? Job.new(job_name) : nil
           end
           
           def create(name, config=nil)
-            config = File.open(File.dirname(__FILE__) + '/new_job_config.xml').read if config.nil?
+            config ||= File.open(File.dirname(__FILE__) + '/new_job_config.xml').read
 
             response = send_post_request(@@xml_api_create_item_path, {:name=>name, :mode=>"hudson.model.FreeStyleProject", :config=>config})
             raise(APIError, "Error creating job #{name}: #{response.body}") if response.class != Net::HTTPFound
