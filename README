@@ -29,3 +29,13 @@ puts j.last_build
 j.repository_url = { :url => 'https://github.com/beeplove/hudson-remote-api-mkhan.git', :branch => 'origin/master' }
 # or, only to change branch
 j.repository_url = { :branch => 'origin/master' }
+
+# update build trigger
+j.triggers = { 'hudson.triggers.SCMTrigger' => '* * * * *'}
+# or
+j.triggers = { 'SCMTrigger' => '* * * * *'}
+
+# To view current trigger
+j.triggers
+# would return hash containing trigger name in key and trigger spec in value.
+# Example of returned hash: {"hudson.triggers.TimerTrigger"=>"0 22 * * *", "hudson.triggers.SCMTrigger"=>"* * * * *"}
