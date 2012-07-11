@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/multicast.rb'
 
 module Hudson
   # set default settings
-  @@settings = {:url => 'http://localhost:8080', :user => nil, :password => nil, :version => nil}
+  @@settings = {:url => 'http://localhost:8080', :user => nil, :password => nil, :version => nil, :crumb => true}
   
   def self.[](param)
     return @@settings[param]
