@@ -21,10 +21,17 @@ class TestHudsonConfig < Test::Unit::TestCase
     assert_equal(Hudson[:user], "test")
     assert_equal(Hudson[:password], "test")
     assert_equal(Hudson[:version], "1.00")
+    assert_equal(Hudson[:crumb], true)
   end
   
   def test_auto_config
     assert_nothing_thrown{ Hudson.auto_config }
+  end
+
+  def test_when_crumb_is_false
+    new_settings = {:url => 'test.com', :user => 'test', :password => 'test', :version => '1.00', :crumb => false}
+    Hudson.settings = new_settings
+    assert_equal(Hudson[:crumb], false)
   end
   
 end
