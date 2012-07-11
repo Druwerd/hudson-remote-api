@@ -105,24 +105,25 @@ module Hudson
     end
     
     def self.fetch_crumb
-      body = get_xml(url_for '/crumbIssuer/api/xml')
-      doc = REXML::Document.new(body)
-      
-      crumbValue = doc.elements['/defaultCrumbIssuer/crumb'] or begin
-        $stderr.puts "Failure fetching crumb value from server"
-        return
+      if Hudson[:crumb]
+        body = get_xml(url_for '/crumbIssuer/api/xml')
+        doc  = REXML::Document.new(body)
+
+        crumbValue = doc.elements['/defaultCrumbIssuer/crumb'] or begin
+          $stderr.puts "Failure fetching crumb value from server"
+          return
+        end
+
+        crumbName = doc.elements['/defaultCrumbIssuer/crumbRequestField'] or begin
+          $stderr.puts "Failure fetching crumb field name from server"
+          return
+        end
+
+        @@apiCrumb = Struct.new(:name,:value).new(crumbName.text,crumbValue.text)
       end
-      
-      crumbName = doc.elements['/defaultCrumbIssuer/crumbRequestField'] or begin
-        $stderr.puts "Failure fetching crumb field name from server"
-        return
-      end
-      
-      @@apiCrumb = Struct.new(:name,:value).new(crumbName.text,crumbValue.text)
     rescue
         $stderr.puts "Failure fetching crumb xml"
     end
-    
   end
 end
 
