@@ -1,10 +1,7 @@
 module Hudson
     # This class provides an interface to Hudson jobs
     class Job < HudsonObject
-
         attr_accessor :name, :config, :repository_url, :repository_urls, :repository_browser_location, :description
-        attr_reader :color, :last_build, :last_completed_build, :last_failed_build, :last_stable_build, :last_successful_build, :last_unsuccessful_build, :next_build_number
-        attr_reader :builds_list
         
 SVN_SCM_CONF = <<-SVN_SCM_STRING
   <scm class="hudson.scm.SubversionSCM">
@@ -53,15 +50,11 @@ SVN_SCM_STRING
           
           def get(job_name)
             job_name.strip!
-            if list.include?(job_name)
-              Job.new(job_name)
-            else
-              nil
-            end
+            list.include?(job_name) ? Job.new(job_name) : nil
           end
           
           def create(name, config=nil)
-            config = File.open(File.dirname(__FILE__) + '/new_job_config.xml').read if config.nil?
+            config ||= File.open(File.dirname(__FILE__) + '/new_job_config.xml').read
 
             response = send_post_request(@@xml_api_create_item_path, {:name=>name, :mode=>"hudson.model.FreeStyleProject", :config=>config})
             raise(APIError, "Error creating job #{name}: #{response.body}") if response.class != Net::HTTPFound
@@ -74,20 +67,11 @@ SVN_SCM_STRING
         def initialize(name, config=nil)
             name.strip!
             Hudson::Job.fetch_crumb
-            if Job.list.include?(name) # job already in Jenkins
-              @name = name
-              load_xml_api
-              load_config
-              load_info
-              self
-            else
-              j = Job.create(name, config)
-              @name = j.name
-              load_xml_api
-              load_config
-              load_info
-              self
-            end
+            # Creates the job in Hudson if it doesn't already exist
+            @name = Job.list.include?(name) ? name : Job.create(name, config).name
+            load_xml_api
+            load_config
+            self
         end
         
         def load_xml_api
@@ -104,6 +88,9 @@ SVN_SCM_STRING
         def load_config
             @config = get_xml(@xml_api_config_path)
             @config_doc = REXML::Document.new(@config)
+            
+            @info = get_xml(@xml_api_path)
+            @info_doc = REXML::Document.new(@info)
 
             @repository_urls = []
             if @config_doc.elements["/project/description"]
@@ -135,25 +122,46 @@ SVN_SCM_STRING
             end
         end
         
-        def load_info()
-            @info = get_xml(@xml_api_path)
-            @info_doc = REXML::Document.new(@info)
-            
-            if @info_doc.elements["/freeStyleProject"]
-              @color = @info_doc.elements["/freeStyleProject/color"].text if @info_doc.elements["/freeStyleProject/color"]
-              @last_build = @info_doc.elements["/freeStyleProject/lastBuild/number"].text if @info_doc.elements["/freeStyleProject/lastBuild/number"]
-              @last_completed_build = @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"].text if @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"]
-              @last_failed_build = @info_doc.elements["/freeStyleProject/lastFailedBuild/number"].text if @info_doc.elements["/freeStyleProject/lastFailedBuild/number"]
-              @last_stable_build = @info_doc.elements["/freeStyleProject/lastStableBuild/number"].text if @info_doc.elements["/freeStyleProject/lastStableBuild/number"]
-              @last_successful_build = @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"]
-              @last_unsuccessful_build = @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"].text if @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"]
-              @next_build_number = @info_doc.elements["/freeStyleProject/nextBuildNumber"].text if @info_doc.elements["/freeStyleProject/nextBuildNumber"]
-            end
-            
-            if !@info_doc.elements["/freeStyleProject/build"].nil?
-                @builds_list = []
-                @info_doc.elements.each("/freeStyleProject/build"){|e| @builds_list << e.elements["number"].text }
-            end
+        def free_style_project?
+          !@info_doc.elements["/freeStyleProject"].nil?
+        end
+        
+        def color
+          @info_doc.elements["/freeStyleProject/color"].text if free_style_project? && @info_doc.elements["/freeStyleProject/color"]
+        end
+        
+        def last_build
+          @info_doc.elements["/freeStyleProject/lastBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastBuild/number"]
+        end
+        
+        def last_completed_build
+          @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"]
+        end
+        
+        def last_failed_build
+          @info_doc.elements["/freeStyleProject/lastFailedBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastFailedBuild/number"]
+        end
+        
+        def last_stable_build
+          @info_doc.elements["/freeStyleProject/lastStableBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastStableBuild/number"]
+        end
+        
+        def last_successful_build
+          @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"]
+        end
+        
+        def last_unsuccessful_build
+          @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"]
+        end
+        
+        def next_build_number
+          @info_doc.elements["/freeStyleProject/nextBuildNumber"].text if free_style_project? && @info_doc.elements["/freeStyleProject/nextBuildNumber"]
+        end
+        
+        def builds_list
+          builds_list = []
+          @info_doc.elements.each("/freeStyleProject/build"){|e| builds_list << e.elements["number"].text } unless @info_doc.elements["/freeStyleProject/build"].nil?
+          builds_list
         end
         
         def active?
