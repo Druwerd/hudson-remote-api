@@ -12,6 +12,9 @@ Hudson[:url] = 'http://localhost:8080'
 Hudson[:user] = 'hudson'
 Hudson[:password] = 'password'
 
+# To turn off checking for crumbIssuer
+Hudson[:crumb] = false
+
 # List all Hudson jobs
 Hudson::Job.list
 
