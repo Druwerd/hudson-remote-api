@@ -30,10 +30,19 @@ j.repository_url = { :url => 'https://github.com/beeplove/hudson-remote-api-mkha
 # or, only to change branch
 j.repository_url = { :branch => 'origin/master' }
 
-# update build trigger
+# Set build trigger
 j.triggers = { 'hudson.triggers.SCMTrigger' => '* * * * *'}
-# or
-j.triggers = { 'SCMTrigger' => '* * * * *'}
+# or, using shortcut
+j.triggers = { 'SCMTrigger' => '* * * * *', 'TimerTrigger' => '0 22 * * *'}
+
+# To add or update a trigger in existing triggers
+j.triggers = j.triggers.merge({ 'hudson.triggers.TimerTrigger' => '0 22 * * *'})
+# Avoid using shortcut form when to edit a trigger in existing triggers
+
+# To delete existing triggers
+j.triggers = {}
+# or,
+j.triggers = nil
 
 # To view current trigger
 j.triggers

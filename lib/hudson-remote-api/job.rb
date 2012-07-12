@@ -262,7 +262,9 @@ SVN_SCM_STRING
         private :generate_trigger
 
         def triggers= opts={}
+          opts = {} if opts.nil?
           if triggers = @config_doc.elements["/project/triggers[@class='vector']"]
+            triggers.elements.delete_all '*'
             opts.each do |key, value|
               trigger_name = key.to_s
               trigger_name = 'hudson.triggers.' + trigger_name unless Regexp.new(/^hudson\.triggers\./).match(trigger_name)
