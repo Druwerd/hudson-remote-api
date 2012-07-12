@@ -22,6 +22,7 @@ class TestHudsonJob < Test::Unit::TestCase
     new_job = Hudson::Job.create(new_job_name)
     assert new_job
     assert_equal(new_job.name, new_job_name)
+    assert_equal(true, new_job.triggers.empty?, "New job should have empty triggers")
     assert new_job.delete
   end
   
@@ -80,5 +81,39 @@ class TestHudsonJob < Test::Unit::TestCase
   def test_builds_list
     job = Hudson::Job.get("test_job")
     assert job.builds_list.kind_of?(Array)
+  end
+
+  def test_triggers_set
+    job_name = 'build_triggers'
+    job = Hudson::Job.create(job_name)
+
+    job.triggers = { "hudson.triggers.SCMTrigger" => '* * * * *' }
+    assert_equal(1, job.triggers.size, "Failed to set triggers with 1 trigger.")
+    assert_equal({"hudson.triggers.SCMTrigger" => '* * * * *'}, job.triggers, "Failed to set triggers with 1 trigger.")
+
+    assert job.delete
+  end
+
+  def test_triggers_set_using_shortcut
+    job_name = 'build_triggers'
+    job = Hudson::Job.create(job_name)
+
+    job.triggers = { "SCMTrigger" => '* * * * *', 'TimerTrigger' => '0 22 * * *' }
+    assert_equal(2, job.triggers.size, "Failed to set triggers using shortcut.")
+    assert_equal({"hudson.triggers.SCMTrigger" => '* * * * *'}, job.triggers, "Failed to set triggers using shortcut.")
+    assert_equal({"hudson.triggers.TimerTrigger" => '0 22 * * *'}, job.triggers, "Failed to set triggers using shortcut.")
+
+    assert job.delete
+  end
+
+  def test_triggers_delete
+    job_name = 'build_triggers'
+    job = Hudson::Job.create(job_name)
+
+    job.triggers = { "SCMTrigger" => '* * * * *', 'TimerTrigger' => '0 22 * * *' }
+    job.triggers = {}
+    assert_equal(true, job.triggers.empty?, "Failed to delete triggers.")
+
+    assert job.delete
   end
 end

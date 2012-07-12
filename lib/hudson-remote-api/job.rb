@@ -214,7 +214,6 @@ SVN_SCM_STRING
             end
 
             @config = @config_doc.to_s
-
             update
         end
         
@@ -252,6 +251,51 @@ SVN_SCM_STRING
             @config_doc.elements["/project/description"].text = description
             @config = @config_doc.to_s
             update
+        end
+
+        def generate_trigger trigger, spec_text
+          spec = REXML::Element.new("spec")
+          spec.text = spec_text.to_s
+          trigger.elements << spec
+          trigger
+        end
+        private :generate_trigger
+
+        def triggers= opts={}
+          opts = {} if opts.nil?
+          if triggers = @config_doc.elements["/project/triggers[@class='vector']"]
+            triggers.elements.delete_all '*'
+            opts.each do |key, value|
+              trigger_name = key.to_s
+              trigger_name = 'hudson.triggers.' + trigger_name unless Regexp.new(/^hudson\.triggers\./).match(trigger_name)
+              if trigger = triggers.elements[trigger_name]
+                if spec = trigger.elements['spec']
+                  spec.text = value.to_s
+                else
+                  triggers.elements << generate_trigger(trigger, value)
+                end
+              else
+                triggers.elements << generate_trigger(REXML::Element.new(trigger_name), value)
+              end
+            end
+            # Todo: before calling update, @config need to be assigned with @config_doc.to_s,
+            #       let it be done by update.
+            @config = @config_doc.to_s
+            update
+          else
+            $stderr.puts "triggers not found in configuration, triggers assignment ignored."
+          end
+        end
+
+        def triggers
+          results = {}
+          if triggers = @config_doc.elements["/project/triggers[@class='vector']"]
+            triggers.elements.to_a.each do |trigger|
+              spec_text = trigger.elements['spec'].text
+              results[trigger.name.to_s] = spec_text.to_s
+            end
+          end
+          results
         end
 
         def url
