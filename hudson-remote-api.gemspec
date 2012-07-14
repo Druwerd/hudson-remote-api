@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "hudson-remote-api"
-  s.version = "0.5.0"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dru Ibarra"]
-  s.date = "2012-06-26"
+  s.date = "2012-07-14"
   s.description = "Connect to Hudson's remote web API"
   s.email = "Druwerd@gmail.com"
   s.extra_rdoc_files = [
