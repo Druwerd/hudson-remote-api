@@ -100,8 +100,7 @@ class TestHudsonJob < Test::Unit::TestCase
 
     job.triggers = { "SCMTrigger" => '* * * * *', 'TimerTrigger' => '0 22 * * *' }
     assert_equal(2, job.triggers.size, "Failed to set triggers using shortcut.")
-    assert_equal({"hudson.triggers.SCMTrigger" => '* * * * *'}, job.triggers, "Failed to set triggers using shortcut.")
-    assert_equal({"hudson.triggers.TimerTrigger" => '0 22 * * *'}, job.triggers, "Failed to set triggers using shortcut.")
+    assert_equal({"hudson.triggers.SCMTrigger"=>"* * * * *", "hudson.triggers.TimerTrigger"=>"0 22 * * *"}, job.triggers, "Failed to set triggers using shortcut.")
 
     assert job.delete
   end
