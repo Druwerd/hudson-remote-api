@@ -1,0 +1,291 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://test:test@localhost:8080/createItem
+    body:
+      encoding: US-ASCII
+      string: name=build_triggers&mode=hudson.model.FreeStyleProject&config=%3C%3Fxml+version%3D%271.0%27+encoding%3D%27UTF-8%27%3F%3E%0A%3Cproject%3E%0A++%3Cactions%2F%3E%0A++%3Cdescription%3E%3C%2Fdescription%3E%0A++%3CkeepDependencies%3Efalse%3C%2FkeepDependencies%3E%0A++%3Cproperties%2F%3E%0A++%3Cscm+class%3D%22hudson.scm.NullSCM%22%2F%3E%0A++%3CcanRoam%3Etrue%3C%2FcanRoam%3E%0A++%3Cdisabled%3Efalse%3C%2Fdisabled%3E%0A++%3CblockBuildWhenUpstreamBuilding%3Efalse%3C%2FblockBuildWhenUpstreamBuilding%3E%0A++%3Ctriggers+class%3D%22vector%22%2F%3E%0A++%3CconcurrentBuild%3Efalse%3C%2FconcurrentBuild%3E%0A++%3Cbuilders%2F%3E%0A++%3Cpublishers%2F%3E%0A++%3CbuildWrappers%2F%3E%0A%3C%2Fproject%3E
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Location:
+      - http://localhost:8080/job/build_triggers/configure
+      Content-Length:
+      - '0'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '817'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: <hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>build_triggers</name><url>http://localhost:8080/job/build_triggers/</url><color>grey</color></job><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue_anime</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>false</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '817'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: <hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>build_triggers</name><url>http://localhost:8080/job/build_triggers/</url><color>grey</color></job><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue_anime</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>false</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/job/build_triggers/config.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml
+      Connection:
+      - Close
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version='1.0' encoding='UTF-8'?>\n<project>\n  <keepDependencies>false</keepDependencies>\n
+        \ <properties/>\n  <scm class=\"hudson.scm.NullSCM\"/>\n  <canRoam>false</canRoam>\n
+        \ <disabled>false</disabled>\n  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>\n
+        \ <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>\n
+        \ <triggers class=\"vector\"/>\n  <concurrentBuild>false</concurrentBuild>\n
+        \ <builders/>\n  <publishers/>\n  <buildWrappers/>\n</project>"
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/job/build_triggers/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '356'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: <freeStyleProject><displayName>build_triggers</displayName><name>build_triggers</name><url>http://localhost:8080/job/build_triggers/</url><buildable>true</buildable><color>grey</color><inQueue>false</inQueue><keepDependencies>false</keepDependencies><nextBuildNumber>1</nextBuildNumber><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: post
+    uri: http://test:test@localhost:8080/job/build_triggers/config.xml
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version='1.0' encoding='UTF-8'?>\n<project>\n  <keepDependencies>false</keepDependencies>\n
+        \ <properties/>\n  <scm class='hudson.scm.NullSCM'/>\n  <canRoam>false</canRoam>\n
+        \ <disabled>false</disabled>\n  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>\n
+        \ <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>\n
+        \ <triggers class='vector'><hudson.triggers.SCMTrigger><spec>* * * * *</spec></hudson.triggers.SCMTrigger><hudson.triggers.TimerTrigger><spec>0
+        22 * * *</spec></hudson.triggers.TimerTrigger></triggers>\n  <concurrentBuild>false</concurrentBuild>\n
+        \ <builders/>\n  <publishers/>\n  <buildWrappers/>\n</project>"
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Connection:
+      - Close
+      Content-Type:
+      - text/html;charset=UTF-8
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: post
+    uri: http://test:test@localhost:8080/job/build_triggers/config.xml
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version='1.0' encoding='UTF-8'?>\n<project>\n  <keepDependencies>false</keepDependencies>\n
+        \ <properties/>\n  <scm class='hudson.scm.NullSCM'/>\n  <canRoam>false</canRoam>\n
+        \ <disabled>false</disabled>\n  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>\n
+        \ <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>\n
+        \ <triggers class='vector'/>\n  <concurrentBuild>false</concurrentBuild>\n
+        \ <builders/>\n  <publishers/>\n  <buildWrappers/>\n</project>"
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Connection:
+      - Close
+      Content-Type:
+      - text/html;charset=UTF-8
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: post
+    uri: http://test:test@localhost:8080/job/build_triggers/doDelete
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Location:
+      - http://localhost:8080/
+      Content-Length:
+      - '0'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+recorded_with: VCR 2.2.5

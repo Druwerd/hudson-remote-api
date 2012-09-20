@@ -1,0 +1,306 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '702'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: <hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>false</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/job/test_svn_job/config.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml
+      Connection:
+      - Close
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?><project>\n  <keepDependencies>false</keepDependencies>\n
+        \ <properties/>\n    <scm class=\"hudson.scm.SubversionSCM\">\n  <locations>\n
+        \ <hudson.scm.SubversionSCM_-ModuleLocation>\n  <remote>http://svn.apache.org/repos/asf/subversion/trunk/doc/user/</remote>\n
+        \ <local>.</local>\n  </hudson.scm.SubversionSCM_-ModuleLocation>\n  </locations>\n
+        \ <excludedRegions/>\n  <includedRegions/>\n  <excludedUsers/>\n  <excludedRevprop/>\n
+        \ <excludedCommitMessages/>\n  <workspaceUpdater class=\"hudson.scm.subversion.UpdateUpdater\"/>\n
+        \ </scm>\n\n  <canRoam>false</canRoam>\n  <disabled>false</disabled>\n  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>\n
+        \ <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>\n
+        \ <triggers class=\"vector\"/>\n  <concurrentBuild>false</concurrentBuild>\n
+        \ <builders/>\n  <publishers/>\n  <buildWrappers/>\n</project>"
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/job/test_svn_job/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '5185'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ! '<freeStyleProject><displayName>test_svn_job</displayName><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><buildable>true</buildable><build><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></build><build><number>47</number><url>http://localhost:8080/job/test_svn_job/47/</url></build><build><number>46</number><url>http://localhost:8080/job/test_svn_job/46/</url></build><build><number>45</number><url>http://localhost:8080/job/test_svn_job/45/</url></build><build><number>44</number><url>http://localhost:8080/job/test_svn_job/44/</url></build><build><number>43</number><url>http://localhost:8080/job/test_svn_job/43/</url></build><build><number>42</number><url>http://localhost:8080/job/test_svn_job/42/</url></build><build><number>41</number><url>http://localhost:8080/job/test_svn_job/41/</url></build><build><number>40</number><url>http://localhost:8080/job/test_svn_job/40/</url></build><build><number>39</number><url>http://localhost:8080/job/test_svn_job/39/</url></build><build><number>38</number><url>http://localhost:8080/job/test_svn_job/38/</url></build><build><number>37</number><url>http://localhost:8080/job/test_svn_job/37/</url></build><build><number>36</number><url>http://localhost:8080/job/test_svn_job/36/</url></build><build><number>35</number><url>http://localhost:8080/job/test_svn_job/35/</url></build><build><number>34</number><url>http://localhost:8080/job/test_svn_job/34/</url></build><build><number>33</number><url>http://localhost:8080/job/test_svn_job/33/</url></build><build><number>32</number><url>http://localhost:8080/job/test_svn_job/32/</url></build><build><number>31</number><url>http://localhost:8080/job/test_svn_job/31/</url></build><build><number>30</number><url>http://localhost:8080/job/test_svn_job/30/</url></build><build><number>29</number><url>http://localhost:8080/job/test_svn_job/29/</url></build><build><number>28</number><url>http://localhost:8080/job/test_svn_job/28/</url></build><build><number>27</number><url>http://localhost:8080/job/test_svn_job/27/</url></build><build><number>26</number><url>http://localhost:8080/job/test_svn_job/26/</url></build><build><number>25</number><url>http://localhost:8080/job/test_svn_job/25/</url></build><build><number>24</number><url>http://localhost:8080/job/test_svn_job/24/</url></build><build><number>23</number><url>http://localhost:8080/job/test_svn_job/23/</url></build><build><number>22</number><url>http://localhost:8080/job/test_svn_job/22/</url></build><build><number>21</number><url>http://localhost:8080/job/test_svn_job/21/</url></build><build><number>20</number><url>http://localhost:8080/job/test_svn_job/20/</url></build><build><number>19</number><url>http://localhost:8080/job/test_svn_job/19/</url></build><build><number>18</number><url>http://localhost:8080/job/test_svn_job/18/</url></build><build><number>17</number><url>http://localhost:8080/job/test_svn_job/17/</url></build><build><number>16</number><url>http://localhost:8080/job/test_svn_job/16/</url></build><build><number>15</number><url>http://localhost:8080/job/test_svn_job/15/</url></build><build><number>14</number><url>http://localhost:8080/job/test_svn_job/14/</url></build><build><number>13</number><url>http://localhost:8080/job/test_svn_job/13/</url></build><build><number>12</number><url>http://localhost:8080/job/test_svn_job/12/</url></build><build><number>11</number><url>http://localhost:8080/job/test_svn_job/11/</url></build><build><number>10</number><url>http://localhost:8080/job/test_svn_job/10/</url></build><build><number>9</number><url>http://localhost:8080/job/test_svn_job/9/</url></build><build><number>8</number><url>http://localhost:8080/job/test_svn_job/8/</url></build><build><number>7</number><url>http://localhost:8080/job/test_svn_job/7/</url></build><build><number>6</number><url>http://localhost:8080/job/test_svn_job/6/</url></build><build><number>5</number><url>http://localhost:8080/job/test_svn_job/5/</url></build><build><number>4</number><url>http://localhost:8080/job/test_svn_job/4/</url></build><build><number>3</number><url>http://localhost:8080/job/test_svn_job/3/</url></build><build><number>2</number><url>http://localhost:8080/job/test_svn_job/2/</url></build><build><number>1</number><url>http://localhost:8080/job/test_svn_job/1/</url></build><color>blue</color><firstBuild><number>1</number><url>http://localhost:8080/job/test_svn_job/1/</url></firstBuild><healthReport><description>Build
+        stability: No recent builds failed.</description><iconUrl>health-80plus.png</iconUrl><score>100</score></healthReport><inQueue>false</inQueue><keepDependencies>false</keepDependencies><lastBuild><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></lastBuild><lastCompletedBuild><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></lastCompletedBuild><lastStableBuild><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></lastStableBuild><lastSuccessfulBuild><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></lastSuccessfulBuild><nextBuildNumber>49</nextBuildNumber><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>'
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: post
+    uri: http://test:test@localhost:8080/job/test_svn_job/build
+    body:
+      encoding: US-ASCII
+      string: delay=0sec
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Location:
+      - http://localhost:8080/job/test_svn_job/
+      Content-Length:
+      - '0'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: post
+    uri: http://test:test@localhost:8080/job/test_svn_job/config.xml
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version='1.0' encoding='UTF-8'?><project>\n  <keepDependencies>false</keepDependencies>\n
+        \ <properties/>\n    <scm class='hudson.scm.SubversionSCM'>\n  <locations>\n
+        \ <hudson.scm.SubversionSCM_-ModuleLocation>\n  <remote>http://svn.apache.org/repos/asf/subversion/trunk/doc/user/</remote>\n
+        \ <local>.</local>\n  </hudson.scm.SubversionSCM_-ModuleLocation>\n  </locations>\n
+        \ <excludedRegions/>\n  <includedRegions/>\n  <excludedUsers/>\n  <excludedRevprop/>\n
+        \ <excludedCommitMessages/>\n  <workspaceUpdater class='hudson.scm.subversion.UpdateUpdater'/>\n
+        \ </scm>\n\n  <canRoam>false</canRoam>\n  <disabled>false</disabled>\n  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>\n
+        \ <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>\n
+        \ <triggers class='vector'/>\n  <concurrentBuild>false</concurrentBuild>\n
+        \ <builders/>\n  <publishers/>\n  <buildWrappers/>\n</project>"
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Connection:
+      - Close
+      Content-Type:
+      - text/html;charset=UTF-8
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '702'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: <hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>false</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/job/test_svn_job/config.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml
+      Connection:
+      - Close
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?><project>\n  <keepDependencies>false</keepDependencies>\n
+        \ <properties/>\n    <scm class=\"hudson.scm.SubversionSCM\">\n  <locations>\n
+        \ <hudson.scm.SubversionSCM_-ModuleLocation>\n  <remote>http://svn.apache.org/repos/asf/subversion/trunk/doc/user/</remote>\n
+        \ <local>.</local>\n  </hudson.scm.SubversionSCM_-ModuleLocation>\n  </locations>\n
+        \ <excludedRegions/>\n  <includedRegions/>\n  <excludedUsers/>\n  <excludedRevprop/>\n
+        \ <excludedCommitMessages/>\n  <workspaceUpdater class=\"hudson.scm.subversion.UpdateUpdater\"/>\n
+        \ </scm>\n\n  <canRoam>false</canRoam>\n  <disabled>false</disabled>\n  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>\n
+        \ <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>\n
+        \ <triggers class=\"vector\"/>\n  <concurrentBuild>false</concurrentBuild>\n
+        \ <builders/>\n  <publishers/>\n  <buildWrappers/>\n</project>"
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/job/test_svn_job/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '5487'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ! '<freeStyleProject><displayName>test_svn_job</displayName><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><buildable>true</buildable><build><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></build><build><number>47</number><url>http://localhost:8080/job/test_svn_job/47/</url></build><build><number>46</number><url>http://localhost:8080/job/test_svn_job/46/</url></build><build><number>45</number><url>http://localhost:8080/job/test_svn_job/45/</url></build><build><number>44</number><url>http://localhost:8080/job/test_svn_job/44/</url></build><build><number>43</number><url>http://localhost:8080/job/test_svn_job/43/</url></build><build><number>42</number><url>http://localhost:8080/job/test_svn_job/42/</url></build><build><number>41</number><url>http://localhost:8080/job/test_svn_job/41/</url></build><build><number>40</number><url>http://localhost:8080/job/test_svn_job/40/</url></build><build><number>39</number><url>http://localhost:8080/job/test_svn_job/39/</url></build><build><number>38</number><url>http://localhost:8080/job/test_svn_job/38/</url></build><build><number>37</number><url>http://localhost:8080/job/test_svn_job/37/</url></build><build><number>36</number><url>http://localhost:8080/job/test_svn_job/36/</url></build><build><number>35</number><url>http://localhost:8080/job/test_svn_job/35/</url></build><build><number>34</number><url>http://localhost:8080/job/test_svn_job/34/</url></build><build><number>33</number><url>http://localhost:8080/job/test_svn_job/33/</url></build><build><number>32</number><url>http://localhost:8080/job/test_svn_job/32/</url></build><build><number>31</number><url>http://localhost:8080/job/test_svn_job/31/</url></build><build><number>30</number><url>http://localhost:8080/job/test_svn_job/30/</url></build><build><number>29</number><url>http://localhost:8080/job/test_svn_job/29/</url></build><build><number>28</number><url>http://localhost:8080/job/test_svn_job/28/</url></build><build><number>27</number><url>http://localhost:8080/job/test_svn_job/27/</url></build><build><number>26</number><url>http://localhost:8080/job/test_svn_job/26/</url></build><build><number>25</number><url>http://localhost:8080/job/test_svn_job/25/</url></build><build><number>24</number><url>http://localhost:8080/job/test_svn_job/24/</url></build><build><number>23</number><url>http://localhost:8080/job/test_svn_job/23/</url></build><build><number>22</number><url>http://localhost:8080/job/test_svn_job/22/</url></build><build><number>21</number><url>http://localhost:8080/job/test_svn_job/21/</url></build><build><number>20</number><url>http://localhost:8080/job/test_svn_job/20/</url></build><build><number>19</number><url>http://localhost:8080/job/test_svn_job/19/</url></build><build><number>18</number><url>http://localhost:8080/job/test_svn_job/18/</url></build><build><number>17</number><url>http://localhost:8080/job/test_svn_job/17/</url></build><build><number>16</number><url>http://localhost:8080/job/test_svn_job/16/</url></build><build><number>15</number><url>http://localhost:8080/job/test_svn_job/15/</url></build><build><number>14</number><url>http://localhost:8080/job/test_svn_job/14/</url></build><build><number>13</number><url>http://localhost:8080/job/test_svn_job/13/</url></build><build><number>12</number><url>http://localhost:8080/job/test_svn_job/12/</url></build><build><number>11</number><url>http://localhost:8080/job/test_svn_job/11/</url></build><build><number>10</number><url>http://localhost:8080/job/test_svn_job/10/</url></build><build><number>9</number><url>http://localhost:8080/job/test_svn_job/9/</url></build><build><number>8</number><url>http://localhost:8080/job/test_svn_job/8/</url></build><build><number>7</number><url>http://localhost:8080/job/test_svn_job/7/</url></build><build><number>6</number><url>http://localhost:8080/job/test_svn_job/6/</url></build><build><number>5</number><url>http://localhost:8080/job/test_svn_job/5/</url></build><build><number>4</number><url>http://localhost:8080/job/test_svn_job/4/</url></build><build><number>3</number><url>http://localhost:8080/job/test_svn_job/3/</url></build><build><number>2</number><url>http://localhost:8080/job/test_svn_job/2/</url></build><build><number>1</number><url>http://localhost:8080/job/test_svn_job/1/</url></build><color>blue</color><firstBuild><number>1</number><url>http://localhost:8080/job/test_svn_job/1/</url></firstBuild><healthReport><description>Build
+        stability: No recent builds failed.</description><iconUrl>health-80plus.png</iconUrl><score>100</score></healthReport><inQueue>true</inQueue><keepDependencies>false</keepDependencies><lastBuild><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></lastBuild><lastCompletedBuild><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></lastCompletedBuild><lastStableBuild><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></lastStableBuild><lastSuccessfulBuild><number>48</number><url>http://localhost:8080/job/test_svn_job/48/</url></lastSuccessfulBuild><nextBuildNumber>49</nextBuildNumber><queueItem><blocked>false</blocked><buildable>false</buildable><id>18</id><inQueueSince>1348122857690</inQueueSince><params></params><stuck>false</stuck><task><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url></task><why>???</why><timestamp>1348122857690</timestamp></queueItem><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>'
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+recorded_with: VCR 2.2.5

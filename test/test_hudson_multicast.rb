@@ -1,6 +1,4 @@
-require 'test/unit'
-$LOAD_PATH << File.dirname(__FILE__) + "/../lib"
-require 'hudson-remote-api.rb'
+require 'test_helper.rb'
 
 class TestHudsonMulticast < Test::Unit::TestCase
   

@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '702'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:17 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: <hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>false</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
+recorded_with: VCR 2.2.5

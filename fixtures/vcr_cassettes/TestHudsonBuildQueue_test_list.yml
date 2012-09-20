@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8080/queue/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '15'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Thu, 20 Sep 2012 06:34:16 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: <queue></queue>
+    http_version: 
+  recorded_at: Thu, 20 Sep 2012 06:34:16 GMT
+recorded_with: VCR 2.2.5
