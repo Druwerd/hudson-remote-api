@@ -72,7 +72,7 @@ j.delete
 
 ### Information on a job 
 ```ruby
-j = Hudson::Job.new('jobname')
+j = Hudson::Job.new('job_name')
 
 # job build indicator color
 puts j.color
@@ -93,7 +93,24 @@ puts j.last_failed_build
 # returns hash containing trigger name in key and trigger spec in value.
 # Example: {"hudson.triggers.TimerTrigger"=>"0 22 * * *", "hudson.triggers.SCMTrigger"=>"* * * * *"}
 puts j.triggers
+```
 
+### Information on a build
+```ruby
+# gets information on latest build
+b = Hudson::Build.new('job_name')
+
+# gets information on particular build number
+b = Hudson::Build.new('job_name', 42)
+
+# get commit revisions in this build
+puts b.revisions
+
+# get the result of this build
+puts b.result
+
+# get the culprit of this build
+puts b.culprit
 ```
 
 ### Modifying a job
@@ -114,7 +131,7 @@ j.repository_url = { :branch => 'origin/master' }
 j.repository_url = "http://svn.myrepo.com"
 ```
 
-#### Set build trigger
+#### Set build triggers
 ```ruby
 j.triggers = { 'hudson.triggers.SCMTrigger' => '* * * * *'}
 # or, using shortcut
