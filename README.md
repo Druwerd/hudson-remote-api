@@ -125,3 +125,8 @@ j.triggers = nil
 
 ```
 *Avoid using shortcut form when editing a trigger in existing triggers
+
+#### Set job description
+```ruby
+j.description = "My new job description"
+```
