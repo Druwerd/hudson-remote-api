@@ -29,14 +29,38 @@ Hudson[:crumb] = false
 ```
 ## Usage:
 
-### List all Hudson jobs
+### List jobs
 ```ruby
+# list all jobs
 Hudson::Job.list
+
+# list current active jobs
+Hudson::Job.list_active
 ```
 
-### List all active Hudson jobs
+### Create (or load existing) job
 ```ruby
-Hudson::Job.list_active
+j = Hudson::Job.new('my_new_job')
+```
+
+### Actions on job
+```ruby
+j = Hudson::Job.new('my_new_job')
+
+# start a build
+j.build
+
+# disable the job
+j.disable
+
+# enable the job
+j.enable
+
+# clear out the job's workspace
+j.wipe_out_workspace
+
+# delete the job
+j.delete
 ```
 
 ### Print the last build number of a job
