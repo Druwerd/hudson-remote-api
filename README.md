@@ -80,10 +80,16 @@ j.delete
 ```ruby
 j = Hudson::Job.new('job_name')
 
-# job build indicator color
+# the job's URL address on Hudson server
+puts j.url
+
+# job's current build indicator color
 puts j.color
 
-# get list of job's builds
+# returns true if job is currently running
+j.active?
+
+# list of job's build numbers
 puts j.builds_list
 
 # latest build number
@@ -95,10 +101,13 @@ puts j.last_successful_build
 # latest failed build number
 puts j.last_failed_build
 
+# next build number
+puts j.next_build_number
+
 # view current triggers
 # returns hash containing trigger name in key and trigger spec in value.
 # Example: {"hudson.triggers.TimerTrigger"=>"0 22 * * *", "hudson.triggers.SCMTrigger"=>"* * * * *"}
-puts j.triggers
+j.triggers
 ```
 
 ### Information on a build
