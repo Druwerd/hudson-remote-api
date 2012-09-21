@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/Druwerd/hudson-remote-api.png)](http://travis-ci.org/Druwerd/hudson-remote-api)
+
 hudson-remote-api is ruby library to talk to Hudson's xml remote access api
 
 Usage:
