@@ -39,6 +39,12 @@ Hudson::Job.list
 Hudson::Job.list_active
 ```
 
+### Build Queue
+```ruby
+# list all jobs in the build queue (waiting to run)
+Hudson::BuildQueue.list
+```
+
 ### Create (or load existing) job
 ```ruby
 j = Hudson::Job.new('my_new_job')
