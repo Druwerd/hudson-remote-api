@@ -13,7 +13,8 @@ require 'hudson-remote-api'
 ```
 
 ```ruby
-# Auto Configuration sets Hudson[:url]
+# Auto Configuration 
+# detects Hudson instance on your network & sets Hudson[:url]
 Hudson.auto_config
 ```
 Or
@@ -43,12 +44,15 @@ Hudson::Job.list_active
 j = Hudson::Job.new('my_new_job')
 ```
 
-### Actions on job
+### Actions on a job
 ```ruby
 j = Hudson::Job.new('my_new_job')
 
 # start a build
 j.build
+
+# create a copy of existing job
+j.copy('copy_of_my_job')
 
 # disable the job
 j.disable
@@ -59,14 +63,31 @@ j.enable
 # clear out the job's workspace
 j.wipe_out_workspace
 
+# wait (sleep) until the job has completed building
+j.wait_for_build_to_finish
+
 # delete the job
 j.delete
 ```
 
-### Print the last build number of a job
+### Information on a job 
 ```ruby
 j = Hudson::Job.new('jobname')
+
+# job build indicator color
+puts j.color
+
+# get list of job's builds
+puts j.builds_list
+
+# latest build number
 puts j.last_build
+
+# latest successful build number
+puts j.last_successful_build
+
+# latest failed build number
+puts j.last_failed_build
 ```
 
 ### Use with Git
