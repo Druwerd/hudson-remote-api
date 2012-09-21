@@ -88,52 +88,40 @@ puts j.last_successful_build
 
 # latest failed build number
 puts j.last_failed_build
+
+# view current triggers
+# returns hash containing trigger name in key and trigger spec in value.
+# Example: {"hudson.triggers.TimerTrigger"=>"0 22 * * *", "hudson.triggers.SCMTrigger"=>"* * * * *"}
+puts j.triggers
+
 ```
 
-### Use with Git
+### Modifying a job
+
+#### Set repository
 ```ruby
+# Git
 j.repository_url = { :url => 'https://github.com/beeplove/hudson-remote-api-mkhan.git', :branch => 'origin/master' }
-```
-
-or, only to change branch
-
-```ruby
+# or, only to change branch
 j.repository_url = { :branch => 'origin/master' }
+
+# SVN
+j.repository_url = "http://svn.myrepo.com"
 ```
 
-### Set build trigger
+#### Set build trigger
 ```ruby
 j.triggers = { 'hudson.triggers.SCMTrigger' => '* * * * *'}
-```
-
-or, using shortcut
-
-```ruby
+# or, using shortcut
 j.triggers = { 'SCMTrigger' => '* * * * *', 'TimerTrigger' => '0 22 * * *'}
-```
 
-### Add or update a trigger in existing triggers
-```ruby
+# Add or update a trigger in existing triggers*
 j.triggers = j.triggers.merge({ 'hudson.triggers.TimerTrigger' => '0 22 * * *'})
-```
 
-*Avoid using shortcut form when to edit a trigger in existing triggers
-
-### To delete existing triggers
-```ruby
+# Delete existing triggers
 j.triggers = {}
-```
-
-or,
-
-```ruby
+# or,
 j.triggers = nil
-```
 
-### View current trigger
-```ruby
-j.triggers
 ```
-
-would return hash containing trigger name in key and trigger spec in value.
-Example of returned hash: {"hudson.triggers.TimerTrigger"=>"0 22 * * *", "hudson.triggers.SCMTrigger"=>"* * * * *"}
+*Avoid using shortcut form when editing a trigger in existing triggers
