@@ -98,6 +98,11 @@ puts j.triggers
 
 ### Modifying a job
 
+#### Set job description
+```ruby
+j.description = "My new job description"
+```
+
 #### Set repository
 ```ruby
 # Git
@@ -126,7 +131,3 @@ j.triggers = nil
 ```
 *Avoid using shortcut form when editing a trigger in existing triggers
 
-#### Set job description
-```ruby
-j.description = "My new job description"
-```
