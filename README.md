@@ -57,6 +57,9 @@ j = Hudson::Job.new('my_new_job')
 # start a build
 j.build
 
+# start build with parameters
+j.build({:Key1 => Value1, :Key2 => Value2,...})
+
 # create a copy of existing job
 j.copy('copy_of_my_job')
 

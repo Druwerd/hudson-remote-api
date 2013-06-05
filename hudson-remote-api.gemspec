@@ -5,20 +5,20 @@
 
 Gem::Specification.new do |s|
   s.name = "hudson-remote-api"
-  s.version = "0.6.0"
+  s.version = "0.6.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Dru Ibarra"]
-  s.date = "2012-07-14"
+  s.authors = ["Dru Ibarra", "Guy Cheung"]
+  s.date = "2013-06-05"
   s.description = "Connect to Hudson's remote web API"
-  s.email = "Druwerd@gmail.com"
+  s.email = "Druwerd@gmail.com, guy.xtafcusqt@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE",
-    "README"
+    "README.md"
   ]
   s.files = [
     "LICENSE",
-    "README",
+    "README.md",
     "Rakefile",
     "VERSION",
     "hudson-remote-api.gemspec",
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
     "test/test_hudson_job.rb",
     "test/test_hudson_multicast.rb"
   ]
-  s.homepage = "http://github.com/Druwerd/hudson-remote-api"
+  s.homepage = "https://github.com/GuyCheung/hudson-remote-api"
   s.require_paths = ["lib"]
   s.rubyforge_project = "hudson-remote-api"
   s.rubygems_version = "1.8.24"

@@ -8,9 +8,9 @@ begin
     gemspec.name = "hudson-remote-api"
     gemspec.summary = "Connect to Hudson's remote web API"
     gemspec.description = "Connect to Hudson's remote web API"
-    gemspec.email = "Druwerd@gmail.com"
-    gemspec.homepage = "http://github.com/Druwerd/hudson-remote-api"
-    gemspec.authors = ["Dru Ibarra"]
+    gemspec.email = "Druwerd@gmail.com, guy.xtafcusqt@gmail.com"
+    gemspec.homepage = "https://github.com/GuyCheung/hudson-remote-api"
+    gemspec.authors = ["Dru Ibarra", "Guy Cheung"]
     gemspec.rubyforge_project = gemspec.name
   end
   Jeweler::GemcutterTasks.new
