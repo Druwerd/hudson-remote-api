@@ -12,6 +12,7 @@ begin
     gemspec.homepage = "http://github.com/Druwerd/hudson-remote-api"
     gemspec.authors = ["Dru Ibarra"]
     gemspec.rubyforge_project = gemspec.name
+    gemspec.files = Dir.glob(File.join('lib/**', '*'))
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
