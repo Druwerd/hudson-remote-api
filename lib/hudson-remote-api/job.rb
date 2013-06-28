@@ -1,7 +1,7 @@
 module Hudson
     # This class provides an interface to Hudson jobs
     class Job < HudsonObject
-        attr_accessor :name, :config, :repository_url, :repository_urls, :repository_browser_location, :description
+        attr_accessor :name, :config, :repository_url, :repository_urls, :repository_browser_location, :description, :parameterized_job
         
 SVN_SCM_CONF = <<-SVN_SCM_STRING
   <scm class="hudson.scm.SubversionSCM">
@@ -78,6 +78,7 @@ SVN_SCM_STRING
           @xml_api_path = File.join(Hudson[:url], "job/#{@name}/api/xml")
           @xml_api_config_path = File.join(Hudson[:url], "job/#{@name}/config.xml")
           @xml_api_build_path = File.join(Hudson[:url], "job/#{@name}/build")
+          @xml_api_build_with_params_path = File.join(Hudson[:url], "job/#{@name}/buildWithParameters")
           @xml_api_disable_path = File.join(Hudson[:url], "job/#{@name}/disable")
           @xml_api_enable_path = File.join(Hudson[:url], "job/#{@name}/enable")
           @xml_api_delete_path  = File.join(Hudson[:url], "job/#{@name}/doDelete")
@@ -95,6 +96,11 @@ SVN_SCM_STRING
             @repository_urls = []
             if @config_doc.elements["/project/description"]
                 @description = @config_doc.elements["/project/description"].text || ""
+            end
+
+            @parameterized_job = false
+            if @config_doc.elements["/project/properties/hudson.model.ParametersDefinitionProperty"]
+              @parameterized_job = true
             end
 
             if @config_doc.elements["/project/scm"].attributes['class'] == "hudson.plugins.git.GitSCM"
@@ -302,9 +308,13 @@ SVN_SCM_STRING
           File.join( Hudson[:url], 'job', name) + '/'
         end
         
-        # Start building this job on Hudson server (can't build parameterized jobs)
-        def build()
-            response = send_post_request(@xml_api_build_path, {:delay => '0sec'})
+        # Start building this job on Hudson server
+        def build(params={})
+            if @parameterized_job
+              response = send_post_request(@xml_api_build_with_params_path, {:delay => '0sec'}.merge(params))
+            else
+              response = send_post_request(@xml_api_build_path, {:delay => '0sec'})
+            end
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
 

@@ -1,0 +1,155 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      X-Jenkins:
+      - '1.510'
+      X-Jenkins-Session:
+      - a9a2d0eb
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '686'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Fri, 28 Jun 2013 23:35:53 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: <hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>blah</name><url>http://localhost:8080/job/blah/</url><color>blue</color></job><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>grey</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>false</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>
+    http_version: 
+  recorded_at: Fri, 28 Jun 2013 23:35:53 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/job/test_job/config.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Content-Type:
+      - application/xml
+      Connection:
+      - Close
+      Date:
+      - Fri, 28 Jun 2013 23:35:53 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version='1.0' encoding='UTF-8'?>\n<project>\n  <keepDependencies>false</keepDependencies>\n
+        \ <properties/>\n  <scm class=\"hudson.scm.NullSCM\"/>\n  <canRoam>false</canRoam>\n
+        \ <disabled>false</disabled>\n  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>\n
+        \ <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>\n
+        \ <triggers class=\"vector\"/>\n  <concurrentBuild>false</concurrentBuild>\n
+        \ <builders/>\n  <publishers/>\n  <buildWrappers/>\n</project>"
+    http_version: 
+  recorded_at: Fri, 28 Jun 2013 23:35:53 GMT
+- request:
+    method: get
+    uri: http://test:test@localhost:8080/job/test_job/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      X-Jenkins:
+      - '1.510'
+      X-Jenkins-Session:
+      - a9a2d0eb
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '338'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Fri, 28 Jun 2013 23:35:53 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: <freeStyleProject><displayName>test_job</displayName><name>test_job</name><url>http://localhost:8080/job/test_job/</url><buildable>true</buildable><color>grey</color><inQueue>false</inQueue><keepDependencies>false</keepDependencies><nextBuildNumber>1</nextBuildNumber><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>
+    http_version: 
+  recorded_at: Fri, 28 Jun 2013 23:35:53 GMT
+- request:
+    method: post
+    uri: http://test:test@localhost:8080/job/test_job/build
+    body:
+      encoding: US-ASCII
+      string: delay=0sec
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - Winstone Servlet Engine v0.9.10
+      Location:
+      - http://localhost:8080/job/test_job/
+      Content-Length:
+      - '0'
+      Connection:
+      - Keep-Alive
+      Date:
+      - Fri, 28 Jun 2013 23:35:53 GMT
+      X-Powered-By:
+      - Servlet/2.5 (Winstone/0.9.10)
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Fri, 28 Jun 2013 23:35:53 GMT
+recorded_with: VCR 2.4.0
