@@ -103,6 +103,24 @@ class TestHudsonJob < Test::Unit::TestCase
     end
   end
 
+  def test_build
+    VCR.use_cassette("#{self.class}_#{__method__}") do
+      job_name = 'test_job'
+      job = Hudson::Job.new(job_name)
+
+      assert job.build
+    end
+  end
+
+  def test_build_with_params
+    VCR.use_cassette("#{self.class}_#{__method__}") do
+      job_name = 'test_job'
+      job = Hudson::Job.new(job_name)
+
+      assert job.build
+    end
+  end
+
   def test_triggers_set
     VCR.use_cassette("#{self.class}_#{__method__}") do
       job_name = 'build_triggers'
