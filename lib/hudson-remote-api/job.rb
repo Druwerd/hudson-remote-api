@@ -1,7 +1,7 @@
 module Hudson
     # This class provides an interface to Hudson jobs
     class Job < HudsonObject
-        attr_accessor :name, :config, :repository_url, :repository_urls, :repository_browser_location, :description
+        attr_accessor :name, :config, :repository_url, :repository_urls, :repository_browser_location, :description, :parameterized_job
         
 SVN_SCM_CONF = <<-SVN_SCM_STRING
   <scm class="hudson.scm.SubversionSCM">
@@ -96,6 +96,11 @@ SVN_SCM_STRING
             @repository_urls = []
             if @config_doc.elements["/project/description"]
                 @description = @config_doc.elements["/project/description"].text || ""
+            end
+
+            @parameterized_job = false
+            if @config_doc.elements["/project/properties/hudson.model.ParametersDefinitionProperty"]
+              @parameterized_job = true
             end
 
             if @config_doc.elements["/project/scm"].attributes['class'] == "hudson.plugins.git.GitSCM"
@@ -304,14 +309,12 @@ SVN_SCM_STRING
         end
         
         # Start building this job on Hudson server
-        def build()
-            response = send_post_request(@xml_api_build_path, {:delay => '0sec'})
-            response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
-        end
-
-        # Start building this job on Hudson server. Use this if the build is parameterized.
-        def build_with_params(params={})
-            response = send_post_request(@xml_api_build_with_params_path, {:delay => '0sec'}.merge(params))
+        def build(params={})
+            if @parameterized_job
+              response = send_post_request(@xml_api_build_with_params_path, {:delay => '0sec'}.merge(params))
+            else
+              response = send_post_request(@xml_api_build_path, {:delay => '0sec'})
+            end
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
 
