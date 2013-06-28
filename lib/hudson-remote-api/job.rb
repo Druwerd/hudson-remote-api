@@ -78,6 +78,7 @@ SVN_SCM_STRING
           @xml_api_path = File.join(Hudson[:url], "job/#{@name}/api/xml")
           @xml_api_config_path = File.join(Hudson[:url], "job/#{@name}/config.xml")
           @xml_api_build_path = File.join(Hudson[:url], "job/#{@name}/build")
+          @xml_api_build_with_params_path = File.join(Hudson[:url], "job/#{@name}/buildWithParameters")
           @xml_api_disable_path = File.join(Hudson[:url], "job/#{@name}/disable")
           @xml_api_enable_path = File.join(Hudson[:url], "job/#{@name}/enable")
           @xml_api_delete_path  = File.join(Hudson[:url], "job/#{@name}/doDelete")
@@ -302,9 +303,15 @@ SVN_SCM_STRING
           File.join( Hudson[:url], 'job', name) + '/'
         end
         
-        # Start building this job on Hudson server (can't build parameterized jobs)
+        # Start building this job on Hudson server
         def build()
             response = send_post_request(@xml_api_build_path, {:delay => '0sec'})
+            response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
+        end
+
+        # Start building this job on Hudson server. Use this if the build is parameterized.
+        def build_with_params(params={})
+            response = send_post_request(@xml_api_build_with_params_path, {:delay => '0sec'}.merge(params))
             response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
         end
 
