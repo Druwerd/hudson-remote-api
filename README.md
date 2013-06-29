@@ -57,6 +57,9 @@ j = Hudson::Job.new('my_new_job')
 # start a build
 j.build
 
+# start a parameterized build. Pass parameters as a Hash.
+j.build({ :awesome_dev => "thomasbiddle" })
+
 # create a copy of existing job
 j.copy('copy_of_my_job')
 
