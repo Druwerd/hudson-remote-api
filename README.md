@@ -27,6 +27,11 @@ Hudson[:password] = 'password'
 
 # To turn off checking for crumbIssuer
 Hudson[:crumb] = false
+
+# To turn on proxy access
+Hudson[:proxy_host] = 'your-proxy-host'
+Hudson[:proxy_port] = 8888
+
 ```
 ## Usage:
 
