@@ -16,13 +16,22 @@ module Hudson
   class HudsonObject
     
     def self.hudson_request(uri,request)
-       Net::HTTP.start(uri.host, uri.port) do |http| 
-        http = Net::HTTP.new(uri.host, uri.port)
+       http_class = get_http_class
+       http_class.start(uri.host, uri.port) do |http| 
+        http = http_class.new(uri.host, uri.port)
         if uri.scheme == 'https'
           http.use_ssl = true
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
         end
         http.request(request)
+      end
+    end
+
+    def self.get_http_class
+      if Hudson[:proxy_host] && Hudson[:proxy_port]
+        Net::HTTP::Proxy(Hudson[:proxy_host], Hudson[:proxy_port])
+      else
+        Net::HTTP
       end
     end
     
@@ -42,7 +51,8 @@ module Hudson
       host = uri.host
       port = uri.port
       path = uri.path
-      request = Net::HTTP::Get.new(path)
+      http_class = get_http_class
+      request = http_class::Get.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request['Content-Type'] = "text/xml"
       response = hudson_request(uri,request)
@@ -69,7 +79,8 @@ module Hudson
       host = uri.host
       port = uri.port
       path = uri.path
-      request = Net::HTTP::Post.new(path)
+      http_class = get_http_class
+      request = http_class::Post.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request.set_form_data(data)
       request.add_field(crumb.name, crumb.value) if crumb
@@ -86,7 +97,8 @@ module Hudson
       port = uri.port
       path = uri.path
       path = path+"?"+uri.query if uri.query
-      request = Net::HTTP::Post.new(path)
+      http_class = get_http_class
+      request = http_class::Post.new(path)
       request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
       request.set_form_data(data) if data
       request.add_field(crumb.name, crumb.value) if crumb

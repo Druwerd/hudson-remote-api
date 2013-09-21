@@ -31,5 +31,12 @@ class TestHudsonConfig < Test::Unit::TestCase
     Hudson.settings = new_settings
     assert_equal(Hudson[:crumb], false)
   end
+
+  def test_proxy_setting
+    new_settings = {:url => 'test.com', :user => 'test', :password => 'test', :version => '1.00', :proxy_host => 'test-proxy.com', :proxy_port => 9876}
+    Hudson.settings = new_settings
+    assert_equal(Hudson[:proxy_host], 'test-proxy.com')
+    assert_equal(Hudson[:proxy_port], 9876)
+  end
   
 end
