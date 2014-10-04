@@ -34,11 +34,8 @@ module Hudson
 
       def get_xml(url)
         uri = URI.parse(URI.encode(url))
-        host = uri.host
-        port = uri.port
-        path = uri.path
         http_class = get_http_class
-        request = http_class::Get.new(path)
+        request = http_class::Get.new(uri.path)
         request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
         request['Content-Type'] = "text/xml"
         response = hudson_request(uri,request)
@@ -52,7 +49,7 @@ module Hudson
           end
         else
           $stderr.puts response.body
-          raise APIError, "Error retrieving #{path}"
+          raise APIError, "Error retrieving #{uri.path}"
         end
       end
 
