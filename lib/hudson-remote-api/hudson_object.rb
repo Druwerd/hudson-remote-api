@@ -55,11 +55,8 @@ module Hudson
 
       def send_post_request(url, data={})
         uri = URI.parse(URI.encode(url))
-        host = uri.host
-        port = uri.port
-        path = uri.path
         http_class = get_http_class
-        request = http_class::Post.new(path)
+        request = http_class::Post.new(uri.path)
         request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
         request.set_form_data(data)
         request.add_field(crumb.name, crumb.value) if crumb
@@ -68,8 +65,6 @@ module Hudson
 
       def send_xml_post_request(url, xml, data=nil)
         uri = URI.parse(URI.encode(url))
-        host = uri.host
-        port = uri.port
         path = uri.path
         path = path+"?"+uri.query if uri.query
         http_class = get_http_class
