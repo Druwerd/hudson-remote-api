@@ -4,7 +4,6 @@ module Hudson
 
     class << self
       def hudson_request(uri,request)
-        http_class = get_http_class
         http_class.start(uri.host, uri.port) do |http|
           http = http_class.new(uri.host, uri.port)
           if uri.scheme == 'https'
@@ -15,7 +14,7 @@ module Hudson
         end
       end
 
-      def get_http_class
+      def http_class
         if Hudson[:proxy_host] && Hudson[:proxy_port]
           Net::HTTP::Proxy(Hudson[:proxy_host], Hudson[:proxy_port])
         else
@@ -34,7 +33,6 @@ module Hudson
 
       def get_xml(url)
         uri = URI.parse(URI.encode(url))
-        http_class = get_http_class
         request = http_class::Get.new(uri.path)
         request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
         request['Content-Type'] = "text/xml"
@@ -55,7 +53,6 @@ module Hudson
 
       def send_post_request(url, data={})
         uri = URI.parse(URI.encode(url))
-        http_class = get_http_class
         request = http_class::Post.new(uri.path)
         request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
         request.set_form_data(data)
@@ -65,9 +62,7 @@ module Hudson
 
       def send_xml_post_request(url, xml, data=nil)
         uri = URI.parse(URI.encode(url))
-        path = uri.path
-        path = path+"?"+uri.query if uri.query
-        http_class = get_http_class
+        path = uri.query ? "#{uri.path}?#{uri.query}" : uri.path
         request = http_class::Post.new(path)
         request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
         request.set_form_data(data) if data
