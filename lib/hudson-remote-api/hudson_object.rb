@@ -15,18 +15,6 @@ module Hudson
         end
       end
 
-      def hudson_request(uri,request)
-        http_class = get_http_class
-        http_class.start(uri.host, uri.port) do |http|
-          http = http_class.new(uri.host, uri.port)
-          if uri.scheme == 'https'
-            http.use_ssl = true
-            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-          end
-          http.request(request)
-        end
-      end
-
       def get_http_class
         if Hudson[:proxy_host] && Hudson[:proxy_port]
           Net::HTTP::Proxy(Hudson[:proxy_host], Hudson[:proxy_port])
