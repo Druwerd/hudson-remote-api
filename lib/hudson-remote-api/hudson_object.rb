@@ -33,9 +33,11 @@ module Hudson
 
       def get_xml(url)
         uri = URI.parse(URI.encode(url))
-        request = http_class::Get.new(uri.path)
-        request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
-        request['Content-Type'] = "text/xml"
+        request = http_class::Get.new(uri.path).tap do |r|
+          r.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]  
+          r['Content-Type'] = "text/xml"
+        end
+        
         response = hudson_request(uri,request)
 
         if response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
@@ -53,21 +55,25 @@ module Hudson
 
       def send_post_request(url, data={})
         uri = URI.parse(URI.encode(url))
-        request = http_class::Post.new(uri.path)
-        request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
-        request.set_form_data(data)
-        request.add_field(crumb.name, crumb.value) if crumb
+        request = http_class::Post.new(uri.path).tap do |r|
+          r.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
+          r.set_form_data(data)
+          r.add_field(crumb.name, crumb.value) if crumb
+        end
+        
         hudson_request(uri,request)
       end
 
       def send_xml_post_request(url, xml, data=nil)
         uri = URI.parse(URI.encode(url))
         path = uri.query ? "#{uri.path}?#{uri.query}" : uri.path
-        request = http_class::Post.new(path)
-        request.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
-        request.set_form_data(data) if data
-        request.add_field(crumb.name, crumb.value) if crumb
-        request.body = xml
+        request = http_class::Post.new(path).tap do |r|
+          r.basic_auth(Hudson[:user], Hudson[:password]) if Hudson[:user] and Hudson[:password]
+          r.set_form_data(data) if data
+          r.add_field(crumb.name, crumb.value) if crumb
+          r.body = xml
+        end
+        
         hudson_request(uri,request)
       end
 
