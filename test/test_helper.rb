@@ -1,8 +1,7 @@
 require 'rubygems'
 require 'test/unit'
 require 'vcr'
-$LOAD_PATH << File.dirname(__FILE__) + "/../lib"
-require 'hudson-remote-api.rb'
+require './lib/hudson-remote-api.rb'
 
 VCR.configure do |c|
   c.cassette_library_dir = 'fixtures/vcr_cassettes'
