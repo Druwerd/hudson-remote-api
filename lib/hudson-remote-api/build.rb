@@ -5,11 +5,7 @@ module Hudson
     def initialize(job, build_number=nil)
       @job = Job.new(job) if job.kind_of?(String)
       @job = job if job.kind_of?(Hudson::Job)
-      if build_number
-        @number = build_number
-      else
-        @number = @job.last_build
-      end
+      @number =  build_number || @job.last_build
       @revisions = {}
       @xml_api_build_info_path = File.join(Hudson[:url], "job/#{@job.name}/#{@number}/api/xml")
       load_build_info
