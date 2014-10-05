@@ -24,7 +24,7 @@ class TestHudsonJob < Test::Unit::TestCase
       new_job_name = 'new_test_job'
       new_job = Hudson::Job.create(new_job_name)
       assert new_job
-      assert_equal(new_job.name, new_job_name)
+      assert_equal(new_job_name, new_job.name)
       assert_equal(true, new_job.triggers.empty?, "New job should have empty triggers")
       assert new_job.delete
     end
@@ -61,11 +61,11 @@ class TestHudsonJob < Test::Unit::TestCase
     VCR.use_cassette("#{self.class}_#{__method__}") do
       job = Hudson::Job.new('test_job')
       assert job
-      assert_equal(job.name, 'test_job')
+      assert_equal('test_job', job.name)
     
       new_job = Hudson::Job.new('test_job2')
       assert new_job
-      assert_equal('test_job2', new_job.name)
+      assert_equal(new_job.name, 'test_job2')
       assert new_job.delete
     end
   end
@@ -75,7 +75,7 @@ class TestHudsonJob < Test::Unit::TestCase
       job = Hudson::Job.get('test_job')
       new_job = job.copy
       assert new_job
-      assert_equal(new_job.name, 'copy_of_test_job')
+      assert_equal('copy_of_test_job', new_job.name)
       assert new_job.delete
     end
   end
@@ -83,7 +83,7 @@ class TestHudsonJob < Test::Unit::TestCase
   def test_url
     VCR.use_cassette("#{self.class}_#{__method__}") do
       job = Hudson::Job.get("test_job")
-      assert_equal(job.url, "http://localhost:8080/job/#{job.name}/")
+      assert_equal("http://localhost:8080/job/#{job.name}/", job.url)
     end
   end
   
