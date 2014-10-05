@@ -30,11 +30,7 @@ module Hudson
     end
 
     def settings=(settings)
-      if settings.kind_of?(Hash)
-        settings.each do |param, value|
-          Hudson[param] = value
-        end
-      end
+      settings.each {|param, value| Hudson[param] = value} if settings.kind_of?(Hash)
     end
     
     # Discovers nearby Hudson server on the network and configures settings
