@@ -10,16 +10,13 @@ module Hudson
       # List the jobs in the queue
       def list
         xml = get_xml(@@xml_api_build_queue_info_path)
-        queue = []
         queue_doc = REXML::Document.new(xml)
-        return queue if queue_doc.elements["/queue/item"].nil?
-        queue_doc.each_element("/queue/item/task") do |job|
-          queue << job.elements["name"].text
-        end
-        queue
+        return [] if queue_doc.elements["/queue/item"].nil?
+
+        queue_doc.each_element("/queue/item/task").collect{ |job| job.elements["name"].text }
       end
     end
-    
+
     load_xml_api
   end
 
