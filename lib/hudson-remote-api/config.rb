@@ -14,7 +14,7 @@ module Hudson
 
   class << self
     def [](param)
-      return @@settings[param]
+      @@settings[param]
     end
 
     def []=(param,value)
@@ -39,7 +39,7 @@ module Hudson
     
     # Discovers nearby Hudson server on the network and configures settings
     def auto_config
-      xml_response = discover()
+      xml_response = Hudson.discover
       if xml_response
         doc = REXML::Document.new(xml_response)
         url = doc.elements["/hudson/url"]
