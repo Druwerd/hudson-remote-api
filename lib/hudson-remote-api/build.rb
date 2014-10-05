@@ -17,16 +17,17 @@ module Hudson
       build_info_xml = patch_bad_git_xml(get_xml(@xml_api_build_info_path))
       build_info_doc = REXML::Document.new(build_info_xml)
 
-      if build_info_doc.elements["/freeStyleBuild/result"]
-        @result = build_info_doc.elements["/freeStyleBuild/result"].text
-      end
-      if !build_info_doc.elements["/freeStyleBuild/changeSet"].nil?
-        build_info_doc.elements.each("/freeStyleBuild/changeSet/revision"){|e| @revisions[e.elements["module"].text] = e.elements["revision"].text }
+      build_result_element = build_info_doc.elements["/freeStyleBuild/result"]
+      @result = build_result_element.text if build_result_element.respond_to?(:text)
+      
+      if build_info_doc.elements["/freeStyleBuild/changeSet"]
+        build_info_doc.elements.each("/freeStyleBuild/changeSet/revision") do |revision|
+          @revisions[revision.elements["module"].text] = revision.elements["revision"].text 
+        end
       end
 
-      if build_info_doc.elements['/freeStyleBuild/culprit/fullName']
-        @culprit = build_info_doc.elements['/freeStyleBuild/culprit/fullName'].text
-      end
+      culprit_element = build_info_doc.elements['/freeStyleBuild/culprit/fullName']
+      @culprt = culprit_element.text if culprit_element.respond_to?(:text)
 
     end
 
