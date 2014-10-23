@@ -75,13 +75,13 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
     end
 
     def load_xml_api
-      @xml_api_path = File.join(Hudson[:url], "job/#{@name}/api/xml")
-      @xml_api_config_path = File.join(Hudson[:url], "job/#{@name}/config.xml")
-      @xml_api_build_path = File.join(Hudson[:url], "job/#{@name}/build")
-      @xml_api_build_with_params_path = File.join(Hudson[:url], "job/#{@name}/buildWithParameters")
-      @xml_api_disable_path = File.join(Hudson[:url], "job/#{@name}/disable")
-      @xml_api_enable_path = File.join(Hudson[:url], "job/#{@name}/enable")
-      @xml_api_delete_path  = File.join(Hudson[:url], "job/#{@name}/doDelete")
+      @xml_api_path                    = File.join(Hudson[:url], "job/#{@name}/api/xml")
+      @xml_api_config_path             = File.join(Hudson[:url], "job/#{@name}/config.xml")
+      @xml_api_build_path              = File.join(Hudson[:url], "job/#{@name}/build")
+      @xml_api_build_with_params_path  = File.join(Hudson[:url], "job/#{@name}/buildWithParameters")
+      @xml_api_disable_path            = File.join(Hudson[:url], "job/#{@name}/disable")
+      @xml_api_enable_path             = File.join(Hudson[:url], "job/#{@name}/enable")
+      @xml_api_delete_path             = File.join(Hudson[:url], "job/#{@name}/doDelete")
       @xml_api_wipe_out_workspace_path = File.join(Hudson[:url], "job/#{@name}/doWipeOutWorkspace")
     end
 
