@@ -5,7 +5,7 @@ module Hudson
     class << self
       def list
         xml = Hudson.client.build_queue_info
-        build_queue_info_parser = Hudson::Parser::BuildQueueInfo.new()
+        build_queue_info_parser = Hudson::Parser::BuildQueueInfo.new(xml)
 
         build_queue_info_parser.items
       end
