@@ -28,7 +28,7 @@ module Hudson
       end
     end
 
-    def build_info(job_name, build_number)
+    def job_build_info(job_name, build_number)
       get_xml(self.xml_api.build_info_url(job_name, build_number))
     end
 

@@ -14,8 +14,8 @@ class TestHudsonClient < Test::Unit::TestCase
     Hudson::Client.new
   end
 
-  def test_build_info
-    assert @client.build_info('test_job')
+  def test_job_build_info
+    assert @client.job_build_info('test_job', 1)
   end
 
   def test_build_queue_info
@@ -24,18 +24,18 @@ class TestHudsonClient < Test::Unit::TestCase
     assert(!response.empty?)
   end
 
-  def test_build!
-    response = @client.build!('test_job')
+  def test_build_job!
+    response = @client.build_job!('test_job')
     assert response
   end
 
-  def test_build_with_parameters!
-    response = @client.build_with_parameters!('test_job', {})
+  def test_build_job_with_parameters!
+    response = @client.build_job_with_parameters!('test_job', {})
     assert response
   end
 
-  def test_config_info
-    response = @client.config_info('test_job')
+  def test_job_config_info
+    response = @client.job_config_info('test_job')
     assert response
   end
 
@@ -44,8 +44,8 @@ class TestHudsonClient < Test::Unit::TestCase
     assert response
   end
 
-  def test_delete!
-    response = @client.delete!('new_test_job')
+  def test_delete_job!
+    response = @client.delete_job!('new_test_job')
   end
 
 end
