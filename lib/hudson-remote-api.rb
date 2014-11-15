@@ -5,4 +5,4 @@
 require './lib/hudson-remote-api/config.rb'
 require './lib/hudson-remote-api/hudson_object.rb'
 
-Dir[File.dirname(__FILE__) + '/hudson-remote-api/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/hudson-remote-api/**/*.rb'].each {|file| require file }

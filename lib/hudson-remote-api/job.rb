@@ -24,28 +24,18 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
     class <<self
       # List all Hudson jobs
       def list()
-        xml = get_xml(@@hudson_xml_api_path)
+        xml = Hudson.client.server_info
+        server_info_parser = Hudson::Parser::ServerInfo.new(xml)
 
-        jobs = []
-        jobs_doc = REXML::Document.new(xml)
-        jobs_doc.each_element("hudson/job") do |job|
-          jobs << job.elements["name"].text
-        end
-        jobs
+        server_info_parser.jobs
       end
 
       # List all jobs in active execution
       def list_active
-        xml = get_xml(@@hudson_xml_api_path)
+        xml = Hudson.client.server_info
+        server_info_parser = Hudson::Parser::ServerInfo.new(xml)
 
-        active_jobs = []
-        jobs_doc = REXML::Document.new(xml)
-        jobs_doc.each_element("hudson/job") do |job|
-          if job.elements["color"].text.include?("anime")
-            active_jobs << job.elements["name"].text
-          end
-        end
-        active_jobs
+        server_info_parser.active_jobs
       end
 
       def get(job_name)
@@ -55,8 +45,7 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
 
       def create(name, config=nil)
         config ||= File.open(File.dirname(__FILE__) + '/new_job_config.xml').read
-
-        response = send_post_request(@@xml_api_create_item_path, {:name=>name, :mode=>"hudson.model.FreeStyleProject", :config=>config})
+        response = Hudson.client.create_item!({:name=>name, :mode=>"hudson.model.FreeStyleProject", :config=>config})
         raise(APIError, "Error creating job #{name}: #{response.body}") if response.class != Net::HTTPFound
         Job.get(name)
       end
@@ -66,112 +55,70 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
     # Instance methods
     def initialize(name, config=nil)
       name.strip!
-      Hudson::Job.fetch_crumb
       # Creates the job in Hudson if it doesn't already exist
       @name = Job.list.include?(name) ? name : Job.create(name, config).name
-      load_xml_api
       load_config
       self
     end
 
-    def load_xml_api
-      @xml_api_path                    = File.join(Hudson[:url], "job/#{@name}/api/xml")
-      @xml_api_config_path             = File.join(Hudson[:url], "job/#{@name}/config.xml")
-      @xml_api_build_path              = File.join(Hudson[:url], "job/#{@name}/build")
-      @xml_api_build_with_params_path  = File.join(Hudson[:url], "job/#{@name}/buildWithParameters")
-      @xml_api_disable_path            = File.join(Hudson[:url], "job/#{@name}/disable")
-      @xml_api_enable_path             = File.join(Hudson[:url], "job/#{@name}/enable")
-      @xml_api_delete_path             = File.join(Hudson[:url], "job/#{@name}/doDelete")
-      @xml_api_wipe_out_workspace_path = File.join(Hudson[:url], "job/#{@name}/doWipeOutWorkspace")
-    end
-
     # Load data from Hudson's Job configuration settings into class variables
     def load_config
-      @config = get_xml(@xml_api_config_path)
-      @config_doc = REXML::Document.new(@config)
+      @config = Hudson.client.config_info(self.name)
+      @config_info_parser = Hudson::Parser::JobConfigInfo.new(@config)
 
-      @info = get_xml(@xml_api_path)
-      @info_doc = REXML::Document.new(@info)
+      @info = Hudson.client.job_info(self.name)
+      @job_info_parser = Hudson::Parser::JobInfo(@info)
 
-      @repository_urls = []
-      if @config_doc.elements["/project/description"]
-        @description = @config_doc.elements["/project/description"].text || ""
-      end
-
-      @parameterized_job = false
-      if @config_doc.elements["/project/properties/hudson.model.ParametersDefinitionProperty"]
-        @parameterized_job = true
-      end
-
-      if @config_doc.elements["/project/scm"].attributes['class'] == "hudson.plugins.git.GitSCM"
-        @git = true
-        @repository_url = {}
-        if @config_doc.elements["/project/scm/userRemoteConfigs/hudson.plugins.git.UserRemoteConfig/url"]
-          @repository_url[:url] = @config_doc.elements['/project/scm/userRemoteConfigs/hudson.plugins.git.UserRemoteConfig/url'].text || ""
-        end
-        if @config_doc.elements['/project/scm/branches/hudson.plugins.git.BranchSpec/name']
-          @repository_url[:branch] = @config_doc.elements['/project/scm/branches/hudson.plugins.git.BranchSpec/name'].text || ""
-        end
-        if @config_doc.elements['/project/scm/browser/url']
-          @repository_browser_location = @config_doc.elements['/project/scm/browser/url'].text || ""
-        end
-      else
-        if !@config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].nil?
-          @repository_url = @config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].text || ""
-        end
-        if !@config_doc.elements["/project/scm/locations"].nil?
-          @config_doc.elements.each("/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation"){|e| @repository_urls << e.elements["remote"].text }
-        end
-        if !@config_doc.elements["/project/scm/browser/location"].nil?
-          @repository_browser_location = @config_doc.elements["/project/scm/browser/location"].text
-        end
-      end
+      @description = @config_info_parser.description
+      @parameterized_job = @config_info_parser.parameterized?
+      @git = @config_info_parser.git_repo?
+      @repository_url = @config_info_parser.repository_url
+      @repostory_urls = @config_info_parse.repostory_urls
+      @repository_browser_location = @config_info_parser.repository_browser_location
     end
 
     def free_style_project?
-      !@info_doc.elements["/freeStyleProject"].nil?
+      @free_style_project ||= @job_info_parser.free_style_project?
     end
 
     def color
-      @info_doc.elements["/freeStyleProject/color"].text if free_style_project? && @info_doc.elements["/freeStyleProject/color"]
+      @color ||= @job_info_parser.color
     end
 
     def last_build
-      @info_doc.elements["/freeStyleProject/lastBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastBuild/number"]
+      @job_info_parser.last_build
     end
 
     def last_completed_build
-      @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastCompletedBuild/number"]
+      @job_info_parser.last_completed_build
     end
 
     def last_failed_build
-      @info_doc.elements["/freeStyleProject/lastFailedBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastFailedBuild/number"]
+      @job_info_parser.last_failed_build
     end
 
     def last_stable_build
-      @info_doc.elements["/freeStyleProject/lastStableBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastStableBuild/number"]
+      @job_info_parser.last_stable_build
     end
 
     def last_successful_build
-      @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastSuccessfulBuild/number"]
+      @job_info_parser.last_successful_build
     end
 
     def last_unsuccessful_build
-      @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"].text if free_style_project? && @info_doc.elements["/freeStyleProject/lastUnsuccessfulBuild/number"]
+      @job_info_parser.last_unsuccessful_build
     end
 
     def next_build_number
-      @info_doc.elements["/freeStyleProject/nextBuildNumber"].text if free_style_project? && @info_doc.elements["/freeStyleProject/nextBuildNumber"]
+      @job_info_parser.next_build_number
     end
 
     def builds_list
-      builds_list = []
-      @info_doc.elements.each("/freeStyleProject/build"){|e| builds_list << e.elements["number"].text } unless @info_doc.elements["/freeStyleProject/build"].nil?
-      builds_list
+      @job_info_parser.builds
     end
 
     def active?
-      Job.list_active.include?(@name)
+      Job.list_active.include?(self.name)
     end
 
     def wait_for_build_to_finish(poll_freq=10)
@@ -185,8 +132,7 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
     # Create a new job on Hudson server based on the current job object
     def copy(new_job=nil)
       new_job = "copy_of_#{@name}" if new_job.nil?
-
-      response = send_post_request(@@xml_api_create_item_path, {:name=>new_job, :mode=>"copy", :from=>@name})
+      response = Hudson.client.create_item!({:name=>new_job, :mode=>"copy", :from=>@name})
       raise(APIError, "Error copying job #{@name}: #{response.body}") if response.class != Net::HTTPFound
       Job.new(new_job)
     end
@@ -194,7 +140,7 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
     # Update the job configuration on Hudson server
     def update(config=nil)
       @config = config if !config.nil?
-      response = send_xml_post_request(@xml_api_config_path, @config)
+      response = Hudson.client.update_job_config!(self.name, @config)
       response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
     end
 
@@ -294,43 +240,36 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
     end
 
     def triggers
-      results = {}
-      if triggers = @config_doc.elements["/project/triggers[@class='vector']"]
-        triggers.elements.to_a.each do |trigger|
-          spec_text = trigger.elements['spec'].text
-          results[trigger.name.to_s] = spec_text.to_s
-        end
-      end
-      results
+      @config_info_parser.triggers
     end
 
-    def url
-      File.join( Hudson[:url], 'job', name) + '/'
-    end
+    #def url
+    #  File.join( Hudson[:url], 'job', self.name) + '/'
+    #end
 
     # Start building this job on Hudson server
     def build(params={})
       if @parameterized_job
-        response = send_post_request(@xml_api_build_with_params_path, {:delay => '0sec'}.merge(params))
+        response = Hudson.client.build_job_with_parameters!(self.name, params)
       else
-        response = send_post_request(@xml_api_build_path, {:delay => '0sec'})
+        response = Hudson.client.build_job!(self.name)
       end
       response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
     end
 
     def disable()
-      response = send_post_request(@xml_api_disable_path)
+      response = Hudson.client.disable_job!(self.name)
       response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
     end
 
     def enable()
-      response = send_post_request(@xml_api_enable_path)
+      response = Hudson.client.enable_job!(self.name)
       response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
     end
 
     # Delete this job from Hudson server
     def delete()
-      response = send_post_request(@xml_api_delete_path)
+      response = Hudson.client.delete_job!(self.name)
       response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
     end
 
@@ -339,10 +278,12 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
 
       if !active?
         response = send_post_request(@xml_api_wipe_out_workspace_path)
+        response = Hudson.client.wipeout_job_workspace!(self.name)
       else
         response = false
       end
       response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
     end
+
   end
 end

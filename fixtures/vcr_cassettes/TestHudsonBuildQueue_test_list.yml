@@ -7,8 +7,10 @@ http_interactions:
       encoding: US-ASCII
       string: ''
     headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
-      - ! '*/*'
+      - "*/*"
       User-Agent:
       - Ruby
       Content-Type:
@@ -18,21 +20,19 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Server:
-      - Winstone Servlet Engine v0.9.10
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - 394516d7
       Content-Type:
       - application/xml;charset=UTF-8
       Content-Length:
-      - '15'
-      Connection:
-      - Keep-Alive
-      Date:
-      - Thu, 20 Sep 2012 06:34:16 GMT
-      X-Powered-By:
-      - Servlet/2.5 (Winstone/0.9.10)
+      - '30'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
     body:
-      encoding: US-ASCII
-      string: <queue></queue>
+      encoding: UTF-8
+      string: "<queue></queue>"
     http_version: 
-  recorded_at: Thu, 20 Sep 2012 06:34:16 GMT
-recorded_with: VCR 2.2.5
+  recorded_at: Fri, 07 Nov 2014 06:47:04 GMT
+recorded_with: VCR 2.9.3
