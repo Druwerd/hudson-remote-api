@@ -1,5 +1,6 @@
 module Hudson
   module Parser
+    
     class JobConfigInfo
       attr_accessor :xml, :xml_doc
 
@@ -72,7 +73,7 @@ module Hudson
         !self.xml_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].nil?
       end
 
-      def repository_urls
+      def svn_repository_urls
         if !self.xml_doc.elements["/project/scm/locations"].nil?
           Array.new.tap do |a|
             self.xml_doc.elements.each("/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation"){|e| a << e.elements["remote"].text }
@@ -80,17 +81,19 @@ module Hudson
         end
       end
 
-      def repository
-        if self.git_repo?
-          Hash.new.tap do |h|
-            h[:url] = self.git_url
-            h[:branch] = self.git_branch
-          end
-        elsif self.svn_repo?
-          self.xml_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].text || ""
+      def git_repository
+        Hash.new.tap do |h|
+          h[:url] = self.git_url
+          h[:branch] = self.git_branch
         end
       end
 
+      def svn_repository
+        repo_elem = self.xml_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"]
+        if repo_elem ? repo_elem.text : ""
+        end
+      end
     end
+
   end
 end

@@ -67,14 +67,14 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
       @config_info_parser = Hudson::Parser::JobConfigInfo.new(@config)
 
       @info = Hudson.client.job_info(self.name)
-      @job_info_parser = Hudson::Parser::JobInfo(@info)
+      @job_info_parser = Hudson::Parser::JobInfo.new(@info)
 
       @description = @config_info_parser.description
       @parameterized_job = @config_info_parser.parameterized?
       @git = @config_info_parser.git_repo?
-      @repository_url = @config_info_parser.repository_url
-      @repostory_urls = @config_info_parse.repostory_urls
-      @repository_browser_location = @config_info_parser.repository_browser_location
+      @repository_url = @git ? @config_info_parser.git_repository : @config_info_parser.svn_repository
+      @repostory_urls = @config_info_parser.svn_repository_urls
+      @repository_browser_location = @config_info_parser.scm_broswer_location
     end
 
     def free_style_project?

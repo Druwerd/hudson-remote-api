@@ -11,7 +11,7 @@ module Hudson
     end
 
     def build_info_url(job_name, build_number)
-      File.join(self.host, "job/#{job_name}/#{number}/api/xml")
+      File.join(self.host, "job/#{job_name}/#{build_number}/api/xml")
     end
 
     def build_queue_info_url
