@@ -63,7 +63,7 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
 
     # Load data from Hudson's Job configuration settings into class variables
     def load_config
-      @config = Hudson.client.config_info(self.name)
+      @config = Hudson.client.job_config_info(self.name)
       @config_info_parser = Hudson::Parser::JobConfigInfo.new(@config)
 
       @info = Hudson.client.job_info(self.name)
