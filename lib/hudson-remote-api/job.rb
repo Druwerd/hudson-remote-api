@@ -1,24 +1,7 @@
 module Hudson
   # This class provides an interface to Hudson jobs
-  class Job < HudsonObject
+  class Job
     attr_accessor :name, :config, :repository_url, :repository_urls, :repository_browser_location, :description, :parameterized_job
-
-SVN_SCM_CONF = <<-SVN_SCM_STRING
-  <scm class="hudson.scm.SubversionSCM">
-  <locations>
-  <hudson.scm.SubversionSCM_-ModuleLocation>
-  <remote>%s</remote>
-  <local>.</local>
-  </hudson.scm.SubversionSCM_-ModuleLocation>
-  </locations>
-  <excludedRegions/>
-  <includedRegions/>
-  <excludedUsers/>
-  <excludedRevprop/>
-  <excludedCommitMessages/>
-  <workspaceUpdater class="hudson.scm.subversion.UpdateUpdater"/>
-  </scm>
-    SVN_SCM_STRING
 
     # Class methods
     class <<self
@@ -65,6 +48,7 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
     def load_config
       @config = Hudson.client.job_config_info(self.name)
       @config_info_parser = Hudson::Parser::JobConfigInfo.new(@config)
+      @config_writer = Hudson::XmlWriter::JobConfigInfo.new(self.name, @config)
 
       @info = Hudson.client.job_info(self.name)
       @job_info_parser = Hudson::Parser::JobInfo.new(@info)
@@ -76,6 +60,7 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
       @repostory_urls = @config_info_parser.svn_repository_urls
       @repository_browser_location = @config_info_parser.scm_broswer_location
     end
+    alias :reload_config :load_config
 
     def free_style_project?
       @free_style_project ||= @job_info_parser.free_style_project?
@@ -147,96 +132,38 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
     # Set the repository url and update on Hudson server
     def repository_url=(repository_url)
       #return false if @repository_url.nil?
-
-      @repository_url = repository_url
-
       if @git
-        if repository_url[:url]
-          @config_doc.elements['/project/scm/userRemoteConfigs/hudson.plugins.git.UserRemoteConfig/url'].text = repository_url[:url]
-        end
-        if repository_url[:branch]
-          @config_doc.elements['/project/scm/branches/hudson.plugins.git.BranchSpec/name'].text = repository_url[:branch]
-        end
+        @config_writer.git_repository_url = repository_url
       else
-        if @config_doc.elements["/project/scm"].attributes['class'] == "hudson.scm.NullSCM"
-          @config_doc.elements["/project/scm"].replace_with REXML::Document.new(SVN_SCM_CONF % repository_url)
-        else
-          @config_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"].text = repository_url
-        end
+        @config_writer.svn_repository_url = repository_url
       end
-
-      @config = @config_doc.to_s
-      update
+      reload_config
     end
 
     def repository_urls=(repository_urls)
-      return false if !repository_urls.class == Array
-      @repository_urls = repository_urls
-
-      i = 0
-      @config_doc.elements.each("/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation") do |location|
-        location.elements["remote"].text = @repository_urls[i]
-        i += 1
-      end
-
-      @config = @config_doc.to_s
-      update
+      @config_writer.repository_urls = repository_urls
+      reload_config
     end
 
     # Set the repository browser location and update on Hudson server
     def repository_browser_location=(repository_browser_location)
-      @repository_browser_location = repository_browser_location
       if @git
-        @config_doc.elements['/project/scm/browser/url'].text = repository_browser_location
+        @config_writer.git_repository_browser_location = repository_browser_location
       else
-        @config_doc.elements["/project/scm/browser/location"].text = repository_browser_location
+        @config_writer.svn_repository_browser_location = repository_browser_location
       end
-      @config = @config_doc.to_s
-      update
+      reload_config
     end
 
     # Set the job description and update on Hudson server
     def description=(description)
-      @description = description
-      @config_doc.elements["/project"] << REXML::Element.new("description") if @config_doc.elements["/project/description"].nil?
-
-      @config_doc.elements["/project/description"].text = description
-      @config = @config_doc.to_s
-      update
+      @config_writer.description = description
+      reload_config
     end
-
-    def generate_trigger trigger, spec_text
-      spec = REXML::Element.new("spec")
-      spec.text = spec_text.to_s
-      trigger.elements << spec
-      trigger
-    end
-    private :generate_trigger
 
     def triggers= opts={}
-      opts = {} if opts.nil?
-      if triggers = @config_doc.elements["/project/triggers[@class='vector']"]
-        triggers.elements.delete_all '*'
-        opts.each do |key, value|
-          trigger_name = key.to_s
-          trigger_name = 'hudson.triggers.' + trigger_name unless Regexp.new(/^hudson\.triggers\./).match(trigger_name)
-          if trigger = triggers.elements[trigger_name]
-            if spec = trigger.elements['spec']
-              spec.text = value.to_s
-            else
-              triggers.elements << generate_trigger(trigger, value)
-            end
-          else
-            triggers.elements << generate_trigger(REXML::Element.new(trigger_name), value)
-          end
-        end
-        # Todo: before calling update, @config need to be assigned with @config_doc.to_s,
-        #       let it be done by update.
-        @config = @config_doc.to_s
-        update
-      else
-        $stderr.puts "triggers not found in configuration, triggers assignment ignored."
-      end
+      @config_writer.triggers = opts
+      reload_config
     end
 
     def triggers
@@ -283,6 +210,14 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
         response = false
       end
       response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
+    end
+
+    private
+    def generate_trigger trigger, spec_text
+      spec = REXML::Element.new("spec")
+      spec.text = spec_text.to_s
+      trigger.elements << spec
+      trigger
     end
 
   end

@@ -10,7 +10,8 @@ module Hudson
       end
 
       def description
-        self.xml_doc.elements["/project/description"].text || ""
+        description_elem = self.xml_doc.elements["/project/description"]
+        description_elem ? description_elem.text : ""
       end
 
       def disabled?

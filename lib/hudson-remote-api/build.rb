@@ -12,7 +12,7 @@ module Hudson
 
     private
     def load_build_info
-      build_info_xml    = Hudson.client.build_info(self.job.name, self.number)
+      build_info_xml    = Hudson.client.job_build_info(self.job.name, self.number)
       build_info_parser = Hudson::Parser::BuildInfo.new(build_info_xml)
 
       @result    = build_info_parser.result

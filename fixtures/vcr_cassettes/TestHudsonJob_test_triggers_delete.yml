@@ -254,4 +254,247 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Fri, 07 Nov 2014 06:42:54 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/build_triggers/config.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '468'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version='1.0' encoding='UTF-8'?>
+        <project>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.scm.NullSCM"/>
+          <canRoam>false</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers/>
+          <concurrentBuild>false</concurrentBuild>
+          <builders/>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 17:39:51 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/build_triggers/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '201'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<freeStyleProject><displayName>build_triggers</displayName><name>build_triggers</name><url>http://localhost:8080/job/build_triggers/</url><buildable>true</buildable><color>notbuilt</color><inQueue>false</inQueue><keepDependencies>false</keepDependencies><nextBuildNumber>1</nextBuildNumber><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>"
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 17:39:51 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/build_triggers/config.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '468'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version='1.0' encoding='UTF-8'?>
+        <project>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.scm.NullSCM"/>
+          <canRoam>false</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers/>
+          <concurrentBuild>false</concurrentBuild>
+          <builders/>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 17:39:51 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/build_triggers/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '201'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<freeStyleProject><displayName>build_triggers</displayName><name>build_triggers</name><url>http://localhost:8080/job/build_triggers/</url><buildable>true</buildable><color>notbuilt</color><inQueue>false</inQueue><keepDependencies>false</keepDependencies><nextBuildNumber>1</nextBuildNumber><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>"
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 17:39:51 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/build_triggers/config.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '468'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version='1.0' encoding='UTF-8'?>
+        <project>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.scm.NullSCM"/>
+          <canRoam>false</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers/>
+          <concurrentBuild>false</concurrentBuild>
+          <builders/>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 17:39:51 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/build_triggers/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '201'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<freeStyleProject><displayName>build_triggers</displayName><name>build_triggers</name><url>http://localhost:8080/job/build_triggers/</url><buildable>true</buildable><color>notbuilt</color><inQueue>false</inQueue><keepDependencies>false</keepDependencies><nextBuildNumber>1</nextBuildNumber><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>"
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 17:39:51 GMT
 recorded_with: VCR 2.9.3

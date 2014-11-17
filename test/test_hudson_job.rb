@@ -4,7 +4,7 @@ class TestHudsonJob < Test::Unit::TestCase
   TEST_SVN_REPO_URL = "http://svn.apache.org/repos/asf/subversion/trunk/doc/user/"
   
   def setup
-    Hudson[:url] = "http://localhost:8080"
+    Hudson.client.configuration.host = "http://localhost:8080"
   end
   
   def test_list
@@ -79,13 +79,6 @@ class TestHudsonJob < Test::Unit::TestCase
       assert new_job.delete
     end
   end
-
-  def test_url
-    VCR.use_cassette("#{self.class}_#{__method__}") do
-      job = Hudson::Job.get("test_job")
-      assert_equal("http://localhost:8080/job/#{job.name}/", job.url)
-    end
-  end
   
   def test_job_with_spaces
     VCR.use_cassette("#{self.class}_#{__method__}") do
@@ -148,7 +141,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
 
   def test_triggers_delete
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job_name = 'build_triggers'
       job = Hudson::Job.create(job_name)
 
