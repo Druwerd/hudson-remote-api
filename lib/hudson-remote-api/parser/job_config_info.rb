@@ -91,8 +91,7 @@ module Hudson
 
       def svn_repository
         repo_elem = self.xml_doc.elements["/project/scm/locations/hudson.scm.SubversionSCM_-ModuleLocation/remote"]
-        if repo_elem ? repo_elem.text : ""
-        end
+        repo_elem ? repo_elem.text : ""
       end
     end
 
