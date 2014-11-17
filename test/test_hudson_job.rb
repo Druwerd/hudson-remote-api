@@ -39,7 +39,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
   
   def test_desc_update
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job = Hudson::Job.new('test_job')
       assert job.description = "test"
       assert job.description != nil, "Job description should not be nil"
@@ -47,7 +47,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
   
   def test_scm_url
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job = Hudson::Job.new('test_svn_job')
       job.build
       assert job.repository_url = TEST_SVN_REPO_URL

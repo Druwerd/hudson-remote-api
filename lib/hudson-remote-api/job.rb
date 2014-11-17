@@ -122,13 +122,6 @@ module Hudson
       Job.new(new_job)
     end
 
-    # Update the job configuration on Hudson server
-    def update(config=nil)
-      @config = config if !config.nil?
-      response = Hudson.client.update_job_config!(self.name, @config)
-      response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
-    end
-
     # Set the repository url and update on Hudson server
     def repository_url=(repository_url)
       #return false if @repository_url.nil?

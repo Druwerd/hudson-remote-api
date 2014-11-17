@@ -197,4 +197,85 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Fri, 07 Nov 2014 06:42:54 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/test_job/config.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '498'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?><project>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.scm.NullSCM"/>
+          <canRoam>false</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers/>
+          <concurrentBuild>false</concurrentBuild>
+          <builders/>
+          <publishers/>
+          <buildWrappers/>
+        <description>test</description></project>
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 18:54:03 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/test_job/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '581'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<freeStyleProject><description>test</description><displayName>test_job</displayName><name>test_job</name><url>http://localhost:8080/job/test_job/</url><buildable>true</buildable><build><number>37</number><url>http://localhost:8080/job/test_job/37/</url></build><build><number>36</number><url>http://localhost:8080/job/test_job/36/</url></build><build><number>35</number><url>http://localhost:8080/job/test_job/35/</url></build><build><number>34</number><url>http://localhost:8080/job/test_job/34/</url></build><build><number>33</number><url>http://localhost:8080/job/test_job/33/</url></build><build><number>32</number><url>http://localhost:8080/job/test_job/32/</url></build><build><number>31</number><url>http://localhost:8080/job/test_job/31/</url></build><build><number>30</number><url>http://localhost:8080/job/test_job/30/</url></build><build><number>29</number><url>http://localhost:8080/job/test_job/29/</url></build><build><number>28</number><url>http://localhost:8080/job/test_job/28/</url></build><build><number>27</number><url>http://localhost:8080/job/test_job/27/</url></build><build><number>26</number><url>http://localhost:8080/job/test_job/26/</url></build><build><number>25</number><url>http://localhost:8080/job/test_job/25/</url></build><build><number>24</number><url>http://localhost:8080/job/test_job/24/</url></build><build><number>23</number><url>http://localhost:8080/job/test_job/23/</url></build><build><number>22</number><url>http://localhost:8080/job/test_job/22/</url></build><build><number>21</number><url>http://localhost:8080/job/test_job/21/</url></build><build><number>20</number><url>http://localhost:8080/job/test_job/20/</url></build><build><number>19</number><url>http://localhost:8080/job/test_job/19/</url></build><build><number>18</number><url>http://localhost:8080/job/test_job/18/</url></build><build><number>17</number><url>http://localhost:8080/job/test_job/17/</url></build><build><number>16</number><url>http://localhost:8080/job/test_job/16/</url></build><build><number>15</number><url>http://localhost:8080/job/test_job/15/</url></build><build><number>14</number><url>http://localhost:8080/job/test_job/14/</url></build><build><number>13</number><url>http://localhost:8080/job/test_job/13/</url></build><build><number>12</number><url>http://localhost:8080/job/test_job/12/</url></build><build><number>11</number><url>http://localhost:8080/job/test_job/11/</url></build><build><number>10</number><url>http://localhost:8080/job/test_job/10/</url></build><build><number>9</number><url>http://localhost:8080/job/test_job/9/</url></build><build><number>8</number><url>http://localhost:8080/job/test_job/8/</url></build><build><number>7</number><url>http://localhost:8080/job/test_job/7/</url></build><build><number>6</number><url>http://localhost:8080/job/test_job/6/</url></build><build><number>5</number><url>http://localhost:8080/job/test_job/5/</url></build><build><number>4</number><url>http://localhost:8080/job/test_job/4/</url></build><build><number>3</number><url>http://localhost:8080/job/test_job/3/</url></build><build><number>2</number><url>http://localhost:8080/job/test_job/2/</url></build><build><number>1</number><url>http://localhost:8080/job/test_job/1/</url></build><color>blue</color><firstBuild><number>1</number><url>http://localhost:8080/job/test_job/1/</url></firstBuild><healthReport><description>Build
+        stability: No recent builds failed.</description><iconClassName>icon-health-80plus</iconClassName><iconUrl>health-80plus.png</iconUrl><score>100</score></healthReport><inQueue>false</inQueue><keepDependencies>false</keepDependencies><lastBuild><number>37</number><url>http://localhost:8080/job/test_job/37/</url></lastBuild><lastCompletedBuild><number>37</number><url>http://localhost:8080/job/test_job/37/</url></lastCompletedBuild><lastStableBuild><number>37</number><url>http://localhost:8080/job/test_job/37/</url></lastStableBuild><lastSuccessfulBuild><number>37</number><url>http://localhost:8080/job/test_job/37/</url></lastSuccessfulBuild><nextBuildNumber>38</nextBuildNumber><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>"
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 18:54:03 GMT
 recorded_with: VCR 2.9.3

@@ -73,7 +73,7 @@ module Hudson
     end
 
     def update_job_config!(job_name, config)
-      send_post_request(self.xml_api.job_config_url(job_name), config)
+      send_xml_post_request(self.xml_api.job_config_url(job_name), config)
     end
 
     def wipeout_job_workspace!(job_name)
@@ -132,6 +132,19 @@ module Hudson
         r.basic_auth(self.configuration.user, self.configuration.password) if self.configuration.user && self.configuration.password
         r.set_form_data(data)
         r.add_field(crumb.name, crumb.value) if crumb
+      end
+      
+      hudson_request(uri,request)
+    end
+
+    def send_xml_post_request(url, xml, data=nil)
+      uri = URI.parse(URI.encode(url))
+      path = uri.query ? "#{uri.path}?#{uri.query}" : uri.path
+      request = http_class::Post.new(path).tap do |r|
+        r.basic_auth(self.configuration.user, self.configuration.password) if self.configuration.user && self.configuration.password
+        r.set_form_data(data) if data
+        r.add_field(crumb.name, crumb.value) if crumb
+        r.body = xml
       end
       
       hudson_request(uri,request)
