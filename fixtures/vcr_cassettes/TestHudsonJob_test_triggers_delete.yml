@@ -497,4 +497,92 @@ http_interactions:
       string: "<freeStyleProject><displayName>build_triggers</displayName><name>build_triggers</name><url>http://localhost:8080/job/build_triggers/</url><buildable>true</buildable><color>notbuilt</color><inQueue>false</inQueue><keepDependencies>false</keepDependencies><nextBuildNumber>1</nextBuildNumber><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>"
     http_version: 
   recorded_at: Mon, 17 Nov 2014 17:39:51 GMT
+- request:
+    method: post
+    uri: http://localhost:8080/job/build_triggers/config.xml
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version='1.0' encoding='UTF-8'?>
+        <project>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class='hudson.scm.NullSCM'/>
+          <canRoam>false</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers><hudson.triggers.SCMTrigger><spec>* * * * *</spec></hudson.triggers.SCMTrigger><hudson.triggers.TimerTrigger><spec>0 22 * * *</spec></hudson.triggers.TimerTrigger></triggers>
+          <concurrentBuild>false</concurrentBuild>
+          <builders/>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      ".crumb":
+      - 794e76dae4fb480fa0642bcacda51ace
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '0'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 20:50:51 GMT
+- request:
+    method: post
+    uri: http://localhost:8080/job/build_triggers/config.xml
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version='1.0' encoding='UTF-8'?>
+        <project>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class='hudson.scm.NullSCM'/>
+          <canRoam>false</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers/>
+          <concurrentBuild>false</concurrentBuild>
+          <builders/>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      ".crumb":
+      - 794e76dae4fb480fa0642bcacda51ace
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '0'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Mon, 17 Nov 2014 20:50:51 GMT
 recorded_with: VCR 2.9.3

@@ -50,7 +50,7 @@ module Hudson
 
       def triggers
         Hash.new.tap do |h|
-          if triggers_elem = self.xml_doc.elements["/project/triggers[@class='vector']"]
+          if triggers_elem = self.xml_doc.elements["/project/triggers"] || self.xml_doc.elements["/project/triggers[@class='vector']"]
             triggers_elem.elements.to_a.each do |trigger|
               spec_text = trigger.elements['spec'].text
               h[trigger.name.to_s] = spec_text.to_s

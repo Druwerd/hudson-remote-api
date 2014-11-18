@@ -115,7 +115,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
 
   def test_triggers_set
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job_name = 'build_triggers'
       job = Hudson::Job.create(job_name)
 
@@ -128,7 +128,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
 
   def test_triggers_set_using_shortcut
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job_name = 'build_triggers'
       job = Hudson::Job.create(job_name)
 

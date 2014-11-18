@@ -205,13 +205,7 @@ module Hudson
       response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
     end
 
-    private
-    def generate_trigger trigger, spec_text
-      spec = REXML::Element.new("spec")
-      spec.text = spec_text.to_s
-      trigger.elements << spec
-      trigger
-    end
+    
 
   end
 end

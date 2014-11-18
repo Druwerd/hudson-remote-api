@@ -74,7 +74,7 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
 
       def triggers= opts={}
         opts = {} if opts.nil?
-        if triggers = self.xml_doc.elements["/project/triggers[@class='vector']"]
+        if triggers = self.xml_doc.elements["/project/triggers"] || self.xml_doc.elements["/project/triggers[@class='vector']"]
           triggers.elements.delete_all '*'
           opts.each do |key, value|
             trigger_name = key.to_s
@@ -99,6 +99,13 @@ SVN_SCM_CONF = <<-SVN_SCM_STRING
         def update
           response = Hudson.client.update_job_config!(self.job_name, self.xml_doc.to_s)
           response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
+        end
+
+        def generate_trigger trigger, spec_text
+          spec = REXML::Element.new("spec")
+          spec.text = spec_text.to_s
+          trigger.elements << spec
+          trigger
         end
     end
 
