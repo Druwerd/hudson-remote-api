@@ -12,15 +12,15 @@ module Hudson
     attr_reader :configuration, :xml_api
 
     def initialize(config_settings={})
-      @configuration = Hudson::Settings.new(config_settings).configuration
-      @xml_api = Hudson::XmlApi.new(self.configuration)
+      @configuration = ::Hudson::Settings.new(config_settings).configuration
+      @xml_api = ::Hudson::XmlApi.new(self.configuration)
       fetch_crumb
     end
 
     def auto_configure
-      xml_response = Hudson.discover
+      xml_response = ::Hudson.discover
       if xml_response
-        mulitcast_parser = Hudson::Parser::Multicast.new(xml_response)
+        mulitcast_parser = ::Hudson::Parser::Multicast.new(xml_response)
         self.configuration.host = mulitcast_parser.url || self.configuration.host
         self.configuration.version = mulitcast_parser.version || self.configuration.version
         puts "found Hudson version #{mulitcast_parser.version} @ #{mulitcast_parser.url}"
@@ -87,9 +87,9 @@ module Hudson
 
     def http_class
       if self.configuration.proxy_host && self.configuration.proxy_port
-        Net::HTTP::Proxy(self.configuration.proxy_host, self.configuration.proxy_port)
+        ::Net::HTTP::Proxy(self.configuration.proxy_host, self.configuration.proxy_port)
       else
-        Net::HTTP
+        ::Net::HTTP
       end
     end
 
@@ -98,14 +98,14 @@ module Hudson
         http = http_class.new(uri.host, uri.port)
         if uri.scheme == 'https'
           http.use_ssl = true
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          http.verify_mode = ::OpenSSL::SSL::VERIFY_NONE
         end
         http.request(request)
       end
     end
 
     def get_xml(url)
-      uri = URI.parse(URI.encode(url))
+      uri = ::URI.parse(URI.encode(url))
       request = http_class::Get.new(uri.path).tap do |r|
         r.basic_auth(self.configuration.user, self.configuration.password) if self.configuration.user && self.configuration.password
         r['Content-Type'] = "text/xml"
@@ -113,10 +113,10 @@ module Hudson
       
       response = hudson_request(uri,request)
 
-      if response.is_a?(Net::HTTPSuccess) or response.is_a?(Net::HTTPRedirection)
+      if response.is_a?(::Net::HTTPSuccess) or response.is_a?(::Net::HTTPRedirection)
         encoding = response.get_fields("Content-Encoding")
         if encoding and encoding.include?("gzip")
-          return Zlib::GzipReader.new(StringIO.new(response.body)).read
+          return ::Zlib::GzipReader.new(::StringIO.new(response.body)).read
         else
           return response.body
         end
@@ -127,7 +127,7 @@ module Hudson
     end
 
     def send_post_request(url, data={})
-      uri = URI.parse(URI.encode(url))
+      uri = ::URI.parse(::URI.encode(url))
       request = http_class::Post.new(uri.path).tap do |r|
         r.basic_auth(self.configuration.user, self.configuration.password) if self.configuration.user && self.configuration.password
         r.set_form_data(data)
@@ -138,7 +138,7 @@ module Hudson
     end
 
     def send_xml_post_request(url, xml, data=nil)
-      uri = URI.parse(URI.encode(url))
+      uri = ::URI.parse(URI.encode(url))
       path = uri.query ? "#{uri.path}?#{uri.query}" : uri.path
       request = http_class::Post.new(path).tap do |r|
         r.basic_auth(self.configuration.user, self.configuration.password) if self.configuration.user && self.configuration.password
@@ -157,7 +157,7 @@ module Hudson
     def fetch_crumb
       if self.configuration.crumb
         body = get_xml(self.xml_api.crumb_url)
-        doc  = REXML::Document.new(body)
+        doc  = ::REXML::Document.new(body)
 
         crumbValue = doc.elements['/defaultCrumbIssuer/crumb'] or begin
           $stderr.puts "Failure fetching crumb value from server"
@@ -169,7 +169,7 @@ module Hudson
           return
         end
 
-        @@apiCrumb = Struct.new(:name,:value).new(crumbName.text,crumbValue.text)
+        @@apiCrumb = ::Struct.new(:name,:value).new(crumbName.text,crumbValue.text)
       end
     rescue
       $stderr.puts "Failure fetching crumb xml"
