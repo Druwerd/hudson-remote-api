@@ -15,22 +15,22 @@ require 'hudson-remote-api'
 ```ruby
 # Auto Configuration 
 # detects Hudson instance on your network & sets Hudson[:url]
-Hudson.auto_config
+Hudson.auto_configure
 ```
 Or
 
 ```ruby
 # Manual Configuration
-Hudson[:url] = 'http://localhost:8080'
-Hudson[:user] = 'hudson'
-Hudson[:password] = 'password'
-
-# To turn off checking for crumbIssuer
-Hudson[:crumb] = false
-
-# To turn on proxy access
-Hudson[:proxy_host] = 'your-proxy-host'
-Hudson[:proxy_port] = 8888
+settings = {
+      :host => 'http://localhost:8080', 
+      :user => 'hudson', 
+      :password => 'password', 
+      :version => '1.0', 
+      :crumb => true, # To turn on/off checking for crumbIssuer
+      :proxy_host => 'your-proxy-host', # To turn on proxy access
+      :proxy_port => 888
+    }
+Hudson.client(settings)
 
 ```
 ## Usage:
@@ -87,9 +87,6 @@ j.delete
 ### Information on a job 
 ```ruby
 j = Hudson::Job.new('job_name')
-
-# the job's URL address on Hudson server
-puts j.url
 
 # job's current build indicator color
 puts j.color
