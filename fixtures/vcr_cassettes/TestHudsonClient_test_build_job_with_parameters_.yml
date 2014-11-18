@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:8080/job/test_job/buildWithParameters
+    body:
+      encoding: US-ASCII
+      string: delay=0sec
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+      ".crumb":
+      - d6162b9f2e248ec452bad69592fb87ea
+  response:
+    status:
+      code: 403
+      message: No valid crumb was included in the request
+    headers:
+      Content-Type:
+      - text/html;charset=ISO-8859-1
+      Cache-Control:
+      - must-revalidate,no-cache,no-store
+      Content-Length:
+      - '1463'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html;
+        charset=ISO-8859-1\"/>\n<title>Error 403 No valid crumb was included in the
+        request</title>\n</head>\n<body><h2>HTTP ERROR 403</h2>\n<p>Problem accessing
+        /job/test_job/buildWithParameters. Reason:\n<pre>    No valid crumb was included
+        in the request</pre></p><hr /><i><small>Powered by Jetty://</small></i><br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:55:19 GMT
+recorded_with: VCR 2.9.3

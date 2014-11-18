@@ -1,0 +1,685 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:8080/createItem
+    body:
+      encoding: US-ASCII
+      string: name=test_wipe_out_workspace&mode=hudson.model.FreeStyleProject&config=%3C%3Fxml+version%3D%271.0%27+encoding%3D%27UTF-8%27%3F%3E%0A%3Cproject%3E%0A++%3Cactions%2F%3E%0A++%3Cdescription%3E%3C%2Fdescription%3E%0A++%3CkeepDependencies%3Efalse%3C%2FkeepDependencies%3E%0A++%3Cproperties%2F%3E%0A++%3Cscm+class%3D%22hudson.scm.NullSCM%22%2F%3E%0A++%3CcanRoam%3Etrue%3C%2FcanRoam%3E%0A++%3Cdisabled%3Efalse%3C%2Fdisabled%3E%0A++%3CblockBuildWhenUpstreamBuilding%3Efalse%3C%2FblockBuildWhenUpstreamBuilding%3E%0A++%3Ctriggers+class%3D%22vector%22%2F%3E%0A++%3CconcurrentBuild%3Efalse%3C%2FconcurrentBuild%3E%0A++%3Cbuilders%2F%3E%0A++%3Cpublishers%2F%3E%0A++%3CbuildWrappers%2F%3E%0A%3C%2Fproject%3E
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+      ".crumb":
+      - 794e76dae4fb480fa0642bcacda51ace
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Location:
+      - http://localhost:8080/job/test_wipe_out_workspace/configure
+      Content-Length:
+      - '0'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:35:56 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '355'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>copy_of_my_job</name><url>http://localhost:8080/job/copy_of_my_job/</url><color>notbuilt</color></job><job><name>my_new_job</name><url>http://localhost:8080/job/my_new_job/</url><color>blue</color></job><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue</color></job><job><name>test_wipe_out_workspace</name><url>http://localhost:8080/job/test_wipe_out_workspace/</url><color>notbuilt</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>true</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:35:56 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '355'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>copy_of_my_job</name><url>http://localhost:8080/job/copy_of_my_job/</url><color>notbuilt</color></job><job><name>my_new_job</name><url>http://localhost:8080/job/my_new_job/</url><color>blue</color></job><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue</color></job><job><name>test_wipe_out_workspace</name><url>http://localhost:8080/job/test_wipe_out_workspace/</url><color>notbuilt</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>true</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:35:56 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/test_wipe_out_workspace/config.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml
+      Content-Length:
+      - '468'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version='1.0' encoding='UTF-8'?>
+        <project>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.scm.NullSCM"/>
+          <canRoam>false</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers/>
+          <concurrentBuild>false</concurrentBuild>
+          <builders/>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:35:56 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/job/test_wipe_out_workspace/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '209'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<freeStyleProject><displayName>test_wipe_out_workspace</displayName><name>test_wipe_out_workspace</name><url>http://localhost:8080/job/test_wipe_out_workspace/</url><buildable>true</buildable><color>notbuilt</color><inQueue>false</inQueue><keepDependencies>false</keepDependencies><nextBuildNumber>1</nextBuildNumber><concurrentBuild>false</concurrentBuild><scm></scm></freeStyleProject>"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:35:56 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '355'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>copy_of_my_job</name><url>http://localhost:8080/job/copy_of_my_job/</url><color>notbuilt</color></job><job><name>my_new_job</name><url>http://localhost:8080/job/my_new_job/</url><color>blue</color></job><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue</color></job><job><name>test_wipe_out_workspace</name><url>http://localhost:8080/job/test_wipe_out_workspace/</url><color>notbuilt</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>true</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:36:06 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/queue/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '30'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<queue></queue>"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:36:06 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '355'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>copy_of_my_job</name><url>http://localhost:8080/job/copy_of_my_job/</url><color>notbuilt</color></job><job><name>my_new_job</name><url>http://localhost:8080/job/my_new_job/</url><color>blue</color></job><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue</color></job><job><name>test_wipe_out_workspace</name><url>http://localhost:8080/job/test_wipe_out_workspace/</url><color>notbuilt</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>true</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:36:06 GMT
+- request:
+    method: post
+    uri: http://localhost:8080/job/test_wipe_out_workspace/doWipeOutWorkspace
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+      ".crumb":
+      - 794e76dae4fb480fa0642bcacda51ace
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache,no-store,must-revalidate
+      X-Hudson-Theme:
+      - default
+      Content-Type:
+      - text/html;charset=UTF-8
+      Set-Cookie:
+      - JSESSIONID.b670f0e6=17z7ojqxqu8je1k7kxvw8w32bp;Path=/;HttpOnly
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Hudson:
+      - '1.395'
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      X-Hudson-Cli-Port:
+      - '50015'
+      X-Jenkins-Cli-Port:
+      - '50015'
+      X-Jenkins-Cli2-Port:
+      - '50015'
+      X-Frame-Options:
+      - sameorigin
+      X-Instance-Identity:
+      - MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq2/dvA08xakbK2992TfNmiC8GIvUOfiivg475R6fltYeE9ZzoY9jpNR+/usShK6t/YRXjGdpFdLGRG9+KZaJbjyKGqpExim4lFkuVc8Fpn/ZBf7ZSqygZtbBLOlZ6UxRjv2vlDtJ4JMRYMPXfVUkqNP7G0rO4sdbcIP0wdgFTPBxpFJFpu/uRQQ7sAvnVT+MZzw5v0biwi+4wUF//ZrnGXM47lpm1rTLqrjjqjNLKrcoy9JmYJNvGxL4CE+XBF9RUkV1EQInE/gqUQeh19fPKkZm1AtOp2LJl05cZbfM6cC8v5LmZbt3hATRcQroBTXCkWtHzHNFpSo6VXiudw/YIwIDAQAB
+      X-Ssh-Endpoint:
+      - localhost:50014
+      Content-Length:
+      - '3729'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        CgoKCiAgICAKICAgIDwhRE9DVFlQRSBodG1sPjxodG1sPjxoZWFkIHJlc1VS
+        TD0iL3N0YXRpYy9jZGNlZDFiMiI+CiAgICAKCiAgICA8dGl0bGU+SmVua2lu
+        czwvdGl0bGU+PGxpbmsgcmVsPSJzdHlsZXNoZWV0IiB0eXBlPSJ0ZXh0L2Nz
+        cyIgaHJlZj0iL3N0YXRpYy9jZGNlZDFiMi9jc3Mvc3R5bGUuY3NzIiAvPjxs
+        aW5rIHJlbD0ic3R5bGVzaGVldCIgdHlwZT0idGV4dC9jc3MiIGhyZWY9Ii9z
+        dGF0aWMvY2RjZWQxYjIvY3NzL2NvbG9yLmNzcyIgLz48bGluayByZWw9InN0
+        eWxlc2hlZXQiIHR5cGU9InRleHQvY3NzIiBocmVmPSIvc3RhdGljL2NkY2Vk
+        MWIyL2Nzcy9yZXNwb25zaXZlLWdyaWQuY3NzIiAvPjxsaW5rIHJlbD0ic2hv
+        cnRjdXQgaWNvbiIgdHlwZT0iaW1hZ2Uvdm5kLm1pY3Jvc29mdC5pY29uIiBo
+        cmVmPSIvc3RhdGljL2NkY2VkMWIyL2Zhdmljb24uaWNvIiAvPjxzY3JpcHQ+
+        dmFyIGlzUnVuQXNUZXN0PWZhbHNlOyB2YXIgcm9vdFVSTD0iIjsgdmFyIHJl
+        c1VSTD0iL3N0YXRpYy9jZGNlZDFiMiI7PC9zY3JpcHQ+PHNjcmlwdCBzcmM9
+        Ii9zdGF0aWMvY2RjZWQxYjIvc2NyaXB0cy9wcm90b3R5cGUuanMiIHR5cGU9
+        InRleHQvamF2YXNjcmlwdCI+PC9zY3JpcHQ+PHNjcmlwdCBzcmM9Ii9zdGF0
+        aWMvY2RjZWQxYjIvc2NyaXB0cy9iZWhhdmlvci5qcyIgdHlwZT0idGV4dC9q
+        YXZhc2NyaXB0Ij48L3NjcmlwdD48c2NyaXB0IHNyYz0nL2FkanVuY3RzL2Nk
+        Y2VkMWIyL29yZy9rb2hzdWtlL3N0YXBsZXIvYmluZC5qcycgdHlwZT0ndGV4
+        dC9qYXZhc2NyaXB0Jz48L3NjcmlwdD48c2NyaXB0IHNyYz0iL3N0YXRpYy9j
+        ZGNlZDFiMi9zY3JpcHRzL3l1aS95YWhvby95YWhvby1taW4uanMiPjwvc2Ny
+        aXB0PjxzY3JpcHQgc3JjPSIvc3RhdGljL2NkY2VkMWIyL3NjcmlwdHMveXVp
+        L2RvbS9kb20tbWluLmpzIj48L3NjcmlwdD48c2NyaXB0IHNyYz0iL3N0YXRp
+        Yy9jZGNlZDFiMi9zY3JpcHRzL3l1aS9ldmVudC9ldmVudC1taW4uanMiPjwv
+        c2NyaXB0PjxzY3JpcHQgc3JjPSIvc3RhdGljL2NkY2VkMWIyL3NjcmlwdHMv
+        eXVpL2FuaW1hdGlvbi9hbmltYXRpb24tbWluLmpzIj48L3NjcmlwdD48c2Ny
+        aXB0IHNyYz0iL3N0YXRpYy9jZGNlZDFiMi9zY3JpcHRzL3l1aS9kcmFnZHJv
+        cC9kcmFnZHJvcC1taW4uanMiPjwvc2NyaXB0PjxzY3JpcHQgc3JjPSIvc3Rh
+        dGljL2NkY2VkMWIyL3NjcmlwdHMveXVpL2NvbnRhaW5lci9jb250YWluZXIt
+        bWluLmpzIj48L3NjcmlwdD48c2NyaXB0IHNyYz0iL3N0YXRpYy9jZGNlZDFi
+        Mi9zY3JpcHRzL3l1aS9jb25uZWN0aW9uL2Nvbm5lY3Rpb24tbWluLmpzIj48
+        L3NjcmlwdD48c2NyaXB0IHNyYz0iL3N0YXRpYy9jZGNlZDFiMi9zY3JpcHRz
+        L3l1aS9kYXRhc291cmNlL2RhdGFzb3VyY2UtbWluLmpzIj48L3NjcmlwdD48
+        c2NyaXB0IHNyYz0iL3N0YXRpYy9jZGNlZDFiMi9zY3JpcHRzL3l1aS9hdXRv
+        Y29tcGxldGUvYXV0b2NvbXBsZXRlLW1pbi5qcyI+PC9zY3JpcHQ+PHNjcmlw
+        dCBzcmM9Ii9zdGF0aWMvY2RjZWQxYjIvc2NyaXB0cy95dWkvbWVudS9tZW51
+        LW1pbi5qcyI+PC9zY3JpcHQ+PHNjcmlwdCBzcmM9Ii9zdGF0aWMvY2RjZWQx
+        YjIvc2NyaXB0cy95dWkvZWxlbWVudC9lbGVtZW50LW1pbi5qcyI+PC9zY3Jp
+        cHQ+PHNjcmlwdCBzcmM9Ii9zdGF0aWMvY2RjZWQxYjIvc2NyaXB0cy95dWkv
+        YnV0dG9uL2J1dHRvbi1taW4uanMiPjwvc2NyaXB0PjxzY3JpcHQgc3JjPSIv
+        c3RhdGljL2NkY2VkMWIyL3NjcmlwdHMveXVpL3N0b3JhZ2Uvc3RvcmFnZS1t
+        aW4uanMiPjwvc2NyaXB0PjxzY3JpcHQgc3JjPSIvc3RhdGljL2NkY2VkMWIy
+        L3NjcmlwdHMvaHVkc29uLWJlaGF2aW9yLmpzIiB0eXBlPSJ0ZXh0L2phdmFz
+        Y3JpcHQiPjwvc2NyaXB0PjxzY3JpcHQgc3JjPSIvc3RhdGljL2NkY2VkMWIy
+        L3NjcmlwdHMvc29ydGFibGUuanMiIHR5cGU9InRleHQvamF2YXNjcmlwdCI+
+        PC9zY3JpcHQ+PHNjcmlwdD5jcnVtYi5pbml0KCIuY3J1bWIiLCAiNzk0ZTc2
+        ZGFlNGZiNDgwZmEwNjQyYmNhY2RhNTFhY2UiKTs8L3NjcmlwdD48bGluayBy
+        ZWw9InN0eWxlc2hlZXQiIHR5cGU9InRleHQvY3NzIiBocmVmPSIvc3RhdGlj
+        L2NkY2VkMWIyL3NjcmlwdHMveXVpL2NvbnRhaW5lci9hc3NldHMvY29udGFp
+        bmVyLmNzcyIgLz48bGluayByZWw9InN0eWxlc2hlZXQiIHR5cGU9InRleHQv
+        Y3NzIiBocmVmPSIvc3RhdGljL2NkY2VkMWIyL3NjcmlwdHMveXVpL2Fzc2V0
+        cy9za2lucy9zYW0vc2tpbi5jc3MiIC8+PGxpbmsgcmVsPSJzdHlsZXNoZWV0
+        IiB0eXBlPSJ0ZXh0L2NzcyIgaHJlZj0iL3N0YXRpYy9jZGNlZDFiMi9zY3Jp
+        cHRzL3l1aS9jb250YWluZXIvYXNzZXRzL3NraW5zL3NhbS9jb250YWluZXIu
+        Y3NzIiAvPjxsaW5rIHJlbD0ic3R5bGVzaGVldCIgdHlwZT0idGV4dC9jc3Mi
+        IGhyZWY9Ii9zdGF0aWMvY2RjZWQxYjIvc2NyaXB0cy95dWkvYnV0dG9uL2Fz
+        c2V0cy9za2lucy9zYW0vYnV0dG9uLmNzcyIgLz48bGluayByZWw9InN0eWxl
+        c2hlZXQiIHR5cGU9InRleHQvY3NzIiBocmVmPSIvc3RhdGljL2NkY2VkMWIy
+        L3NjcmlwdHMveXVpL21lbnUvYXNzZXRzL3NraW5zL3NhbS9tZW51LmNzcyIg
+        Lz48bGluayB0aXRsZT0iSmVua2lucyIgcmVsPSJzZWFyY2giIHR5cGU9ImFw
+        cGxpY2F0aW9uL29wZW5zZWFyY2hkZXNjcmlwdGlvbit4bWwiIGhyZWY9Ii9v
+        cGVuc2VhcmNoLnhtbCIgLz48bWV0YSBuYW1lPSJST0JPVFMiIGNvbnRlbnQ9
+        IklOREVYLE5PRk9MTE9XIiAvPjxsaW5rIHRpdGxlPSJKZW5raW5zOnRlc3Rf
+        d2lwZV9vdXRfd29ya3NwYWNlIChhbGwgYnVpbGRzKSIgcmVsPSJhbHRlcm5h
+        dGUiIHR5cGU9ImFwcGxpY2F0aW9uL3Jzcyt4bWwiIGhyZWY9InJzc0FsbCIg
+        Lz48bGluayB0aXRsZT0iSmVua2luczp0ZXN0X3dpcGVfb3V0X3dvcmtzcGFj
+        ZSAoYWxsIGJ1aWxkcykgKFJTUyAyLjApIiByZWw9ImFsdGVybmF0ZSIgdHlw
+        ZT0iYXBwbGljYXRpb24vcnNzK3htbCIgaHJlZj0icnNzQWxsP2ZsYXZvcj1y
+        c3MyMCIgLz48bGluayB0aXRsZT0iSmVua2luczp0ZXN0X3dpcGVfb3V0X3dv
+        cmtzcGFjZSAoZmFpbGVkIGJ1aWxkcykiIHJlbD0iYWx0ZXJuYXRlIiB0eXBl
+        PSJhcHBsaWNhdGlvbi9yc3MreG1sIiBocmVmPSJyc3NGYWlsZWQiIC8+PGxp
+        bmsgdGl0bGU9IkplbmtpbnM6dGVzdF93aXBlX291dF93b3Jrc3BhY2UgKGZh
+        aWxlZCBidWlsZHMpIChSU1MgMi4wKSIgcmVsPSJhbHRlcm5hdGUiIHR5cGU9
+        ImFwcGxpY2F0aW9uL3Jzcyt4bWwiIGhyZWY9InJzc0ZhaWxlZD9mbGF2b3I9
+        cnNzMjAiIC8+PGxpbmsgdGl0bGU9IkplbmtpbnM6dGVzdF93aXBlX291dF93
+        b3Jrc3BhY2UgKGNoYW5nZWxvZykiIHJlbD0iYWx0ZXJuYXRlIiB0eXBlPSJh
+        cHBsaWNhdGlvbi9yc3MreG1sIiBocmVmPSJyc3NDaGFuZ2Vsb2ciIC8+PGxp
+        bmsgdGl0bGU9IkplbmtpbnM6dGVzdF93aXBlX291dF93b3Jrc3BhY2UgKGNo
+        YW5nZWxvZykgKFJTUyAyLjApIiByZWw9ImFsdGVybmF0ZSIgdHlwZT0iYXBw
+        bGljYXRpb24vcnNzK3htbCIgaHJlZj0icnNzQ2hhbmdlbG9nP2ZsYXZvcj1y
+        c3MyMCIgLz48c2NyaXB0IHNyYz0iL3N0YXRpYy9jZGNlZDFiMi9zY3JpcHRz
+        L3l1aS9jb29raWUvY29va2llLW1pbi5qcyI+PC9zY3JpcHQ+PC9oZWFkPjxi
+        b2R5IGlkPSJqZW5raW5zIiBkYXRhLXZlcnNpb249ImplbmtpbnMtMS41ODMi
+        IGNsYXNzPSJ5dWktc2tpbi1zYW0gamVua2lucy0xLjU4MyI+PGEgaHJlZj0i
+        I3NraXAyY29udGVudCIgY2xhc3M9InNraXBsaW5rIj5Ta2lwIHRvIGNvbnRl
+        bnQ8L2E+PGRpdiBpZD0iaGVhZGVyIj48ZGl2IGNsYXNzPSJsb2dvIj48YSBp
+        ZD0iamVua2lucy1ob21lLWxpbmsiIGhyZWY9Ii8iPjxpbWcgaWQ9Implbmtp
+        bnMtaGVhZC1pY29uIiBhbHQ9InRpdGxlIiBzcmM9Ii9zdGF0aWMvY2RjZWQx
+        YjIvaW1hZ2VzL2hlYWRzaG90LnBuZyIgLz48aW1nIGlkPSJqZW5raW5zLW5h
+        bWUtaWNvbiIgaGVpZ2h0PSIzNCIgYWx0PSJ0aXRsZSIgd2lkdGg9IjEzOSIg
+        c3JjPSIvc3RhdGljL2NkY2VkMWIyL2ltYWdlcy90aXRsZS5wbmciIC8+PC9h
+        PjwvZGl2PjxkaXYgY2xhc3M9ImxvZ2luIj48L2Rpdj48ZGl2IGNsYXNzPSJz
+        ZWFyY2hib3ggaGlkZGVuLXhzIj48Zm9ybSBzdHlsZT0icG9zaXRpb246cmVs
+        YXRpdmU7IiBuYW1lPSJzZWFyY2giIGFjdGlvbj0iL2pvYi90ZXN0X3dpcGVf
+        b3V0X3dvcmtzcGFjZS9zZWFyY2gvIiBjbGFzcz0ibm8tanNvbiIgbWV0aG9k
+        PSJnZXQiPjxkaXYgaWQ9InNlYXJjaC1ib3gtbWluV2lkdGgiPjwvZGl2Pjxk
+        aXYgaWQ9InNlYXJjaC1ib3gtc2l6ZXIiPjwvZGl2PjxkaXYgaWQ9InNlYXJj
+        aGZvcm0iPjxpbnB1dCBpZD0ic2VhcmNoLWJveCIgcGxhY2Vob2xkZXI9InNl
+        YXJjaCIgbmFtZT0icSIgY2xhc3M9Imhhcy1kZWZhdWx0LXRleHQiIC8+wqA8
+        YSBocmVmPSJodHRwOi8vd2lraS5qZW5raW5zLWNpLm9yZy9kaXNwbGF5L0pF
+        TktJTlMvU2VhcmNoK0JveCI+PGltZyBzdHlsZT0id2lkdGg6IDE2cHg7IGhl
+        aWdodDogMTZweDsgIiBjbGFzcz0iaWNvbi1oZWxwIGljb24tc20iIHNyYz0i
+        L3N0YXRpYy9jZGNlZDFiMi9pbWFnZXMvMTZ4MTYvaGVscC5wbmciIC8+PC9h
+        PjxkaXYgaWQ9InNlYXJjaC1ib3gtY29tcGxldGlvbiI+PC9kaXY+PHNjcmlw
+        dD5jcmVhdGVTZWFyY2hCb3goIi9qb2IvdGVzdF93aXBlX291dF93b3Jrc3Bh
+        Y2Uvc2VhcmNoLyIpOzwvc2NyaXB0PjwvZGl2PjwvZm9ybT48L2Rpdj48L2Rp
+        dj48ZGl2IGlkPSJicmVhZGNydW1iQmFyIj48dHIgaWQ9InRvcC1uYXYiPjx0
+        ZCBpZD0ibGVmdC10b3AtbmF2IiBjb2xzcGFuPSIyIj48bGluayByZWw9J3N0
+        eWxlc2hlZXQnIGhyZWY9Jy9hZGp1bmN0cy9jZGNlZDFiMi9saWIvbGF5b3V0
+        L2JyZWFkY3J1bWJzLmNzcycgdHlwZT0ndGV4dC9jc3MnIC8+PHNjcmlwdCBz
+        cmM9Jy9hZGp1bmN0cy9jZGNlZDFiMi9saWIvbGF5b3V0L2JyZWFkY3J1bWJz
+        LmpzJyB0eXBlPSd0ZXh0L2phdmFzY3JpcHQnPjwvc2NyaXB0PjxkaXYgY2xh
+        c3M9InRvcC1zdGlja2VyIG5vZWRnZSI+PGRpdiBjbGFzcz0idG9wLXN0aWNr
+        ZXItaW5uZXIiPjxkaXYgaWQ9InJpZ2h0LXRvcC1uYXYiPjxkaXYgaWQ9InJp
+        Z2h0LXRvcC1uYXYiPjxkaXYgY2xhc3M9InNtYWxsZm9udCI+PGEgaHJlZj0i
+        P2F1dG9fcmVmcmVzaD10cnVlIj5FTkFCTEUgQVVUTyBSRUZSRVNIPC9hPjwv
+        ZGl2PjwvZGl2PjwvZGl2Pjx1bCBpZD0iYnJlYWRjcnVtYnMiPjxsaSBjbGFz
+        cz0iaXRlbSI+PGEgY2xhc3M9Im1vZGVsLWxpbmsgaW5zaWRlIiBocmVmPSIv
+        Ij5KZW5raW5zPC9hPjwvbGk+PGxpIGNsYXNzPSJjaGlsZHJlbiIgaHJlZj0i
+        LyI+PC9saT48bGkgY2xhc3M9Iml0ZW0iPjxhIGNsYXNzPSJtb2RlbC1saW5r
+        IGluc2lkZSIgaHJlZj0iL2pvYi90ZXN0X3dpcGVfb3V0X3dvcmtzcGFjZS8i
+        PnRlc3Rfd2lwZV9vdXRfd29ya3NwYWNlPC9hPjwvbGk+PGxpIGNsYXNzPSJj
+        aGlsZHJlbiIgaHJlZj0iL2pvYi90ZXN0X3dpcGVfb3V0X3dvcmtzcGFjZS8i
+        PjwvbGk+PC91bD48ZGl2IGlkPSJicmVhZGNydW1iLW1lbnUtdGFyZ2V0Ij48
+        L2Rpdj48L2Rpdj48L2Rpdj48L3RkPjwvdHI+PC9kaXY+PGRpdiBpZD0icGFn
+        ZS1ib2R5IiBjbGFzcz0iY29udGFpbmVyLWZsdWlkIj48ZGl2IGNsYXNzPSJy
+        b3ciPjxkaXYgaWQ9InNpZGUtcGFuZWwiIGNsYXNzPSJjb2wtc20tOSBjb2wt
+        bWQtNyBjb2wtbGctNiBjb2wteGxnLTQiPjxkaXYgaWQ9InNpZGUtcGFuZWwt
+        Y29udGVudCI+PGRpdiBpZD0idGFza3MiPjxkaXYgY2xhc3M9InRhc2siPjxh
+        IGNsYXNzPSJ0YXNrLWljb24tbGluayIgaHJlZj0iLyI+PGltZyBzdHlsZT0i
+        d2lkdGg6IDI0cHg7IGhlaWdodDogMjRweDsgd2lkdGg6IDI0cHg7IGhlaWdo
+        dDogMjRweDsgbWFyZ2luOiAycHg7IiBjbGFzcz0iaWNvbi11cCBpY29uLW1k
+        IiBzcmM9Ii9zdGF0aWMvY2RjZWQxYjIvaW1hZ2VzLzI0eDI0L3VwLnBuZyIg
+        Lz48L2E+wqA8YSBjbGFzcz0idGFzay1saW5rIiBocmVmPSIvIj5CYWNrIHRv
+        IERhc2hib2FyZDwvYT48L2Rpdj48ZGl2IGNsYXNzPSJ0YXNrIj48YSBjbGFz
+        cz0idGFzay1pY29uLWxpbmsiIGhyZWY9Ii9qb2IvdGVzdF93aXBlX291dF93
+        b3Jrc3BhY2UvIj48aW1nIHN0eWxlPSJ3aWR0aDogMjRweDsgaGVpZ2h0OiAy
+        NHB4OyB3aWR0aDogMjRweDsgaGVpZ2h0OiAyNHB4OyBtYXJnaW46IDJweDsi
+        IGNsYXNzPSJpY29uLXNlYXJjaCBpY29uLW1kIiBzcmM9Ii9zdGF0aWMvY2Rj
+        ZWQxYjIvaW1hZ2VzLzI0eDI0L3NlYXJjaC5wbmciIC8+PC9hPsKgPGEgY2xh
+        c3M9InRhc2stbGluayIgaHJlZj0iL2pvYi90ZXN0X3dpcGVfb3V0X3dvcmtz
+        cGFjZS8iPlN0YXR1czwvYT48L2Rpdj48ZGl2IGNsYXNzPSJ0YXNrIj48YSBj
+        bGFzcz0idGFzay1pY29uLWxpbmsiIGhyZWY9Ii9qb2IvdGVzdF93aXBlX291
+        dF93b3Jrc3BhY2UvY2hhbmdlcyI+PGltZyBzdHlsZT0id2lkdGg6IDI0cHg7
+        IGhlaWdodDogMjRweDsgd2lkdGg6IDI0cHg7IGhlaWdodDogMjRweDsgbWFy
+        Z2luOiAycHg7IiBjbGFzcz0iaWNvbi1ub3RlcGFkIGljb24tbWQiIHNyYz0i
+        L3N0YXRpYy9jZGNlZDFiMi9pbWFnZXMvMjR4MjQvbm90ZXBhZC5wbmciIC8+
+        PC9hPsKgPGEgY2xhc3M9InRhc2stbGluayIgaHJlZj0iL2pvYi90ZXN0X3dp
+        cGVfb3V0X3dvcmtzcGFjZS9jaGFuZ2VzIj5DaGFuZ2VzPC9hPjwvZGl2Pjxk
+        aXYgY2xhc3M9InRhc2siPjxhIGNsYXNzPSJ0YXNrLWljb24tbGluayIgaHJl
+        Zj0iL2pvYi90ZXN0X3dpcGVfb3V0X3dvcmtzcGFjZS93cy8iPjxpbWcgc3R5
+        bGU9IndpZHRoOiAyNHB4OyBoZWlnaHQ6IDI0cHg7IHdpZHRoOiAyNHB4OyBo
+        ZWlnaHQ6IDI0cHg7IG1hcmdpbjogMnB4OyIgY2xhc3M9Imljb24tZm9sZGVy
+        IGljb24tbWQiIHNyYz0iL3N0YXRpYy9jZGNlZDFiMi9pbWFnZXMvMjR4MjQv
+        Zm9sZGVyLnBuZyIgLz48L2E+wqA8YSBjbGFzcz0idGFzay1saW5rIiBocmVm
+        PSIvam9iL3Rlc3Rfd2lwZV9vdXRfd29ya3NwYWNlL3dzLyI+PGI+V29ya3Nw
+        YWNlPC9iPjwvYT48ZGl2IGNsYXNzPSJzdWJ0YXNrcyI+PGRpdiBjbGFzcz0i
+        dGFzayI+PGEgb25jbGljaz0iY29uZmlybVBPU1RfaWQzNTAodHJ1ZSwgJy9q
+        b2IvdGVzdF93aXBlX291dF93b3Jrc3BhY2UvZG9XaXBlT3V0V29ya3NwYWNl
+        JywgJ0FyZSB5b3Ugc3VyZSBhYm91dCB3aXBpbmcgb3V0IHRoZSB3b3Jrc3Bh
+        Y2U/JykiIGhyZWY9IiMiPjxpbWcgc3R5bGU9IndpZHRoOiAyNHB4OyBoZWln
+        aHQ6IDI0cHg7IHdpZHRoOiAyNHB4OyBoZWlnaHQ6IDI0cHg7IG1hcmdpbjog
+        MnB4OyIgY2xhc3M9Imljb24tZm9sZGVyLWRlbGV0ZSBpY29uLW1kIiBzcmM9
+        Ii9zdGF0aWMvY2RjZWQxYjIvaW1hZ2VzLzI0eDI0L2ZvbGRlci1kZWxldGUu
+        cG5nIiAvPjwvYT48c2NyaXB0PmZ1bmN0aW9uIGNvbmZpcm1QT1NUX2lkMzUw
+        KHBvc3QsIGhyZWYsIG1lc3NhZ2UpIHsKICAgICAgICAgICAgaWYgKGNvbmZp
+        cm0obWVzc2FnZSkpIHsKICAgICAgICAgICAgICAgIHZhciBmb3JtID0gZG9j
+        dW1lbnQuY3JlYXRlRWxlbWVudCgnZm9ybScpOwogICAgICAgICAgICAgICAg
+        Zm9ybS5zZXRBdHRyaWJ1dGUoJ21ldGhvZCcsIHBvc3QgPyAnUE9TVCcgOiAn
+        R0VUJyk7CiAgICAgICAgICAgICAgICBmb3JtLnNldEF0dHJpYnV0ZSgnYWN0
+        aW9uJywgaHJlZik7CiAgICAgICAgICAgICAgICBpZiAocG9zdCkgewogICAg
+        ICAgICAgICAgICAgICAgIGNydW1iLmFwcGVuZFRvRm9ybShmb3JtKTsKICAg
+        ICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIGRvY3VtZW50LmJvZHku
+        YXBwZW5kQ2hpbGQoZm9ybSk7CiAgICAgICAgICAgICAgICBmb3JtLnN1Ym1p
+        dCgpOwogICAgICAgICAgICB9CiAgICAgICAgICAgIHJldHVybiBmYWxzZTsK
+        ICAgICAgICB9PC9zY3JpcHQ+wqA8YSBvbmNsaWNrPSJjb25maXJtUE9TVF9p
+        ZDM1MSh0cnVlLCAnL2pvYi90ZXN0X3dpcGVfb3V0X3dvcmtzcGFjZS9kb1dp
+        cGVPdXRXb3Jrc3BhY2UnLCAnQXJlIHlvdSBzdXJlIGFib3V0IHdpcGluZyBv
+        dXQgdGhlIHdvcmtzcGFjZT8nKSIgY2xhc3M9InRhc2stbGluayIgaHJlZj0i
+        IyI+PGI+V2lwZSBPdXQgQ3VycmVudCBXb3Jrc3BhY2U8L2I+PC9hPjxzY3Jp
+        cHQ+ZnVuY3Rpb24gY29uZmlybVBPU1RfaWQzNTEocG9zdCwgaHJlZiwgbWVz
+        c2FnZSkgewogICAgICAgICAgICBpZiAoY29uZmlybShtZXNzYWdlKSkgewog
+        ICAgICAgICAgICAgICAgdmFyIGZvcm0gPSBkb2N1bWVudC5jcmVhdGVFbGVt
+        ZW50KCdmb3JtJyk7CiAgICAgICAgICAgICAgICBmb3JtLnNldEF0dHJpYnV0
+        ZSgnbWV0aG9kJywgcG9zdCA/ICdQT1NUJyA6ICdHRVQnKTsKICAgICAgICAg
+        ICAgICAgIGZvcm0uc2V0QXR0cmlidXRlKCdhY3Rpb24nLCBocmVmKTsKICAg
+        ICAgICAgICAgICAgIGlmIChwb3N0KSB7CiAgICAgICAgICAgICAgICAgICAg
+        Y3J1bWIuYXBwZW5kVG9Gb3JtKGZvcm0pOwogICAgICAgICAgICAgICAgfQog
+        ICAgICAgICAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChmb3Jt
+        KTsKICAgICAgICAgICAgICAgIGZvcm0uc3VibWl0KCk7CiAgICAgICAgICAg
+        IH0KICAgICAgICAgICAgcmV0dXJuIGZhbHNlOwogICAgICAgIH08L3Njcmlw
+        dD48ZGl2IGNsYXNzPSJzdWJ0YXNrcyI+PC9kaXY+PC9kaXY+PC9kaXY+PC9k
+        aXY+PGRpdiBjbGFzcz0idGFzayI+PGEgb25jbGljaz0icmV0dXJuIGJ1aWxk
+        X2lkMzUyKHRoaXMpIiBjbGFzcz0idGFzay1pY29uLWxpbmsiIGhyZWY9Ii9q
+        b2IvdGVzdF93aXBlX291dF93b3Jrc3BhY2UvYnVpbGQ/ZGVsYXk9MHNlYyI+
+        PGltZyBzdHlsZT0id2lkdGg6IDI0cHg7IGhlaWdodDogMjRweDsgd2lkdGg6
+        IDI0cHg7IGhlaWdodDogMjRweDsgbWFyZ2luOiAycHg7IiBjbGFzcz0iaWNv
+        bi1jbG9jayBpY29uLW1kIiBzcmM9Ii9zdGF0aWMvY2RjZWQxYjIvaW1hZ2Vz
+        LzI0eDI0L2Nsb2NrLnBuZyIgLz48L2E+wqA8YSBvbmNsaWNrPSJyZXR1cm4g
+        YnVpbGRfaWQzNTIodGhpcykiIGNsYXNzPSJ0YXNrLWxpbmsiIGhyZWY9Ii9q
+        b2IvdGVzdF93aXBlX291dF93b3Jrc3BhY2UvYnVpbGQ/ZGVsYXk9MHNlYyI+
+        QnVpbGQgTm93PC9hPjwvZGl2PjxzY3JpcHQ+ZnVuY3Rpb24gYnVpbGRfaWQz
+        NTIoYSkgewogICAgICAgICAgICAgICAgbmV3IEFqYXguUmVxdWVzdChhLmhy
+        ZWYpOwogICAgICAgICAgICAgICAgaG92ZXJOb3RpZmljYXRpb24oJ0J1aWxk
+        IHNjaGVkdWxlZCcsYS5wYXJlbnROb2RlKTsKICAgICAgICAgICAgICAgIHJl
+        dHVybiBmYWxzZTsKICAgICAgICAgICAgfTwvc2NyaXB0PjxkaXYgY2xhc3M9
+        InRhc2siPjxhIG9uY2xpY2s9ImNvbmZpcm1QT1NUX2lkMzU1KHRydWUsICcv
+        am9iL3Rlc3Rfd2lwZV9vdXRfd29ya3NwYWNlL2RvRGVsZXRlJywgJ0FyZSB5
+        b3Ugc3VyZSBhYm91dCBkZWxldGluZyB0aGUgUHJvamVjdCDigJh0ZXN0X3dp
+        cGVfb3V0X3dvcmtzcGFjZeKAmT8nKSIgaHJlZj0iIyI+PGltZyBzdHlsZT0i
+        d2lkdGg6IDI0cHg7IGhlaWdodDogMjRweDsgd2lkdGg6IDI0cHg7IGhlaWdo
+        dDogMjRweDsgbWFyZ2luOiAycHg7IiBjbGFzcz0iaWNvbi1lZGl0LWRlbGV0
+        ZSBpY29uLW1kIiBzcmM9Ii9zdGF0aWMvY2RjZWQxYjIvaW1hZ2VzLzI0eDI0
+        L2VkaXQtZGVsZXRlLnBuZyIgLz48L2E+PHNjcmlwdD5mdW5jdGlvbiBjb25m
+        aXJtUE9TVF9pZDM1NShwb3N0LCBocmVmLCBtZXNzYWdlKSB7CiAgICAgICAg
+        ICAgIGlmIChjb25maXJtKG1lc3NhZ2UpKSB7CiAgICAgICAgICAgICAgICB2
+        YXIgZm9ybSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2Zvcm0nKTsKICAg
+        ICAgICAgICAgICAgIGZvcm0uc2V0QXR0cmlidXRlKCdtZXRob2QnLCBwb3N0
+        ID8gJ1BPU1QnIDogJ0dFVCcpOwogICAgICAgICAgICAgICAgZm9ybS5zZXRB
+        dHRyaWJ1dGUoJ2FjdGlvbicsIGhyZWYpOwogICAgICAgICAgICAgICAgaWYg
+        KHBvc3QpIHsKICAgICAgICAgICAgICAgICAgICBjcnVtYi5hcHBlbmRUb0Zv
+        cm0oZm9ybSk7CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBk
+        b2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGZvcm0pOwogICAgICAgICAgICAg
+        ICAgZm9ybS5zdWJtaXQoKTsKICAgICAgICAgICAgfQogICAgICAgICAgICBy
+        ZXR1cm4gZmFsc2U7CiAgICAgICAgfTwvc2NyaXB0PsKgPGEgb25jbGljaz0i
+        Y29uZmlybVBPU1RfaWQzNTYodHJ1ZSwgJy9qb2IvdGVzdF93aXBlX291dF93
+        b3Jrc3BhY2UvZG9EZWxldGUnLCAnQXJlIHlvdSBzdXJlIGFib3V0IGRlbGV0
+        aW5nIHRoZSBQcm9qZWN0IOKAmHRlc3Rfd2lwZV9vdXRfd29ya3NwYWNl4oCZ
+        PycpIiBjbGFzcz0idGFzay1saW5rIiBocmVmPSIjIj5EZWxldGUgUHJvamVj
+        dDwvYT48c2NyaXB0PmZ1bmN0aW9uIGNvbmZpcm1QT1NUX2lkMzU2KHBvc3Qs
+        IGhyZWYsIG1lc3NhZ2UpIHsKICAgICAgICAgICAgaWYgKGNvbmZpcm0obWVz
+        c2FnZSkpIHsKICAgICAgICAgICAgICAgIHZhciBmb3JtID0gZG9jdW1lbnQu
+        Y3JlYXRlRWxlbWVudCgnZm9ybScpOwogICAgICAgICAgICAgICAgZm9ybS5z
+        ZXRBdHRyaWJ1dGUoJ21ldGhvZCcsIHBvc3QgPyAnUE9TVCcgOiAnR0VUJyk7
+        CiAgICAgICAgICAgICAgICBmb3JtLnNldEF0dHJpYnV0ZSgnYWN0aW9uJywg
+        aHJlZik7CiAgICAgICAgICAgICAgICBpZiAocG9zdCkgewogICAgICAgICAg
+        ICAgICAgICAgIGNydW1iLmFwcGVuZFRvRm9ybShmb3JtKTsKICAgICAgICAg
+        ICAgICAgIH0KICAgICAgICAgICAgICAgIGRvY3VtZW50LmJvZHkuYXBwZW5k
+        Q2hpbGQoZm9ybSk7CiAgICAgICAgICAgICAgICBmb3JtLnN1Ym1pdCgpOwog
+        ICAgICAgICAgICB9CiAgICAgICAgICAgIHJldHVybiBmYWxzZTsKICAgICAg
+        ICB9PC9zY3JpcHQ+PC9kaXY+PGRpdiBjbGFzcz0idGFzayI+PGEgY2xhc3M9
+        InRhc2staWNvbi1saW5rIiBocmVmPSIvam9iL3Rlc3Rfd2lwZV9vdXRfd29y
+        a3NwYWNlL2NvbmZpZ3VyZSI+PGltZyBzdHlsZT0id2lkdGg6IDI0cHg7IGhl
+        aWdodDogMjRweDsgd2lkdGg6IDI0cHg7IGhlaWdodDogMjRweDsgbWFyZ2lu
+        OiAycHg7IiBjbGFzcz0iaWNvbi1zZXR0aW5nIGljb24tbWQiIHNyYz0iL3N0
+        YXRpYy9jZGNlZDFiMi9pbWFnZXMvMjR4MjQvc2V0dGluZy5wbmciIC8+PC9h
+        PsKgPGEgY2xhc3M9InRhc2stbGluayIgaHJlZj0iL2pvYi90ZXN0X3dpcGVf
+        b3V0X3dvcmtzcGFjZS9jb25maWd1cmUiPkNvbmZpZ3VyZTwvYT48L2Rpdj48
+        L2Rpdj48ZGl2IGlkPSJidWlsZEhpc3RvcnkiIGNsYXNzPSJjb250YWluZXIt
+        Zmx1aWQgcGFuZS1mcmFtZSI+PGRpdiBjbGFzcz0icm93Ij48ZGl2IGNsYXNz
+        PSJjb2wteHMtMjQgcGFuZS1oZWFkZXIiPjxhIHRpdGxlPSJjb2xsYXBzZSIg
+        Y2xhc3M9ImNvbGxhcHNlIiBocmVmPSIvdG9nZ2xlQ29sbGFwc2U/cGFuZUlk
+        PWJ1aWxkSGlzdG9yeSI+PGltZyBzdHlsZT0id2lkdGg6IDE2cHg7IGhlaWdo
+        dDogMTZweDsgIiBhbHQ9ImNvbGxhcHNlIiBjbGFzcz0iaWNvbi1jb2xsYXBz
+        ZSBpY29uLXNtIiBzcmM9Ii9zdGF0aWMvY2RjZWQxYjIvaW1hZ2VzLzE2eDE2
+        L2NvbGxhcHNlLnBuZyIgLz48L2E+PGRpdiBzdHlsZT0iZmxvYXQ6cmlnaHQi
+        PjxhIGhyZWY9Ii9qb2IvdGVzdF93aXBlX291dF93b3Jrc3BhY2UvYnVpbGRU
+        aW1lVHJlbmQiPnRyZW5kPC9hPjwvZGl2PjxkaXYgZGF0YT0iMTAwIiBjbGFz
+        cz0iaGVhbHRoUmVwb3J0IiBvbm1vdXNlb3Zlcj0idGhpcy5jbGFzc05hbWU9
+        J2hlYWx0aFJlcG9ydCBob3Zlcic7cmV0dXJuIHRydWU7CiAgICAgICAgIiBv
+        bm1vdXNlb3V0PSJ0aGlzLmNsYXNzTmFtZT0naGVhbHRoUmVwb3J0JztyZXR1
+        cm4gdHJ1ZTsiPjxpbWcgc3R5bGU9IndpZHRoOiAxNnB4OyBoZWlnaHQ6IDE2
+        cHg7ICIgYWx0PSIxMDAlIiBjbGFzcz0iaWNvbi1oZWFsdGgtODBwbHVzIGlj
+        b24tc20iIHNyYz0iL3N0YXRpYy9jZGNlZDFiMi9pbWFnZXMvMTZ4MTYvaGVh
+        bHRoLTgwcGx1cy5wbmciLz48L2Rpdj5CdWlsZCBIaXN0b3J5PC9kaXY+PC9k
+        aXY+PGRpdiBjbGFzcz0icm93IHBhbmUtY29udGVudCI+PHRhYmxlIGNsYXNz
+        PSJwYW5lIHN0cmlwcGVkIj48L3RhYmxlPjwvZGl2PjxkaXYgY2xhc3M9InJv
+        dyI+PGRpdiBjbGFzcz0iY29sLXhzLTI0IHBhbmUtZm9vdGVyIj48c3BhbiBj
+        bGFzcz0iYnVpbGQtcnNzLWxpbmtzIj48YSBjbGFzcz0iYnVpbGQtcnNzLWFs
+        bC1pY29uIiBocmVmPSIvam9iL3Rlc3Rfd2lwZV9vdXRfd29ya3NwYWNlL3Jz
+        c0FsbCI+PGltZyBoZWlnaHQ9IjE2IiBhbHQ9IkZlZWQiIHdpZHRoPSIxNiIg
+        c3JjPSIvc3RhdGljL2NkY2VkMWIyL2ltYWdlcy9hdG9tLmdpZiIgYm9yZGVy
+        PSIwIi8+PC9hPsKgPGEgY2xhc3M9ImJ1aWxkLXJzcy1hbGwtbGluayIgaHJl
+        Zj0iL2pvYi90ZXN0X3dpcGVfb3V0X3dvcmtzcGFjZS9yc3NBbGwiPlJTUyBm
+        b3IgYWxsPC9hPsKgPGEgY2xhc3M9ImJ1aWxkLXJzcy1mYWlsZWQtaWNvbiIg
+        aHJlZj0iL2pvYi90ZXN0X3dpcGVfb3V0X3dvcmtzcGFjZS9yc3NGYWlsZWQi
+        PjxpbWcgaGVpZ2h0PSIxNiIgYWx0PSJGZWVkIiB3aWR0aD0iMTYiIHNyYz0i
+        L3N0YXRpYy9jZGNlZDFiMi9pbWFnZXMvYXRvbS5naWYiIGJvcmRlcj0iMCIv
+        PjwvYT7CoDxhIGNsYXNzPSJidWlsZC1yc3MtZmFpbGVkLWxpbmsiIGhyZWY9
+        Ii9qb2IvdGVzdF93aXBlX291dF93b3Jrc3BhY2UvcnNzRmFpbGVkIj5SU1Mg
+        Zm9yIGZhaWx1cmVzPC9hPjwvc3Bhbj48L2Rpdj48L2Rpdj48L2Rpdj48c2Ny
+        aXB0IGRlZmVyPSJ0cnVlIj51cGRhdGVCdWlsZEhpc3RvcnkoIi9qb2IvdGVz
+        dF93aXBlX291dF93b3Jrc3BhY2UvYnVpbGRIaXN0b3J5L2FqYXgiLDEpOzwv
+        c2NyaXB0PjwvZGl2PjwvZGl2PjxkaXYgaWQ9Im1haW4tcGFuZWwiIGNsYXNz
+        PSJjb2wtc20tMTUgY29sLW1kLTE3IGNvbC1sZy0xOCBjb2wteGxnLTIwIj48
+        ZGl2IGlkPSJtYWluLXBhbmVsLWNvbnRlbnQiPjxhIG5hbWU9InNraXAyY29u
+        dGVudCI+PC9hPjxoMT48aW1nIHN0eWxlPSJ3aWR0aDogNDhweDsgaGVpZ2h0
+        OiA0OHB4OyAiIGNsYXNzPSJpY29uLWVycm9yIGljb24teGxnIiBzcmM9Ii9z
+        dGF0aWMvY2RjZWQxYjIvaW1hZ2VzLzQ4eDQ4L2Vycm9yLnBuZyIgLz5FcnJv
+        cjogV2lwZSBPdXQgV29ya3NwYWNlIGJsb2NrZWQgYnkgU0NNPC9oMT48cD5U
+        aGUgU0NNIGZvciB0aGlzIHByb2plY3QgaGFzIGJsb2NrZWQgdGhpcyBhdHRl
+        bXB0IHRvIHdpcGUgb3V0IHRoZSBwcm9qZWN0J3Mgd29ya3NwYWNlLjwvcD48
+        L2Rpdj48L2Rpdj48L2Rpdj48L2Rpdj48ZGl2IGlkPSJmb290ZXItY29udGFp
+        bmVyIiBjbGFzcz0iaGlkZGVuLXhzIj48ZGl2IGlkPSJmb290ZXIiPjxzcGFu
+        IGNsYXNzPSJwYWdlX2dlbmVyYXRlZCI+CiAgICAgICAgICBQYWdlIGdlbmVy
+        YXRlZDoKICAgICAgICAgIE5vdiAxNywgMjAxNCAxMDozOToyMyBQTTwvc3Bh
+        bj48c3BhbiBjbGFzcz0icmVzdF9hcGkiPjxhIGhyZWY9ImFwaS8iPlJFU1Qg
+        QVBJPC9hPjwvc3Bhbj48c3BhbiBjbGFzcz0iamVua2luc192ZXIiPjxhIGhy
+        ZWY9Imh0dHA6Ly9qZW5raW5zLWNpLm9yZy8iPkplbmtpbnMgdmVyLiAxLjU4
+        MzwvYT48L3NwYW4+PGRpdiBpZD0ibDEwbi1kaWFsb2ciIGNsYXNzPSJkaWFs
+        b2ciPjwvZGl2PjxkaXYgaWQ9ImwxMG4tZm9vdGVyIiBzdHlsZT0iZGlzcGxh
+        eTpub25lOyBmbG9hdDpsZWZ0Ij48YSBocmVmPSIjIiBvbmNsaWNrPSJyZXR1
+        cm4gc2hvd1RyYW5zbGF0aW9uRGlhbG9nKCk7Ij48aW1nIHNyYz0iL3N0YXRp
+        Yy9jZGNlZDFiMi9wbHVnaW4vdHJhbnNsYXRpb24vZmxhZ3MucG5nIiAvPgog
+        ICAgICBIZWxwIHVzIGxvY2FsaXplIHRoaXMgcGFnZQogICAgPC9hPjwvZGl2
+        PjxzY3JpcHQ+dmFyIGZvb3RlciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlk
+        KCdsMTBuLWZvb3RlcicpOwogICAgdmFyIGYgPSBkb2N1bWVudC5nZXRFbGVt
+        ZW50QnlJZCgnZm9vdGVyJyk7CiAgICBmLmluc2VydEJlZm9yZShmb290ZXIs
+        Zi5maXJzdENoaWxkKTsKICAgIGZvb3Rlci5zdHlsZS5kaXNwbGF5PSJibG9j
+        ayI7CgogICAgdmFyIHRyYW5zbGF0aW9uPXt9OyAKICAgIHRyYW5zbGF0aW9u
+        LmJ1bmRsZXMgPSAiVWhGd2lBc2JSV2g2WUVvSDRLZ0ZFYzMzSEF2L3RIdkhB
+        Y1plQXZra1VWZG5kMTNqandSeUVvaDlNRkZJSnNSV05LRzBEZEVpR2JNTTlH
+        WHFHUENqcjZ6MXJCV1JQTU00QmFNeVRvZVpzZWN0dDBPak9rTmdMck1FSEVl
+        aGQ1ZkhJMmZWZXRUQmx1d3Q1NU4rYXladmVaUGV5T3VFNnNzM3R5Z3NQcDdH
+        Y284clJOR2dGSDhkOXRqc2tCUmpUbTRIRDZWdzh6cGY4VUZWeVhUS2xXMStG
+        MlUyRDhGTFFvaW5td3Zud0RUUTJ4L3VkODdENkZCU3BSR2xaYkxWdVdGWXQy
+        QWxJVEl6RkJlY0lqWlZqdWQyQUhESXE5bzVpQUg3NDdSWUgxNXhvdFo3R1ZC
+        OGUwYzdKWnVVbFc3Nkg4WTlINEFGaVNhWTF4aS8yT1o3OXE4OTJSNGs5QXJl
+        dThUL3Z5NURhaUxVdnpPTi9XVVU0U0lMcE1DdEJrcEdPWWtMUDNXYWZRQkoy
+        QTZTZ2NCcHIvaUdpSm5oaDlPK1ovcWl4akpqbmRlczFQRlFJa1k4aVRacGgr
+        UTRmeEdEaitBR0hEdzdPR3ZCV2tJeFNGSm5ZeHJHMktMQTV4MnJBaXRrSENj
+        VFlLU2VXKzd0RnE4KzZFQ0o3anE1NW92bjNxRDdaYnRnUkhXeVlXUEhYRUFW
+        bDhsK2MwZWJidjZiQjVjNzhCYlIyc3dhQnpiNWE0RnZSK290WndVak1HY0Fo
+        MDhUejNHaEd6TkFZZUJ4Tzl6bUhPWDdBL1RKdjdqdkFCek55Q2Uyb0J3aXFK
+        MWYxalM4cy9HQzV4TEs2WmpJdW90MDk4TTgybDQ2QXhlTEowTU94b3ZJY3c9
+        PSI7CiAgICB0cmFuc2xhdGlvbi5kZXRlY3RlZExvY2FsZSA9ICIiOwoKICAg
+        IGZ1bmN0aW9uIHNob3dUcmFuc2xhdGlvbkRpYWxvZygpIHsKICAgICAgaWYo
+        IXRyYW5zbGF0aW9uLmxhdW5jaERpYWxvZykKICAgICAgICBsb2FkU2NyaXB0
+        KCIvc3RhdGljL2NkY2VkMWIyL3BsdWdpbi90cmFuc2xhdGlvbi9kaWFsb2cu
+        anMiKTsKICAgICAgZWxzZQogICAgICAgIHRyYW5zbGF0aW9uLmxhdW5jaERp
+        YWxvZygpOwogICAgICByZXR1cm4gZmFsc2U7IAogICAgfTwvc2NyaXB0Pjwv
+        ZGl2PjwvZGl2PjwvYm9keT48L2h0bWw+
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:39:23 GMT
+recorded_with: VCR 2.9.3

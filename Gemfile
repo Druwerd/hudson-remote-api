@@ -8,6 +8,6 @@ group :development do
 end
 
 group :test do
-  gem 'webmock'
-  gem 'vcr'
+  gem 'webmock', '1.20.3'
+  gem 'vcr', '2.9.3'
 end

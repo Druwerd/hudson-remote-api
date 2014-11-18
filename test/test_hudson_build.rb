@@ -3,14 +3,14 @@ require 'test_helper.rb'
 class TestHudsonBuild < Test::Unit::TestCase
 
   def setup
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       assert Hudson::Job.new('test_job').build
       assert Hudson::Build.new('test_job')
     end
   end
 
   def test_build_info
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       build = Hudson::Build.new('test_job')
       assert_equal 'test_job', build.job.name
   

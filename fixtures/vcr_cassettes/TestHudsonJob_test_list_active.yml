@@ -2,13 +2,15 @@
 http_interactions:
 - request:
     method: get
-    uri: http://test:test@localhost:8080/api/xml
+    uri: http://localhost:8080/api/xml
     body:
       encoding: US-ASCII
       string: ''
     headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
-      - ! '*/*'
+      - "*/*"
       User-Agent:
       - Ruby
       Content-Type:
@@ -18,22 +20,20 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Server:
-      - Winstone Servlet Engine v0.9.10
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - 394516d7
       Content-Type:
       - application/xml;charset=UTF-8
       Content-Length:
-      - '702'
-      Connection:
-      - Keep-Alive
-      Date:
-      - Thu, 20 Sep 2012 06:34:17 GMT
-      X-Powered-By:
-      - Servlet/2.5 (Winstone/0.9.10)
+      - '292'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
     body:
-      encoding: US-ASCII
-      string: <hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
-        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><job><name>test_svn_job</name><url>http://localhost:8080/job/test_svn_job/</url><color>blue</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>false</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>
+      encoding: UTF-8
+      string: "<hudson><assignedLabel></assignedLabel><mode>NORMAL</mode><nodeDescription>the
+        master Jenkins node</nodeDescription><nodeName></nodeName><numExecutors>2</numExecutors><job><name>test_job</name><url>http://localhost:8080/job/test_job/</url><color>blue</color></job><overallLoad></overallLoad><primaryView><name>All</name><url>http://localhost:8080/</url></primaryView><quietingDown>false</quietingDown><slaveAgentPort>0</slaveAgentPort><unlabeledLoad></unlabeledLoad><useCrumbs>true</useCrumbs><useSecurity>false</useSecurity><view><name>All</name><url>http://localhost:8080/</url></view></hudson>"
     http_version: 
-  recorded_at: Thu, 20 Sep 2012 06:34:17 GMT
-recorded_with: VCR 2.2.5
+  recorded_at: Fri, 07 Nov 2014 06:42:54 GMT
+recorded_with: VCR 2.9.3

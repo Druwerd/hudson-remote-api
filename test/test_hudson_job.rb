@@ -4,7 +4,7 @@ class TestHudsonJob < Test::Unit::TestCase
   TEST_SVN_REPO_URL = "http://svn.apache.org/repos/asf/subversion/trunk/doc/user/"
   
   def setup
-    Hudson[:url] = "http://localhost:8080"
+    Hudson.client.configuration.host = "http://localhost:8080"
   end
   
   def test_list
@@ -24,7 +24,7 @@ class TestHudsonJob < Test::Unit::TestCase
       new_job_name = 'new_test_job'
       new_job = Hudson::Job.create(new_job_name)
       assert new_job
-      assert_equal(new_job.name, new_job_name)
+      assert_equal(new_job_name, new_job.name)
       assert_equal(true, new_job.triggers.empty?, "New job should have empty triggers")
       assert new_job.delete
     end
@@ -39,7 +39,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
   
   def test_desc_update
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job = Hudson::Job.new('test_job')
       assert job.description = "test"
       assert job.description != nil, "Job description should not be nil"
@@ -47,7 +47,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
   
   def test_scm_url
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job = Hudson::Job.new('test_svn_job')
       job.build
       assert job.repository_url = TEST_SVN_REPO_URL
@@ -61,11 +61,11 @@ class TestHudsonJob < Test::Unit::TestCase
     VCR.use_cassette("#{self.class}_#{__method__}") do
       job = Hudson::Job.new('test_job')
       assert job
-      assert_equal(job.name, 'test_job')
+      assert_equal('test_job', job.name)
     
       new_job = Hudson::Job.new('test_job2')
       assert new_job
-      assert_equal('test_job2', new_job.name)
+      assert_equal(new_job.name, 'test_job2')
       assert new_job.delete
     end
   end
@@ -75,15 +75,8 @@ class TestHudsonJob < Test::Unit::TestCase
       job = Hudson::Job.get('test_job')
       new_job = job.copy
       assert new_job
-      assert_equal(new_job.name, 'copy_of_test_job')
+      assert_equal('copy_of_test_job', new_job.name)
       assert new_job.delete
-    end
-  end
-
-  def test_url
-    VCR.use_cassette("#{self.class}_#{__method__}") do
-      job = Hudson::Job.get("test_job")
-      assert_equal(job.url, "http://localhost:8080/job/#{job.name}/")
     end
   end
   
@@ -122,7 +115,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
 
   def test_triggers_set
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job_name = 'build_triggers'
       job = Hudson::Job.create(job_name)
 
@@ -135,7 +128,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
 
   def test_triggers_set_using_shortcut
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job_name = 'build_triggers'
       job = Hudson::Job.create(job_name)
 
@@ -148,7 +141,7 @@ class TestHudsonJob < Test::Unit::TestCase
   end
 
   def test_triggers_delete
-    VCR.use_cassette("#{self.class}_#{__method__}") do
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
       job_name = 'build_triggers'
       job = Hudson::Job.create(job_name)
 
@@ -157,6 +150,13 @@ class TestHudsonJob < Test::Unit::TestCase
       assert_equal(true, job.triggers.empty?, "Failed to delete triggers.")
 
       assert job.delete
+    end
+  end
+
+  def test_wipe_out_workspace
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
+      job = Hudson::Job.create('test_wipe_out_workspace')
+      assert job.wipe_out_workspace
     end
   end
 end

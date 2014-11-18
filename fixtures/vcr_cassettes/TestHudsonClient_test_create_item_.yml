@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:8080/createItem
+    body:
+      encoding: US-ASCII
+      string: name=new_test_job&mode=hudson.model.FreeStyleProject&config=%3C%3Fxml+version%3D%271.0%27+encoding%3D%27UTF-8%27%3F%3E%0A%3Cproject%3E%0A++%3Cactions%2F%3E%0A++%3Cdescription%3E%3C%2Fdescription%3E%0A++%3CkeepDependencies%3Efalse%3C%2FkeepDependencies%3E%0A++%3Cproperties%2F%3E%0A++%3Cscm+class%3D%22hudson.scm.NullSCM%22%2F%3E%0A++%3CcanRoam%3Etrue%3C%2FcanRoam%3E%0A++%3Cdisabled%3Efalse%3C%2Fdisabled%3E%0A++%3CblockBuildWhenUpstreamBuilding%3Efalse%3C%2FblockBuildWhenUpstreamBuilding%3E%0A++%3Ctriggers+class%3D%22vector%22%2F%3E%0A++%3CconcurrentBuild%3Efalse%3C%2FconcurrentBuild%3E%0A++%3Cbuilders%2F%3E%0A++%3Cpublishers%2F%3E%0A++%3CbuildWrappers%2F%3E%0A%3C%2Fproject%3E
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+      ".crumb":
+      - d6162b9f2e248ec452bad69592fb87ea
+  response:
+    status:
+      code: 403
+      message: No valid crumb was included in the request
+    headers:
+      Content-Type:
+      - text/html;charset=ISO-8859-1
+      Cache-Control:
+      - must-revalidate,no-cache,no-store
+      Content-Length:
+      - '1441'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html;
+        charset=ISO-8859-1\"/>\n<title>Error 403 No valid crumb was included in the
+        request</title>\n</head>\n<body><h2>HTTP ERROR 403</h2>\n<p>Problem accessing
+        /createItem. Reason:\n<pre>    No valid crumb was included in the request</pre></p><hr
+        /><i><small>Powered by Jetty://</small></i><br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n<br/>                                                \n<br/>
+        \                                               \n\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:55:19 GMT
+recorded_with: VCR 2.9.3

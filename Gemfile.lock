@@ -1,8 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.3.2)
-    crack (0.3.1)
+    addressable (2.3.6)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     git (1.2.5)
     jeweler (1.8.4)
       bundler (~> 1.0)
@@ -13,10 +14,11 @@ GEM
     rake (0.9.2.2)
     rdoc (4.0.1)
       json (~> 1.4)
-    vcr (2.2.5)
-    webmock (1.8.10)
-      addressable (>= 2.2.7)
-      crack (>= 0.1.7)
+    safe_yaml (1.0.4)
+    vcr (2.9.3)
+    webmock (1.20.3)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
 
 PLATFORMS
   ruby
@@ -24,5 +26,5 @@ PLATFORMS
 DEPENDENCIES
   jeweler
   rake
-  vcr
-  webmock
+  vcr (= 2.9.3)
+  webmock (= 1.20.3)

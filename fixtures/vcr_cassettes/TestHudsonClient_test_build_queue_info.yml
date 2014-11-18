@@ -23,7 +23,7 @@ http_interactions:
       X-Jenkins:
       - '1.583'
       X-Jenkins-Session:
-      - 394516d7
+      - cdced1b2
       Content-Type:
       - application/xml;charset=UTF-8
       Content-Length:
@@ -34,5 +34,5 @@ http_interactions:
       encoding: UTF-8
       string: "<queue></queue>"
     http_version: 
-  recorded_at: Fri, 07 Nov 2014 06:47:04 GMT
+  recorded_at: Tue, 18 Nov 2014 06:55:19 GMT
 recorded_with: VCR 2.9.3
