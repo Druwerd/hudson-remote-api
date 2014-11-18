@@ -1,3 +1,4 @@
 .rbenv-version
 hudson_settings.yml
 *.gem
+.DS_Store
