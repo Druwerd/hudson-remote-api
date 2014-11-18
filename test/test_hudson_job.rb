@@ -152,4 +152,11 @@ class TestHudsonJob < Test::Unit::TestCase
       assert job.delete
     end
   end
+
+  def test_wipe_out_workspace
+    VCR.use_cassette("#{self.class}_#{__method__}", :record => :new_episodes) do
+      job = Hudson::Job.create('test_wipe_out_workspace')
+      assert job.wipe_out_workspace
+    end
+  end
 end

@@ -197,7 +197,6 @@ module Hudson
       wait_for_build_to_finish
 
       if !active?
-        response = send_post_request(@xml_api_wipe_out_workspace_path)
         response = Hudson.client.wipeout_job_workspace!(self.name)
       else
         response = false
