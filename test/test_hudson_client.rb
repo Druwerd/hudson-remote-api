@@ -15,37 +15,51 @@ class TestHudsonClient < Test::Unit::TestCase
   end
 
   def test_job_build_info
-    assert @client.job_build_info('test_job', 1)
+    VCR.use_cassette("#{self.class}_#{__method__}") do
+      assert @client.job_build_info('test_job', 1)
+    end
   end
 
   def test_build_queue_info
-    response = @client.build_queue_info
-    assert_kind_of(String, response)
-    assert(!response.empty?)
+    VCR.use_cassette("#{self.class}_#{__method__}") do
+      response = @client.build_queue_info
+      assert_kind_of(String, response)
+      assert(!response.empty?)
+    end
   end
 
   def test_build_job!
-    response = @client.build_job!('test_job')
-    assert response
+    VCR.use_cassette("#{self.class}_#{__method__}") do
+      response = @client.build_job!('test_job')
+      assert response
+    end
   end
 
   def test_build_job_with_parameters!
-    response = @client.build_job_with_parameters!('test_job', {})
-    assert response
+    VCR.use_cassette("#{self.class}_#{__method__}") do
+      response = @client.build_job_with_parameters!('test_job', {})
+      assert response
+    end
   end
 
   def test_job_config_info
-    response = @client.job_config_info('test_job')
-    assert response
+    VCR.use_cassette("#{self.class}_#{__method__}") do
+      response = @client.job_config_info('test_job')
+      assert response
+    end
   end
 
   def test_create_item!
-    response = @client.create_item!({:name=>"new_test_job", :mode=>"hudson.model.FreeStyleProject", :config=>config})
-    assert response
+    VCR.use_cassette("#{self.class}_#{__method__}") do
+      response = @client.create_item!({:name=>"new_test_job", :mode=>"hudson.model.FreeStyleProject", :config=>config})
+      assert response
+    end
   end
 
   def test_delete_job!
-    response = @client.delete_job!('new_test_job')
+    VCR.use_cassette("#{self.class}_#{__method__}") do
+      response = @client.delete_job!('new_test_job')
+    end
   end
 
 end

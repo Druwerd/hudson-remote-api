@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8080/queue/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '30'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<queue></queue>"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:55:19 GMT
+recorded_with: VCR 2.9.3

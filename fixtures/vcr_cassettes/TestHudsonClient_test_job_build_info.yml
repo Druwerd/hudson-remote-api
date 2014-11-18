@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8080/job/test_job/1/api/xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Jenkins:
+      - '1.583'
+      X-Jenkins-Session:
+      - cdced1b2
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Content-Length:
+      - '296'
+      Server:
+      - Jetty(8.y.z-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<freeStyleBuild><action><cause><shortDescription>Started by user anonymous</shortDescription><userName>anonymous</userName></cause></action><building>false</building><duration>27</duration><estimatedDuration>28</estimatedDuration><fullDisplayName>test_job
+        #1</fullDisplayName><id>2014-11-06_22-42-52</id><keepLog>false</keepLog><number>1</number><result>SUCCESS</result><timestamp>1415342572000</timestamp><url>http://localhost:8080/job/test_job/1/</url><builtOn></builtOn><changeSet></changeSet></freeStyleBuild>"
+    http_version: 
+  recorded_at: Tue, 18 Nov 2014 06:53:50 GMT
+recorded_with: VCR 2.9.3
