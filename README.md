@@ -14,7 +14,7 @@ require 'hudson-remote-api'
 
 ```ruby
 # Auto Configuration 
-# detects Hudson instance on your network & sets Hudson[:url]
+# detects Hudson instance on your network & sets the host name
 Hudson.auto_configure
 ```
 Or
