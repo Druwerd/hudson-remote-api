@@ -9,7 +9,7 @@ module Hudson
     socket.send(ARGV.join(' '), 0, multicast_addr, port)
     msg = nil
     #msg, info = socket.recvfrom_nonblock(1024)
-    timeout(timeout_limit) do
+    Timeout.timeout(timeout_limit) do
       msg, info = socket.recvfrom(1024)
     end
     msg
