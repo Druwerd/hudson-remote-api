@@ -2,3 +2,4 @@
 hudson_settings.yml
 *.gem
 .DS_Store
+.ruby-gemset
